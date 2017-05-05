@@ -72,7 +72,9 @@ const manifest = {
                         AuthAttempt: './server/models/auth-attempt',
                         Session: './server/models/session',
                         Status: './server/models/status',
-                        User: './server/models/user'
+                        User: './server/models/user',
+                        Character: './server/models/character',
+                        ThroneTeam: './server/models/throne-team'
                     },
                     autoIndex: Config.get('/hapiMongoModels/autoIndex')
                 }
@@ -152,6 +154,18 @@ const manifest = {
         },
         {
             plugin: './server/api/users',
+            options: {
+                routes: { prefix: '/api' }
+            }
+        },
+        {
+            plugin: './server/api/characters',
+            options: {
+                routes: { prefix: '/api' }
+            }
+        },
+        {
+            plugin: './server/api/throne-team',
             options: {
                 routes: { prefix: '/api' }
             }
