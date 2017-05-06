@@ -1,0 +1,16 @@
+'use strict';
+const FluxConstant = require('flux-constant');
+
+module.exports = FluxConstant.set([
+    'CREATE_PREDICTION',
+    'CREATE_PREDICTION_RESPONSE',
+    'GET_PREDICTIONS',
+    'GET_PREDICTIONS_RESPONSE',
+    'GET_MY_PREDICTIONS',
+    'GET_MY_PREDICTIONS_RESPONSE',
+    'UPDATE_PREDICTION',
+    'UPDATE_PREDICTION_RESPONSE',
+    'SHOW_ADD_PREDICTION',
+    'ADD_COMMENT',
+    'ADD_COMMENT_RESPONSE'
+]);

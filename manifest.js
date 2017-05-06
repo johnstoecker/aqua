@@ -74,7 +74,8 @@ const manifest = {
                         Status: './server/models/status',
                         User: './server/models/user',
                         Character: './server/models/character',
-                        ThroneTeam: './server/models/throne-team'
+                        ThroneTeam: './server/models/throne-team',
+                        Prediction: './server/models/prediction'
                     },
                     autoIndex: Config.get('/hapiMongoModels/autoIndex')
                 }
@@ -166,6 +167,12 @@ const manifest = {
         },
         {
             plugin: './server/api/throne-team',
+            options: {
+                routes: { prefix: '/api' }
+            }
+        },
+        {
+            plugin: './server/api/predictions',
             options: {
                 routes: { prefix: '/api' }
             }
