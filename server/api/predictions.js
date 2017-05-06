@@ -128,10 +128,11 @@ internals.applyRoutes = function (server, next) {
               text : request.payload.text,
               tags : request.payload.tags,
               season: 6,
-              status: 'pending'
+              status: 'pending',
+              comments: []
             }
 
-            Prediction.create(params, (err, prediction) => {
+            Prediction.insertOne(params, (err, prediction) => {
 
                 if (err) {
                     return reply(err);
