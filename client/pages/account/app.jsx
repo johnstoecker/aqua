@@ -8,6 +8,7 @@ const ReactRouter = require('react-router-dom');
 const Settings = require('./settings/index.jsx');
 const ThroneTeam = require('./throne-team/index.jsx')
 const Predictions = require('./predictions/index.jsx')
+const NewPrediction = require('./predictions/new/index.jsx')
 
 const Route = ReactRouter.Route;
 const Router = ReactRouter.BrowserRouter;
@@ -22,6 +23,7 @@ const App = (
                 <Route exact path="/account" component={Home} />
                 <Route path="/account/settings" component={Settings} />
                 <Route path="/account/throne-team" component={ThroneTeam} />
+                <Route path="/account/predictions/new" component={NewPrediction} />
                 <Route path="/account/predictions" component={Predictions} />
                 <Route component={NotFound} />
             </Switch>

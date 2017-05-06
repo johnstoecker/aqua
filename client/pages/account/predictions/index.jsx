@@ -3,6 +3,8 @@ const React = require('react');
 const Store = require('./store');
 const Actions = require('./actions')
 const CommentForm = require('./comment-form.jsx');
+const Button = require('../../../components/form/button.jsx');
+
 
 class PredictionsPage extends React.Component {
     constructor(props) {
@@ -35,6 +37,13 @@ class PredictionsPage extends React.Component {
         Actions.addComment(id, newComment);
     }
 
+    goToNewPrediction() {
+        this.props.history.push('/account/predictions/new');
+    }
+
+    addPrediction(state) {
+        console.log("make a prediction")
+    }
 
     addCharacter(character) {
         console.log(this.state)
@@ -94,8 +103,12 @@ class PredictionsPage extends React.Component {
         })
         return (
             <section className="container">
-                <h1 className="page-header">Predictions Season 6</h1>
-                <div className="xxxasdf"></div>
+                <h1 className="page-header">
+                    Game of Thrones Season 6
+                    <Button inputClasses={{ 'btn-primary': true }} onClick={this.goToNewPrediction.bind(this)}>
+                          Make a Prediction
+                    </Button>
+                </h1>
                 <div className="row">
                     <div className="col-sm-6">
                       {predictions}
