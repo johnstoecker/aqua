@@ -31,6 +31,10 @@ Gulp.task('less', () => {
         entries: './client/pages/home/index.less',
         dest: './public/pages',
         outputName: 'home.min.css'
+    }, {
+        entries: './client/stylesheets/components.less',
+        dest: './public/pages',
+        outputName: 'components.min.css'
     }];
 
     return bundleConfigs.map((bundleConfig) => {
