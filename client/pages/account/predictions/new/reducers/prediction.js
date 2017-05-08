@@ -6,6 +6,7 @@ const initialState = {
     hydrated: false,
     loading: false,
     error: undefined,
+    tags: [],
     data: [],
     pages: {},
     items: {}

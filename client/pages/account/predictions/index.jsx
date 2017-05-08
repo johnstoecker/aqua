@@ -4,6 +4,7 @@ const Store = require('./store');
 const Actions = require('./actions')
 const CommentForm = require('./comment-form.jsx');
 const Button = require('../../../components/form/button.jsx');
+const tagImageHash = require('../../../../data/tag_hash.json');
 
 
 class PredictionsPage extends React.Component {
@@ -66,7 +67,6 @@ class PredictionsPage extends React.Component {
     // }
 
     render() {
-        let publicPredictions
         let actions
         console.log(this.state)
         const predictions = this.state.predictions.data.map((pred) => {
@@ -79,10 +79,16 @@ class PredictionsPage extends React.Component {
                     </div>
                 );
             })
-            // {comments}
-            // onCommentSubmit={this.handleCommentSubmit}
-            // <CommentForm />
+            const tags = (pred.tags && pred.tags.map((tag) => {
+                tag = "/public/media/tag_images/"+tagImageHash[tag];
 
+                return (
+                    <div className="tag-image" key={Math.random().toString().substr(2)}>
+                        <img src={tag} />
+                    </div>
+                )
+            })) || []
+            console.log(tags)
             return (
                 <div key={pred._id}>
                     <div className="prediction-box">
@@ -97,6 +103,9 @@ class PredictionsPage extends React.Component {
                         </div>
                     </div>
                     {comments}
+                    <div className="tag-images-container">
+                        {tags}
+                    </div>
                     <CommentForm onCommentSubmit={this.handleCommentSubmit} parentId={pred._id} {...this.state.details}/>
                 </div>
             );
