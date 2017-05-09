@@ -60,6 +60,12 @@ git commit -m "CSS change -- giving tywin brown trousers"
 git push
 ```
 You can `git add` whatever other files you like.
+Having trouble with `git push`? do:
+```
+git pull
+hit the Esc button then type :wq
+git push
+```
 
 ## Technology
 
