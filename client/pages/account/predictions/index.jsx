@@ -13,6 +13,8 @@ class PredictionsPage extends React.Component {
         super(props);
 
         Actions.getPredictions();
+        // TODO: figure out a way to share user between pages
+        Actions.getUser();
 
         this.state = Store.getState();
     }
@@ -27,6 +29,10 @@ class PredictionsPage extends React.Component {
 
     onStoreChange() {
         this.setState(Store.getState());
+    }
+
+    deleteComment(comment, pred) {
+        Actions.deleteComment(pred._id, comment._id)
     }
 
     handleCommentSubmit(id, newComment) {
@@ -70,11 +76,14 @@ class PredictionsPage extends React.Component {
         let actions
         console.log(this.state)
         const predictions = this.state.predictions.data.map((pred) => {
-            console.log(pred)
             const comments = pred.comments.map((comment) => {
+                let commentDelete
+                if(comment.author == this.state.user.username) {
+                    commentDelete = (<a href="#" className="comment-box-delete fa fa-trash" onClick={this.deleteComment.bind(this, comment, pred)}/>)
+                }
                 return (
                     <div className="comment-box" key={comment._id}>
-                        <div>Comment by {comment.author}</div>
+                        <div className="comment-box-header">Comment by {comment.author}{commentDelete}</div>
                         <div>{comment.text}</div>
                     </div>
                 );

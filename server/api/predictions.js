@@ -113,6 +113,30 @@ internals.applyRoutes = function (server, next) {
     })
 
     server.route({
+        method: 'DELETE',
+        path: '/predictions/{predictionId}/comments/{commentId}',
+        config: {
+            auth: {
+                strategy: 'session',
+                scope: ['admin', 'account']
+            }
+        },
+        handler: function (request, reply) {
+
+            const user_id = request.auth.credentials.user._id.toString()
+
+            // TODO: how to get second id here?
+            Prediction.deleteCommentFromPrediction(request.params.predictionId, request.params.commentId, user_id, (err, prediction) => {
+                if (err) {
+                    return reply(err);
+                }
+
+                reply(prediction)
+            })
+        }
+    })
+
+    server.route({
         method: 'POST',
         path: '/predictions/my',
         config: {

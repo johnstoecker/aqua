@@ -16,6 +16,18 @@ class Prediction extends MongoModels {
         };
         this.findByIdAndUpdate(id, updateParams, callback)
     }
+
+    static deleteCommentFromPrediction(predictionId, commentId, userId, callback) {
+        const updateParams = { '$pull':
+            {
+                "comments": {
+                    "_id": this.ObjectId(commentId),
+                    "user_id": userId
+                }
+            }
+        };
+        this.findByIdAndUpdate(this.ObjectId(predictionId), updateParams, callback)
+    }
 }
 
 Prediction.collection = 'predictions';

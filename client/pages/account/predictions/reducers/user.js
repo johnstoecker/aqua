@@ -40,40 +40,6 @@ const reducer = function (state = initialState, action) {
             reservedCoins: action.response.reservedCoins
         });
     }
-
-    if (action.type === Constants.SAVE_USER) {
-        return ObjectAssign({}, state, {
-            loading: true,
-            username: action.request.data.username,
-            email: action.request.data.email
-        });
-    }
-
-    if (action.type === Constants.SAVE_USER_RESPONSE) {
-        const validation = ParseValidation(action.response);
-
-        const stateUpdates = {
-            loading: false,
-            showSaveSuccess: !action.err,
-            error: validation.error,
-            hasError: validation.hasError,
-            help: validation.help
-        };
-
-        if (action.response.hasOwnProperty('username')) {
-            stateUpdates.username = action.response.username;
-            stateUpdates.email = action.response.email;
-        }
-
-        return ObjectAssign({}, state, stateUpdates);
-    }
-
-    if (action.type === Constants.HIDE_USER_SAVE_SUCCESS) {
-        return ObjectAssign({}, state, {
-            showSaveSuccess: false
-        });
-    }
-
     return state;
 };
 

@@ -30,6 +30,19 @@ const reducer = function (state = initialState, action) {
         });
     }
 
+
+    if (action.type === Constants.DELETE_COMMENT_RESPONSE) {
+        const validation = ParseValidation(action.response);
+
+        return ObjectAssign({}, state, {
+            loading: false,
+            showSaveSuccess: !action.err,
+            error: validation.error,
+            hasError: validation.hasError,
+            help: validation.help
+        });
+    }
+
     return state;
 };
 

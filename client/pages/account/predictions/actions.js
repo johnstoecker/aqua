@@ -60,6 +60,27 @@ class Actions {
           Constants.ADD_COMMENT_RESPONSE
         )
     }
+
+    static deleteComment(predId, commentId) {
+        ApiActions.delete(
+            '/api/predictions/' + predId + '/comments/' + commentId,
+            undefined,
+            Store,
+            Constants.DELETE_COMMENT,
+            Constants.DELETE_COMMENT_RESPONSE
+        )
+    }
+
+    static getUser() {
+
+        ApiActions.get(
+            '/api/users/my',
+            undefined,
+            Store,
+            Constants.GET_USER,
+            Constants.GET_USER_RESPONSE
+        );
+    }
 }
 
 module.exports = Actions;
