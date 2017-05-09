@@ -5,6 +5,10 @@
     display: flex;
 }
 
+.well {
+    border: 5px solid blue;
+}
+
 .navbar {
     background-color: #333;
     position: fixed;
@@ -45,13 +49,34 @@
 
 }
 
+.rules li {
+
+margin-bottom: 10px;
+    
+}
+
 .comment-box {
     border: 1px solid lightgrey;
 }
 
 .comment-form {
-    border: 1px solid lightgrey;
     display: flex;
+    margin:20px 0;
+}
+
+.comment-form input[type='text'] {
+    width:100%;
+    padding:10px;
+    font-size:18px;
+}
+
+.comment-form input[type='submit'] {
+    background-color:#333;
+    color:#fff;
+    border: 1px solid #000;
+    padding: 0 20px;
+    margin-left: 5px;
+
 }
 
 .comment-form .form-group {

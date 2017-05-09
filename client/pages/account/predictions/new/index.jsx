@@ -71,7 +71,8 @@ class NewPredictionPage extends React.Component {
                     Wager Your Coin
                 </h1>
                 <div className="row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-8">
+                    <p>Will Arya and Sansa reunite?  Will Bran fight the Night King as a warg?  What depravity will George R.R. Martin show us this season? If you have a hunch, write down each prediction for season 7 and wager points on how sure you are.  If others agree, they might just wager some of their coins too.  If not, they may troll you in the comments section.  The night is dark and full of terrors. </p>
                         <form className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
                             <input
                                 type="text"
@@ -79,7 +80,7 @@ class NewPredictionPage extends React.Component {
                                 value={this.state.text}
                                 onChange={this.handleTextChange.bind(this)}
                                 disabled={this.props.loading}
-                                placeholder="The Iron Throne will...."
+                                placeholder="Enter your prediction"
                             />
                             <input type="submit" value="Post" />
                         </form>
@@ -87,6 +88,21 @@ class NewPredictionPage extends React.Component {
                             {tagImages}
                         </div>
                     </div>
+                    <div className="col-sm-1"></div>
+                    <div className="col-sm-3 rules">
+                        Rules of Engagement
+                        <ul>
+                        <li>Each player has 100 coin to bet</li>
+                        <li>Write predictions for GoT Season 7</li>
+                        <li>Add a bet to each prediction</li>
+                        <li>Bet coin on others predictions</li>
+                        <li>Heckle</li>
+                        <li>Get heckled</li>
+                        <li>If the thing happens, coins go to your bank</li>
+                        <li>Biggest bank roll at the end wins</li>
+                        <li>There are no real winners in GoT</li>
+                        </ul>
+                   </div>
                 </div>
             </section>
         );
