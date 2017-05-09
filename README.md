@@ -34,6 +34,19 @@ secrets. If you have issues during installation related to `bcrypt` then [refer
 to this wiki
 page](https://github.com/jedireza/aqua/wiki/bcrypt-Installation-Trouble).
 
+## Kit's Area
+
+Open up Iterm2:
+1. In one tab:
+```
+sudo ~/Documents/personal/mongodb/bin/mongod
+```
+2. In another tab (cmd+t):
+```
+~/projects/ironwagers/npm start
+```
+3. Open up Sublime Text 2. CSS can be edited in client/stylesheets/components.less
+
 ## Technology
 
 IronWagers is built off of Aqua:
