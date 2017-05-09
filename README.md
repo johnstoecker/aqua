@@ -34,6 +34,33 @@ secrets. If you have issues during installation related to `bcrypt` then [refer
 to this wiki
 page](https://github.com/jedireza/aqua/wiki/bcrypt-Installation-Trouble).
 
+If the server crashes with 'unknow option: --inspect', your node version is
+out of date. Upgrade to at least v7.10.0
+
+## Kit's Area
+
+Open up Iterm2:
+1. In one tab:
+```
+sudo ~/Documents/personal/mongodb/bin/mongod
+```
+2. In another tab (cmd+t):
+```
+cd ~/projects/ironwagers
+git pull
+npm start
+```
+3. Open up Sublime Text 2. CSS can be edited in client/stylesheets/components.less
+...
+4. Once are happy with your changes, you can ctrl-c to shut down each tab. In the ironwagers folder, do a:
+```
+git status
+git add client/stylesheets/components.less
+git commit -m "CSS change -- giving tywin brown trousers"
+git push
+```
+You can `git add` whatever other files you like.
+
 ## Technology
 
 IronWagers is built off of Aqua:
