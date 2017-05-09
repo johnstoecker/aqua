@@ -186,6 +186,7 @@ User.schema = Joi.object().keys({
     email: Joi.string().email().lowercase().required(),
     coins: Joi.number().integer(),
     reservedCoins: Joi.number().integer(),
+    house: Joi.string(),
     roles: Joi.object().keys({
         admin: Joi.object().keys({
             id: Joi.string().required(),

@@ -19,6 +19,15 @@ class HomePage extends React.Component {
         this.unsubscribeStore = Store.subscribe(this.onStoreChange.bind(this));
     }
 
+    toggleShowHouses() {
+        this.setState({showHouses: true})
+    }
+
+    joinHouse(house) {
+        console.log(house)
+    //   Actions.updateUser(house);
+    }
+
     componentWillUnmount() {
 
         this.unsubscribeStore();
@@ -30,7 +39,32 @@ class HomePage extends React.Component {
     }
 
     render() {
-        // console.log({this.state})
+        let house
+        if(this.state.user.house){
+            house = (
+                <div className="col-sm-4">
+                    <div className="well text-center">
+                        <div className="stat-value">
+                            {this.state.user.house}
+                        </div>
+                        <div className="stat-label">House</div>
+                    </div>
+                </div>
+            )
+        }
+        else {
+            house = (
+                <a href="#" className="col-sm-4" onClick={this.joinHouse.bind(this)}>
+                    <div className="well text-center">
+                        <div className="stat-value">
+                            <div className="fa fa-plus"/>
+                        </div>
+                        <div className="stat-label">Join a House</div>
+                    </div>
+                </a>
+            )
+        }
+
         return (
             <section className="section-home container">
                 <div className="row">
@@ -61,6 +95,7 @@ class HomePage extends React.Component {
                                     <div className="stat-label">Available</div>
                                 </div>
                             </div>
+                            {house}
                         </div>
                     </div>
                 </div>
