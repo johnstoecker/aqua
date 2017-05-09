@@ -5,7 +5,7 @@ const Async = require('async');
 const Bcrypt = require('bcrypt');
 const Joi = require('joi');
 const MongoModels = require('mongo-models');
-
+const STARTING_COINS = 100;
 
 class User extends MongoModels {
     static generatePasswordHash(password, callback) {
@@ -45,7 +45,9 @@ class User extends MongoModels {
                     username: username.toLowerCase(),
                     password: results.passwordHash.hash,
                     email: email.toLowerCase(),
-                    timeCreated: new Date()
+                    timeCreated: new Date(),
+                    coins: STARTING_COINS,
+                    reservedCoins: 0
                 };
 
                 self.insertOne(document, done);
@@ -182,6 +184,8 @@ User.schema = Joi.object().keys({
     username: Joi.string().token().lowercase().required(),
     password: Joi.string(),
     email: Joi.string().email().lowercase().required(),
+    coins: Joi.number().integer(),
+    reservedCoins: Joi.number().integer(),
     roles: Joi.object().keys({
         admin: Joi.object().keys({
             id: Joi.string().required(),

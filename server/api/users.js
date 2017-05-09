@@ -105,9 +105,8 @@ internals.applyRoutes = function (server, next) {
             }
         },
         handler: function (request, reply) {
-
             const id = request.auth.credentials.user._id.toString();
-            const fields = User.fieldsAdapter('username email roles');
+            const fields = User.fieldsAdapter('username email roles coins reservedCoins');
 
             User.findById(id, fields, (err, user) => {
 

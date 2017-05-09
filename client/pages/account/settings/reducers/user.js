@@ -12,7 +12,9 @@ const initialState = {
     hasError: {},
     help: {},
     username: '',
-    email: ''
+    email: '',
+    coins: '-',
+    reservedCoins: '-'
 };
 const reducer = function (state = initialState, action) {
 
@@ -33,7 +35,9 @@ const reducer = function (state = initialState, action) {
             hasError: validation.hasError,
             help: validation.help,
             username: action.response.username,
-            email: action.response.email
+            email: action.response.email,
+            coins: action.response.coins,
+            reservedCoins: action.response.reservedCoins
         });
     }
 

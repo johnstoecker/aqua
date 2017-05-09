@@ -1,6 +1,7 @@
 'use strict';
-const Moment = require('moment');
 const React = require('react');
+const Actions = require('./settings/actions');
+const Store = require('./settings/store');
 
 
 class HomePage extends React.Component {
@@ -8,40 +9,28 @@ class HomePage extends React.Component {
 
         super(props);
 
-        this.state = this.getThisMoment();
+        Actions.getUser();
+
+        this.state = Store.getState();
     }
 
     componentDidMount() {
 
-        this.interval = setInterval(this.refreshTime.bind(this), 1000);
+        this.unsubscribeStore = Store.subscribe(this.onStoreChange.bind(this));
     }
 
     componentWillUnmount() {
 
-        clearInterval(this.interval);
+        this.unsubscribeStore();
     }
 
-    refreshTime() {
-
-        this.setState(this.getThisMoment());
-    }
-
-    getThisMoment() {
-
-        const thisMoment = Moment();
-
-        return {
-            second: thisMoment.format('ss'),
-            minute: thisMoment.format('mm'),
-            hour: thisMoment.format('HH'),
-            day: thisMoment.format('DD'),
-            month: thisMoment.format('MM'),
-            year: thisMoment.format('YYYY')
-        };
+    onStoreChange() {
+        console.log(Store.getState());
+        this.setState(Store.getState());
     }
 
     render() {
-
+        // console.log({this.state})
         return (
             <section className="section-home container">
                 <div className="row">
@@ -51,57 +40,27 @@ class HomePage extends React.Component {
                             <div className="col-sm-4">
                                 <div className="well text-center">
                                     <div className="stat-value">
-                                        {this.state.hour}
+                                        {this.state.user.coins}
                                     </div>
-                                    <div className="stat-label">hour</div>
+                                    <div className="stat-label">Coins</div>
                                 </div>
                             </div>
                             <div className="col-sm-4">
                                 <div className="well text-center">
                                     <div className="stat-value">
-                                        {this.state.minute}
+                                        {this.state.user.reservedCoins}
                                     </div>
-                                    <div className="stat-label">minute</div>
+                                    <div className="stat-label">Reserved</div>
                                 </div>
                             </div>
                             <div className="col-sm-4">
                                 <div className="well text-center">
                                     <div className="stat-value">
-                                        {this.state.second}
+                                        {this.state.user.coins - this.state.user.reservedCoins}
                                     </div>
-                                    <div className="stat-label">second</div>
+                                    <div className="stat-label">Available</div>
                                 </div>
                             </div>
-                            <div className="col-sm-4">
-                                <div className="well text-center">
-                                    <div className="stat-value">
-                                        {this.state.year}
-                                    </div>
-                                    <div className="stat-label">year</div>
-                                </div>
-                            </div>
-                            <div className="col-sm-4">
-                                <div className="well text-center">
-                                    <div className="stat-value">
-                                        {this.state.month}
-                                    </div>
-                                    <div className="stat-label">month</div>
-                                </div>
-                            </div>
-                            <div className="col-sm-4">
-                                <div className="well text-center">
-                                    <div className="stat-value">
-                                        {this.state.day}
-                                    </div>
-                                    <div className="stat-label">day</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-5">
-                        <h1 className="page-header">Throttle guage</h1>
-                        <div className="text-center">
-                            <i className="fa fa-dashboard bamf"></i>
                         </div>
                     </div>
                 </div>
