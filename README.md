@@ -3,7 +3,18 @@
 You need [Node.js](http://nodejs.org/download/) installed and you'll need
 [MongoDB](http://www.mongodb.org/downloads) installed and running.
 
+on Mac, run:
+```bash
+$ brew install node
+$ brew install mongodb
+```
+
 ## Installation
+
+Ensure you have mongodb running (in a separate tab) with:
+```bash
+$ mongod
+```
 
 ```bash
 $ git clone git@github.com:johnstoecker/ironwagers.git
