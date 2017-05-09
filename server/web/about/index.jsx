@@ -21,13 +21,10 @@ class AboutPage extends React.Component {
                                 </div>
                             </div>
                             <div className="media-body">
-                                <h4 className="media-heading">Leo Damon</h4>
+                                <h4 className="media-heading">John Stoecker</h4>
                                 <p>
-                                    Cras sit amet nibh libero, in gravida
-                                    nulla. Nulla vel metus scelerisque ante
-                                    sollicitudin commodo. Cras purus odio,
-                                    vestibulum in vulputate at, tempus viverra
-                                    turpis.
+                                    Spends most of his time on various hype trains.
+                                    Thinks the show is better than the books.
                                 </p>
                             </div>
                         </div>
@@ -38,13 +35,10 @@ class AboutPage extends React.Component {
                                 </div>
                             </div>
                             <div className="media-body">
-                                <h4 className="media-heading">Mathew DiCaprio</h4>
+                                <h4 className="media-heading">Kit Richert</h4>
                                 <p>
-                                    Cras sit amet nibh libero, in gravida
-                                    nulla. Nulla vel metus scelerisque ante
-                                    sollicitudin commodo. Cras purus odio,
-                                    vestibulum in vulputate at, tempus viverra
-                                    turpis.
+                                    Excited about season 7.
+                                    Can't wait to create more GOT-themed Christmas Carols.
                                 </p>
                             </div>
                         </div>
@@ -55,23 +49,12 @@ class AboutPage extends React.Component {
                                 </div>
                             </div>
                             <div className="media-body">
-                                <h4 className="media-heading">Nick Jackson</h4>
+                                <h4 className="media-heading">3rd Team Member?</h4>
                                 <p>
-                                    Cras sit amet nibh libero, in gravida
-                                    nulla. Nulla vel metus scelerisque ante
-                                    sollicitudin commodo. Cras purus odio,
-                                    vestibulum in vulputate at, tempus viverra
-                                    turpis.
+                                    Contribute to <a href="https://github.com/johnstoecker/ironwagers"> our github</a> and oooweee, this could be *you*
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-sm-6 text-center">
-                        <h1 className="page-header">Prestige worldwide</h1>
-                        <p className="lead">
-                            The first name in entertainment.
-                        </p>
-                        <i className="fa fa-volume-up bamf"></i>
                     </div>
                 </div>
             </Layout>

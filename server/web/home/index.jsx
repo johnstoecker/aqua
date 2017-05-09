@@ -16,30 +16,23 @@ class HomePage extends React.Component {
                 activeTab="home">
 
                 <div className="jumbotron">
-                    <h1>Success</h1>
-                    <div>
-                        <p className="lead">Your Node.js website and user system is running. (v{Package.version})</p>
+                    <h2>THE IRON BANK WILL HAVE ITS DUE</h2>
+                    <h1>
+                        <img src="http://media-cache-ak0.pinimg.com/736x/1b/16/98/1b169875c1952cf4272eb245fee48add.jpg" />
                         <div>
                             <a className="btn btn-primary btn-lg" href="/signup">
                                 Create an account
                             </a>
-                            &nbsp; or &nbsp;
-                            <a className="btn btn-warning btn-lg" href="/login/forgot">
-                                Reset your password
-                            </a>
                         </div>
-                    </div>
+                    </h1>
                 </div>
                 <div className="row">
-                    <div className="col-sm-4">
+                    <div className="col-sm-6">
                         <div className="panel panel-default">
                             <div className="panel-body">
                                 <h3>About us</h3>
                                 <p>
-                                    At vero eos et accusamus et iusto odio
-                                    dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum deleniti atque
-                                    corrupti.
+                                    John and Kit are GOT superfans.
                                 </p>
                                 <a href="/about" className="btn btn-default btn-block">
                                     Learn more
@@ -47,31 +40,12 @@ class HomePage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-sm-4">
-                        <div className="panel panel-default">
-                            <div className="panel-body">
-                                <h3>Sign up</h3>
-                                <p>
-                                    At vero eos et accusamus et iusto odio
-                                    dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum deleniti atque
-                                    corrupti.
-                                </p>
-                                <a href="/signup" className="btn btn-default btn-block">
-                                    Learn more
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-4">
+                    <div className="col-sm-6">
                         <div className="panel panel-default">
                             <div className="panel-body">
                                 <h3>Contact us</h3>
                                 <p>
-                                    At vero eos et accusamus et iusto odio
-                                    dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum deleniti atque
-                                    corrupti.
+                                    <a href="https://twitter.com/ironwagers">@ironwagers</a>, <a href="https://reddit.com/r/ironwagers">r/ironwagers</a>, or email below
                                 </p>
                                 <a href="/contact" className="btn btn-default btn-block">
                                     Learn more

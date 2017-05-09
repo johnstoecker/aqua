@@ -19,11 +19,11 @@ class ContactPage extends React.Component {
                     <div className="col-sm-6 text-center">
                         <h1 className="page-header">Contact us</h1>
                         <p className="lead">
-                            Freddy can't wait to hear from you.
+                            The Iron Bank will have its email.
                         </p>
                         <i className="fa fa-reply-all bamf"></i>
                         <div>
-                            1428 Elm Street &bull; San Francisco, CA 94122
+                            San Francisco, CA, Braavos, Essos
                         </div>
                     </div>
                 </div>
