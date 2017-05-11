@@ -6,6 +6,7 @@ const Bcrypt = require('bcrypt');
 const Joi = require('joi');
 const MongoModels = require('mongo-models');
 const STARTING_COINS = 100;
+const House = require('./house')
 
 class User extends MongoModels {
     static generatePasswordHash(password, callback) {
@@ -186,7 +187,7 @@ User.schema = Joi.object().keys({
     email: Joi.string().email().lowercase().required(),
     coins: Joi.number().integer(),
     reservedCoins: Joi.number().integer(),
-    house: Joi.string(),
+    house: House.schema,
     roles: Joi.object().keys({
         admin: Joi.object().keys({
             id: Joi.string().required(),

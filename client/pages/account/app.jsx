@@ -14,7 +14,6 @@ const Route = ReactRouter.Route;
 const Router = ReactRouter.BrowserRouter;
 const Switch = ReactRouter.Switch;
 
-
 const App = (
     <Router>
         <div>

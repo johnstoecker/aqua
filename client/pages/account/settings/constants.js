@@ -15,5 +15,7 @@ module.exports = FluxConstant.set([
     'SAVE_PASSWORD',
     'SAVE_PASSWORD_RESPONSE',
     'SAVE_USER',
-    'SAVE_USER_RESPONSE'
+    'SAVE_USER_RESPONSE',
+    'SAVE_HOUSE',
+    'SAVE_HOUSE_RESPONSE'
 ]);

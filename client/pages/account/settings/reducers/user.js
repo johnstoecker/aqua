@@ -14,7 +14,12 @@ const initialState = {
     username: '',
     email: '',
     coins: '-',
-    reservedCoins: '-'
+    reservedCoins: '-',
+    // // TODO: loading image for house
+    house: {
+        name: '',
+        image: ''
+    }
 };
 const reducer = function (state = initialState, action) {
 
@@ -37,7 +42,8 @@ const reducer = function (state = initialState, action) {
             username: action.response.username,
             email: action.response.email,
             coins: action.response.coins,
-            reservedCoins: action.response.reservedCoins
+            reservedCoins: action.response.reservedCoins,
+            house: action.response.house
         });
     }
 

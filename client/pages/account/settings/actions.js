@@ -45,6 +45,16 @@ class Actions {
         );
     }
 
+    static saveHouse(house) {
+        ApiActions.put(
+            '/api/users/my/house',
+            house,
+            Store,
+            Constants.SAVE_HOUSE,
+            Constants.SAVE_HOUSE_RESPONSE
+        )
+    }
+
     static saveUser(data) {
 
         ApiActions.put(

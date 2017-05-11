@@ -2,7 +2,7 @@
 const React = require('react');
 const Actions = require('./settings/actions');
 const Store = require('./settings/store');
-
+const Houses = require('../../../data/houses.json');
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -20,12 +20,12 @@ class HomePage extends React.Component {
     }
 
     toggleShowHouses() {
-        this.setState({showHouses: true})
+        this.setState({showHouses: !this.state.showHouses})
     }
 
     joinHouse(house) {
         console.log(house)
-    //   Actions.updateUser(house);
+        Actions.saveHouse(house);
     }
 
     componentWillUnmount() {
@@ -34,7 +34,6 @@ class HomePage extends React.Component {
     }
 
     onStoreChange() {
-        console.log(Store.getState());
         this.setState(Store.getState());
     }
 
@@ -45,16 +44,16 @@ class HomePage extends React.Component {
                 <div className="col-sm-4">
                     <div className="well text-center">
                         <div className="stat-value">
-                            {this.state.user.house}
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+this.state.user.house.image} />
                         </div>
-                        <div className="stat-label">House</div>
+                        <div className="stat-label">House {this.state.user.house.name}</div>
                     </div>
                 </div>
             )
         }
         else {
             house = (
-                <a href="#" className="col-sm-4" onClick={this.joinHouse.bind(this)}>
+                <a href="#" className="col-sm-4" onClick={this.toggleShowHouses.bind(this)}>
                     <div className="well text-center">
                         <div className="stat-value">
                             <div className="fa fa-plus"/>
@@ -64,6 +63,17 @@ class HomePage extends React.Component {
                 </a>
             )
         }
+
+        const houseImages = Houses.map((houseHash) => {
+            return (
+                <div className="house-picker-wrapper" key={houseHash.name}>
+                    <a href="#" className="house-picker" onClick={this.joinHouse.bind(this, houseHash)}>
+                        <img className="house-picker-image" src={"/public/media/tag_images/"+houseHash.image} />
+                        <div>{houseHash.name}</div>
+                    </a>
+                </div>
+            )
+        });
 
         return (
             <section className="section-home container">
@@ -98,6 +108,9 @@ class HomePage extends React.Component {
                             {house}
                         </div>
                     </div>
+                </div>
+                <div className={this.state.showHouses ? "house-picker-container" : "hidden"}>
+                    {houseImages}
                 </div>
             </section>
         );

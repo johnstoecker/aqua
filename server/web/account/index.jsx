@@ -16,7 +16,7 @@ class AccountPage extends React.Component {
 
         return (
             <Layout
-                title="Account"
+                title="Iron Wagers"
                 neck={neck}
                 feet={feet}>
 

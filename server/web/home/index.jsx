@@ -11,20 +11,24 @@ class HomePage extends React.Component {
 
         return (
             <Layout
-                title="Aqua"
+                title="Iron Wagers"
                 neck={neck}
                 activeTab="home">
 
                 <div className="jumbotron">
                     <h2>THE IRON BANK WILL HAVE ITS DUE</h2>
-                    <h1>
+                    <h2>
                         <img src="http://media-cache-ak0.pinimg.com/736x/1b/16/98/1b169875c1952cf4272eb245fee48add.jpg" />
-                        <div>
+                        <h2>
                             <a className="btn btn-primary btn-lg" href="/signup">
                                 Create an account
                             </a>
-                        </div>
-                    </h1>
+                            &nbsp;&nbsp;
+                            <a className="btn btn-success btn-lg" href="/login">
+                                Sign In
+                            </a>
+                        </h2>
+                    </h2>
                 </div>
                 <div className="row">
                     <div className="col-sm-6">

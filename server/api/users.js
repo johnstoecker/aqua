@@ -106,7 +106,7 @@ internals.applyRoutes = function (server, next) {
         },
         handler: function (request, reply) {
             const id = request.auth.credentials.user._id.toString();
-            const fields = User.fieldsAdapter('username email roles coins reservedCoins');
+            const fields = User.fieldsAdapter('username email roles coins reservedCoins house');
 
             User.findById(id, fields, (err, user) => {
 
@@ -367,7 +367,8 @@ internals.applyRoutes = function (server, next) {
             const update = {
                 $set: {
                     username: request.payload.username,
-                    email: request.payload.email
+                    email: request.payload.email,
+                    house: request.payload.house
                 }
             };
             const findOptions = {
@@ -439,6 +440,67 @@ internals.applyRoutes = function (server, next) {
             });
         }
     });
+
+    server.route({
+        method: 'PUT',
+        path: '/users/my/house',
+        config: {
+            auth: {
+                strategy: 'session',
+                scope: ['admin', 'account']
+            },
+            validate: {
+                payload: {
+                    name: Joi.string().required(),
+                    image: Joi.string().required()
+                }
+            },
+            // TODO: validate house name/image in thing, or just grab from DB?
+            pre: [
+                AuthPlugin.preware.ensureNotRoot,
+                {
+                    assign: 'house',
+                    method: function (request, reply) {
+
+                        User.findById(request.auth.credentials.user._id, (err, user) => {
+
+                            if (err) {
+                                return reply(err);
+                            }
+
+                            if (user.house) {
+                                return reply(Boom.conflict('House already set.'));
+                            }
+
+                            reply(true);
+                        });
+                    }
+                }
+            ]
+        },
+        handler: function (request, reply) {
+
+            const id = request.auth.credentials.user._id.toString();
+            const update = {
+                $set: {
+                    house: {
+                        name: request.payload.name,
+                        image: request.payload.image
+                    }
+                }
+            };
+
+            User.findByIdAndUpdate(id, update, (err, user) => {
+
+                if (err) {
+                    return reply(err);
+                }
+
+                reply(user);
+            });
+        }
+    });
+
 
 
     server.route({
