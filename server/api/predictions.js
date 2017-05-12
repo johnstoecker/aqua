@@ -117,7 +117,7 @@ internals.applyRoutes = function (server, next) {
             const params = {
                 user_id: request.auth.credentials.user._id.toString(),
                 author: request.auth.credentials.user.username.toString(),
-                authorHouse: request.auth.credentials.user.house.toString(),
+                //authorHouse: request.auth.credentials.user.house.toString(),
                 text : request.payload.text
             }
 

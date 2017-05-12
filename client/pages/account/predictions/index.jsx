@@ -99,7 +99,7 @@ class PredictionsPage extends React.Component {
             })) || []
             console.log(tags)
             return (
-                <div key={pred._id}>
+                <div className="prediction-container" key={pred._id}>
                     <div className="prediction-box">
                         <div className="prediction-box-details">
                             <div className="prediction">{pred.text}</div>
