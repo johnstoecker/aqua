@@ -102,8 +102,8 @@ class PredictionsPage extends React.Component {
                 <div key={pred._id}>
                     <div className="prediction-box">
                         <div className="prediction-box-details">
-                            <div>{pred.text}</div>
-                            <div>Predicted by {pred.author}</div>
+                            <div className="prediction">{pred.text}</div>
+                            <div className="author">Predicted by {pred.author}</div>
                         </div>
                         <div className="prediction-box-footer">
                             <div className="iron-coin" />
@@ -128,7 +128,7 @@ class PredictionsPage extends React.Component {
                     </Button>
                 </h1>
                 <div className="row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-8">
                       {predictions}
                       {actions}
                     </div>
