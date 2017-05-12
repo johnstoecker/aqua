@@ -92,8 +92,8 @@ class PredictionsPage extends React.Component {
                 tag = "/public/media/tag_images/"+tagImageHash[tag];
 
                 return (
-                    <div className="tag-image" key={Math.random().toString().substr(2)}>
-                        <img src={tag} />
+                    <div className="tag-image-container" key={Math.random().toString().substr(2)}>
+                        <img className="tag-image" src={tag} />
                     </div>
                 )
             })) || []
@@ -112,13 +112,13 @@ class PredictionsPage extends React.Component {
                                 <div>pts</div>
                             </div>
                             <div>{pred.status}</div>
+                            {tags}
                         </div>
                     </div>
                     {comments}
-                    <div className="tag-images-container">
-                        {tags}
+                    <div className="comment-box">
+                        <CommentForm onCommentSubmit={this.handleCommentSubmit} parentId={pred._id} {...this.state.details}/>
                     </div>
-                    <CommentForm onCommentSubmit={this.handleCommentSubmit} parentId={pred._id} {...this.state.details}/>
                 </div>
             );
         })

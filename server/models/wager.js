@@ -10,6 +10,9 @@ class Wager extends MongoModels {
         const userUpdate = {
             $inc: {
                 coins: -coins
+            },
+            $inc: {
+                reservedCoins: coins
             }
         }
         User.findByIdAndUpdate(user_id, userUpdate, (err, user) => {

@@ -16,35 +16,37 @@ class NewPredictionPage extends React.Component {
         this.state = Store.getState();
     }
 
-
     // TODO: figure out why this is giving error
     handleTextChange(event) {
         var text = event.target.value;
         this.setState({text: text});
-        var words = text.split(" ");
-        if(tagImageHash[words[words.length-1]]) {
-            this.addTag(words[words.length-1]);
-        } else if(words.length > 1 && tagImageHash[words[words.length-2] + " " + words[words.length-1]]) {
-            this.addTag(words[words.length-2] + " " + words[words.length-1])
+
+        var words = text.toLowerCase().split(" ");
+        var previousWord = null
+        var newTags = []
+        for (var i=0; i<words.length; i++) {
+            console.log(i);
+            if(tagImageHash[words[i]] && !newTags.includes(words[i])) {
+                newTags.push(words[i]);
+            } else if(previousWord != null && tagImageHash[previousWord + " " + words[i]] && !newTags.includes(previousWord + " " + words[i])) {
+                newTags.push(previousWord + " " + words[i])
+            }
+            previousWord = words[i];
         }
+        this.setTags(newTags)
     }
 
     handleCoinChange(event) {
         console.log(event)
         this.setState({coins: event.target.value});
     }
-    addTag(tag) {
-        var tags = this.state.prediction.tags.slice();
-        if(tags.includes(tag)) {
-            return;
-        }
-        tags.push(tag);
+
+    setTags(tags) {
         this.setState({prediction: {tags: tags}})
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        // var author = this.state.author.trim();
         var text = this.state.text.trim();
         if (!text) {
           return;

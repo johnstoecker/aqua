@@ -35,7 +35,7 @@ internals.applyRoutes = function (server, next) {
                 query.userId = request.query.userId
             }
             const fields = request.query.fields;
-            const sort = request.query.sort;
+            const sort = request.query.sort || "-_id";
             const limit = request.query.limit;
             const page = request.query.page;
 
