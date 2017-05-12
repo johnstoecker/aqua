@@ -8,14 +8,10 @@ const PropTypes = require('prop-types');
 const TextControl = require('../../../../components/form/text-control.jsx');
 const tagImageHash = require('../../../../../data/tag_hash.json');
 
-
-
 class NewPredictionPage extends React.Component {
     constructor(props) {
 
         super(props);
-
-        // Actions.getPredictions();
 
         this.state = Store.getState();
     }
@@ -33,6 +29,10 @@ class NewPredictionPage extends React.Component {
         }
     }
 
+    handleCoinChange(event) {
+        console.log(event)
+        this.setState({coins: event.target.value});
+    }
     addTag(tag) {
         var tags = this.state.prediction.tags.slice();
         if(tags.includes(tag)) {
@@ -51,7 +51,8 @@ class NewPredictionPage extends React.Component {
         }
         Actions.createPrediction({
             text: text,
-            tags: this.state.prediction.tags
+            tags: this.state.prediction.tags,
+            coins: this.state.coins
         })
     }
 
@@ -82,6 +83,15 @@ class NewPredictionPage extends React.Component {
                                 disabled={this.props.loading}
                                 placeholder="Enter your prediction"
                             />
+                            Coins:
+                            <input
+                                type="number"
+                                name="number"
+                                value={this.state.coins}
+                                onChange={this.handleCoinChange.bind(this)}
+                                disabled={this.props.loading}
+                                placeholder='10'
+                            />
                             <input type="submit" value="Post" />
                         </form>
                         <div className="tag-images-container">
@@ -108,6 +118,5 @@ class NewPredictionPage extends React.Component {
         );
     }
 }
-
 
 module.exports = NewPredictionPage;

@@ -75,7 +75,8 @@ const manifest = {
                         User: './server/models/user',
                         Character: './server/models/character',
                         ThroneTeam: './server/models/throne-team',
-                        Prediction: './server/models/prediction'
+                        Prediction: './server/models/prediction',
+                        Wager: './server/models/wager'
                     },
                     autoIndex: Config.get('/hapiMongoModels/autoIndex')
                 }

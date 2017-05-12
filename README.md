@@ -50,7 +50,8 @@ cd ~/projects/ironwagers
 git pull
 npm start
 ```
-3. Open up Sublime Text 2. CSS can be edited in client/stylesheets/components.less
+3. Open up Chrome and point to `localhost:8000`
+4. Open up Sublime Text 2. CSS can be edited in client/stylesheets/components.less
 ...
 4. Once are happy with your changes, you can ctrl-c to shut down each tab. In the ironwagers folder, do a:
 ```

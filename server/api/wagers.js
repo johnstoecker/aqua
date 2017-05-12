@@ -4,18 +4,15 @@ const Boom = require('boom');
 const EscapeRegExp = require('escape-string-regexp');
 const Joi = require('joi');
 
-
 const internals = {};
-
 
 internals.applyRoutes = function (server, next) {
 
-    const Prediction = server.plugins['hapi-mongo-models'].Prediction;
     const Wager = server.plugins['hapi-mongo-models'].Wager;
 
     server.route({
         method: 'GET',
-        path: '/predictions',
+        path: '/wagers',
         config: {
             auth: {
                 strategy: 'session',
@@ -25,9 +22,6 @@ internals.applyRoutes = function (server, next) {
         handler: function (request, reply) {
 
             const query = {};
-            if (request.query.author) {
-                query.author = new RegExp('^.*?' + EscapeRegExp(request.query.author) + '.*$', 'i');
-            }
             if (request.query.status) {
                 query.status = request.query.status
             }
@@ -39,7 +33,7 @@ internals.applyRoutes = function (server, next) {
             const limit = request.query.limit;
             const page = request.query.page;
 
-            Prediction.pagedFind(query, fields, sort, limit, page, (err, results) => {
+            Wager.pagedFind(query, fields, sort, limit, page, (err, results) => {
 
                 if (err) {
                     return reply(err);
@@ -52,7 +46,7 @@ internals.applyRoutes = function (server, next) {
 
     server.route({
         method: 'GET',
-        path: '/predictions/my',
+        path: '/wagers/my',
         config: {
             auth: {
                 strategy: 'session',
@@ -63,49 +57,30 @@ internals.applyRoutes = function (server, next) {
             const id = request.auth.credentials.user._id.toString();
             console.log(id);
 
-            Prediction.findByUserId(id, (err, predictions) => {
+            Wager.findByUserId(id, (err, wagers) => {
 
                 if (err) {
                     return reply(err);
                 }
 
-                if (!predictions) {
+                if (!wagers) {
                     return reply(Boom.notFound());
                 }
 
-                reply(predictions);
+                reply(wagers);
             });
         }
     });
 
-    server.route({
-        method: 'POST',
-        path: '/predictions/{id}/wagers',
-        config: {
-            auth: {
-                strategy: 'session',
-                scope: ['account' ]
-            }
-        },
-        handler: function (request, reply) {
-            Wager.create(request.auth.credentials.user._id.toString(), request.params.id, parseInt(request.payload.coins), (err, prediction)=>{
-                if (err) {
-                    return reply(err)
-                }
-                reply(prediction)
-            } )
-        }
-    })
-
-    // TODO: update a predictions
+    // TODO: update a wagers
     // Validate this, make sure it is for the current user
     // Make sure it changes status back to pending
-    // Cant update prediction that is true or false
+    // Cant update wager that is true or false
     // Can only update text/tags
 
     server.route({
         method: 'POST',
-        path: '/predictions/{id}/comments',
+        path: '/wagers/{id}/comments',
         config: {
             auth: {
                 strategy: 'session',
@@ -113,27 +88,28 @@ internals.applyRoutes = function (server, next) {
             }
         },
         handler: function (request, reply) {
+//                 authorHouse: request.auth.credentials.user.house.toString(),
 
             const params = {
                 user_id: request.auth.credentials.user._id.toString(),
                 author: request.auth.credentials.user.username.toString(),
-                authorHouse: request.auth.credentials.user.house.toString(),
+                authorHouse: "Hightower",
                 text : request.payload.text
             }
 
-            Prediction.addComment(request.params.id, params, (err, prediction) => {
+            Wager.addComment(request.params.id, params, (err, wager) => {
                 if (err) {
                     return reply(err);
                 }
 
-                reply(prediction)
+                reply(wager)
             })
         }
     })
 
     server.route({
         method: 'DELETE',
-        path: '/predictions/{predictionId}/comments/{commentId}',
+        path: '/wagers/{wagerId}/comments/{commentId}',
         config: {
             auth: {
                 strategy: 'session',
@@ -145,19 +121,19 @@ internals.applyRoutes = function (server, next) {
             const user_id = request.auth.credentials.user._id.toString()
 
             // TODO: how to get second id here?
-            Prediction.deleteCommentFromPrediction(request.params.predictionId, request.params.commentId, user_id, (err, prediction) => {
+            Wager.deleteCommentFromWager(request.params.wagerId, request.params.commentId, user_id, (err, wager) => {
                 if (err) {
                     return reply(err);
                 }
 
-                reply(prediction)
+                reply(wager)
             })
         }
     })
 
     server.route({
         method: 'POST',
-        path: '/predictions/my',
+        path: '/wagers/my',
         config: {
             auth: {
                 strategy: 'session',
@@ -172,17 +148,16 @@ internals.applyRoutes = function (server, next) {
               tags : request.payload.tags,
               season: 6,
               status: 'pending',
-              coins: 0,
               comments: []
             }
 
-            Prediction.insertOne(params, (err, prediction) => {
+            Wager.insertOne(params, (err, wager) => {
 
                 if (err) {
                     return reply(err);
                 }
 
-                reply(prediction);
+                reply(wager);
             });
         }
     });
@@ -200,5 +175,5 @@ exports.register = function (server, options, next) {
 
 
 exports.register.attributes = {
-    name: 'predictions'
+    name: 'wagers'
 };
