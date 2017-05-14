@@ -27,7 +27,6 @@ const reducer = function (state = initialState, action) {
 
     if (action.type === Constants.GET_USER_RESPONSE) {
         const validation = ParseValidation(action.response);
-        console.log(action.response);
         return ObjectAssign({}, state, {
             loading: false,
             hydrated: true,
