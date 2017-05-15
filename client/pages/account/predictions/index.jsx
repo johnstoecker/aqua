@@ -109,7 +109,7 @@ class PredictionsPage extends React.Component {
                             <div className="iron-coin" />
                             <div className="wager-points">
                                 <div>{pred.coins}</div>
-                                <div>pts</div>
+                                <div>coins</div>
                             </div>
                             <div>{pred.status}</div>
                             {tags}

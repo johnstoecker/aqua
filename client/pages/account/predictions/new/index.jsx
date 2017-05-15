@@ -45,7 +45,7 @@ class NewPredictionPage extends React.Component {
                     </div>
                     <div className="col-sm-1"></div>
                     <div className="col-sm-3 rules">
-                        Rules of Engagement
+                        <h4>Rules of Engagement</h4>
                         <ul>
                         <li>Each player has 100 coin to bet</li>
                         <li>Write predictions for GoT Season 7</li>
