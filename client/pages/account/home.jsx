@@ -24,7 +24,7 @@ class HomePage extends React.Component {
     }
 
     joinHouse(house) {
-        console.log(house)
+        this.toggleShowHouses();
         Actions.saveHouse(house);
     }
 
@@ -100,7 +100,7 @@ class HomePage extends React.Component {
                             <div className="col-sm-4">
                                 <div className="well text-center">
                                     <div className="stat-value">
-                                        {this.state.user.coins - this.state.user.reservedCoins}
+                                        {this.state.user.availableCoins}
                                     </div>
                                     <div className="stat-label">Available</div>
                                 </div>

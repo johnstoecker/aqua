@@ -7,38 +7,7 @@ const Prediction = require('./prediction')
 class Wager extends MongoModels {
 
     static create(user_id, predictionId, coins, callback) {
-        const userUpdate = {
-            $inc: {
-                coins: -coins
-            },
-            $inc: {
-                reservedCoins: coins
-            }
-        }
-        User.findByIdAndUpdate(user_id, userUpdate, (err, user) => {
-            if (err) {
-                return callback(err);
-            }
-            // TODO: figure out how to add time automatically here
-            const wagerParams = {
-                userId: user_id,
-                user: user,
-                coins: coins,
-                predictionId: predictionId,
-                status: 'pending'
-            }
-            this.insertOne(wagerParams, (err, docs) => {
-                if (err) {
-                    return callback(err);
-                }
-                const predParams = {
-                    $inc: {
-                        coins: coins
-                    }
-                }
-                Prediction.findByIdAndUpdate(predictionId.toString(), predParams, callback)
-            })
-        })
+        //????
     }
 }
 

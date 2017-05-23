@@ -51,7 +51,7 @@ class Actions {
             house,
             Store,
             Constants.SAVE_HOUSE,
-            Constants.SAVE_HOUSE_RESPONSE
+            Constants.GET_USER_RESPONSE
         )
     }
 

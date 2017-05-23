@@ -28,28 +28,17 @@ const reducer = function (state = initialState, action) {
     if (action.type === Constants.CREATE_PREDICTION_RESPONSE) {
         // error: validation.error,
         // hasError: validation.hasError,
-        const stateUpdates = {}
-        if (action.err) {
-            stateUpdate.error = action.err
-            stateUpdate.loading = false
-        }
-
-        return ObjectAssign({}, state, stateUpdates);
-    }
-
-    if (action.type == Constants.CREATE_WAGER_RESPONSE) {
+        console.log(action)
         const stateUpdates = {
             hydrated: true,
             loading: false,
             showSaveSuccess: !action.err,
-            error: action.err,
-            data: action.response.data,
-            pages: action.response.pages,
-            items: action.response.items
+            hasError: action.err,
+            error: action.response,
+            tags: []
         }
 
-
-        return ObjectAssign({}, state, stateUpdates)
+        return ObjectAssign({}, state, stateUpdates);
     }
 
     return state;

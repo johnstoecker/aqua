@@ -15,6 +15,7 @@ const initialState = {
     email: '',
     coins: '-',
     reservedCoins: '-',
+    availableCoins: '-',
     // // TODO: loading image for house
     house: {
         name: '',
@@ -43,6 +44,7 @@ const reducer = function (state = initialState, action) {
             email: action.response.email,
             coins: action.response.coins,
             reservedCoins: action.response.reservedCoins,
+            availableCoins: action.response.availableCoins,
             house: action.response.house
         });
     }

@@ -47,8 +47,9 @@ class User extends MongoModels {
                     password: results.passwordHash.hash,
                     email: email.toLowerCase(),
                     timeCreated: new Date(),
-                    coins: STARTING_COINS,
-                    reservedCoins: 0
+                    coins: 0,
+                    reservedCoins: 0,
+                    availableCoins: STARTING_COINS
                 };
 
                 self.insertOne(document, done);
@@ -175,9 +176,7 @@ class User extends MongoModels {
     }
 }
 
-
 User.collection = 'users';
-
 
 User.schema = Joi.object().keys({
     _id: Joi.object(),
@@ -186,7 +185,8 @@ User.schema = Joi.object().keys({
     password: Joi.string(),
     email: Joi.string().email().lowercase().required(),
     coins: Joi.number().integer().min(0),
-    reservedCoins: Joi.number().integer(),
+    reservedCoins: Joi.number().integer().min(0),
+    availableCoins: Joi.number().integer().min(0),
     house: House.schema,
     roles: Joi.object().keys({
         admin: Joi.object().keys({

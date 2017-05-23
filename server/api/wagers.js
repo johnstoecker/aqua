@@ -80,59 +80,6 @@ internals.applyRoutes = function (server, next) {
 
     server.route({
         method: 'POST',
-        path: '/wagers/{id}/comments',
-        config: {
-            auth: {
-                strategy: 'session',
-                scope: ['admin', 'account']
-            }
-        },
-        handler: function (request, reply) {
-//                 authorHouse: request.auth.credentials.user.house.toString(),
-
-            const params = {
-                user_id: request.auth.credentials.user._id.toString(),
-                author: request.auth.credentials.user.username.toString(),
-                authorHouse: "Hightower",
-                text : request.payload.text
-            }
-
-            Wager.addComment(request.params.id, params, (err, wager) => {
-                if (err) {
-                    return reply(err);
-                }
-
-                reply(wager)
-            })
-        }
-    })
-
-    server.route({
-        method: 'DELETE',
-        path: '/wagers/{wagerId}/comments/{commentId}',
-        config: {
-            auth: {
-                strategy: 'session',
-                scope: ['admin', 'account']
-            }
-        },
-        handler: function (request, reply) {
-
-            const user_id = request.auth.credentials.user._id.toString()
-
-            // TODO: how to get second id here?
-            Wager.deleteCommentFromWager(request.params.wagerId, request.params.commentId, user_id, (err, wager) => {
-                if (err) {
-                    return reply(err);
-                }
-
-                reply(wager)
-            })
-        }
-    })
-
-    server.route({
-        method: 'POST',
         path: '/wagers/my',
         config: {
             auth: {

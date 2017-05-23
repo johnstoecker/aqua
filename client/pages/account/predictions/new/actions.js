@@ -10,17 +10,22 @@ class Actions {
             data,
             Store,
             Constants.CREATE_PREDICTION,
-            Constants.CREATE_PREDICTION_RESPONSE,
-            (err, response) => {
-
-                if (!err) {
-                    this.createWager(response[0]._id, data);
-                    //
-                    // history.replace(window.location);
-                    //
-                    // window.scrollTo(0, 0);
-                }
-            }
+            Constants.CREATE_PREDICTION_RESPONSE
+            // (err, response) => {
+            //     console.log(err)
+            //
+            //     if (err) {
+            //
+            //     }
+            //     if (!err) {
+            //         console.log("prediction created")
+            //         // this.createWager(response[0]._id, data);
+            //         //TODO: go to predictions page after create
+            //         // history.replace(window.location);
+            //         //
+            //         // window.scrollTo(0, 0);
+            //     }
+            // }
         );
     }
 

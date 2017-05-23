@@ -90,22 +90,21 @@ class PredictionForm extends React.Component {
     }
 
     render() {
-
         const alerts = [];
         if (this.props.showSaveSuccess) {
             alerts.push(<Alert
                 key="success"
                 type="success"
                 onClose={Actions.hideDetailsSaveSuccess}
-                message="Success. Changes have been saved."
+                message="Your prediction has been created."
             />);
         }
 
-        if (this.props.error) {
+        if (this.props.hasError) {
             alerts.push(<Alert
                 key="danger"
                 type="danger"
-                message={this.props.error}
+                message={this.props.error.message}
             />);
         }
 

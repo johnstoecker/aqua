@@ -3,6 +3,7 @@ const AuthPlugin = require('../auth');
 const Boom = require('boom');
 const EscapeRegExp = require('escape-string-regexp');
 const Joi = require('joi');
+const Mongodb = require('mongodb');
 
 
 const internals = {};
@@ -12,6 +13,7 @@ internals.applyRoutes = function (server, next) {
 
     const Prediction = server.plugins['hapi-mongo-models'].Prediction;
     const Wager = server.plugins['hapi-mongo-models'].Wager;
+    const User = server.plugins['hapi-mongo-models'].User;
 
     server.route({
         method: 'GET',
@@ -172,18 +174,53 @@ internals.applyRoutes = function (server, next) {
               tags : request.payload.tags,
               season: 6,
               status: 'pending',
-              coins: 0,
+              coins: parseInt(request.payload.coins),
               comments: []
             }
 
-            Prediction.insertOne(params, (err, prediction) => {
+            const userUpdate = {
+                $inc: {
+                    availableCoins: -params.coins,
+                    reservedCoins: params.coins
+                }
+            }
+            const findParam = {
+                _id: Mongodb.ObjectId(params.user_id),
+                availableCoins: { $gt: params.coins-1 }
+            }
+            console.log(findParam)
+            User.findOneAndUpdate(findParam, userUpdate, (err, user) => {
 
                 if (err) {
                     return reply(err);
                 }
 
-                reply(prediction);
-            });
+                if (!user) {
+                    return reply(Boom.badRequest("Not enough coins"))
+                }
+
+                Prediction.insertOne(params, (err, prediction) => {
+
+                    if (err) {
+                        return reply(err);
+                    }
+
+                    const wagerParams = {
+                        userId: params.user_id,
+                        user: request.auth.credentials.user,
+                        coins: params.coins,
+                        predictionId: prediction._id,
+                        status: 'pending'
+                    }
+                    Wager.insertOne(wagerParams, (err, docs) => {
+                        if (err) {
+                            return reply(err);
+                        }
+
+                        reply(prediction)
+                    })
+                });
+            })
         }
     });
 
