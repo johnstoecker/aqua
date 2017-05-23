@@ -31,16 +31,46 @@ const reducer = function (state = initialState, action) {
     }
 
 
-    if (action.type === Constants.DELETE_COMMENT_RESPONSE) {
-        const validation = ParseValidation(action.response);
+    if (action.type === Constants.ADD_COMMENT_RESPONSE) {
+        var index = -1;
+        for(var i=0; i<state.data.length; i++) {
+            if(state.data[i]["_id"] == action.response["_id"]) {
+                index = i;
+                break;
+            }
+        }
 
-        return ObjectAssign({}, state, {
+        return Object.assign({}, state,  {
+            hydrated: true,
             loading: false,
-            showSaveSuccess: !action.err,
-            error: validation.error,
-            hasError: validation.hasError,
-            help: validation.help
-        });
+            pages: action.response.pages,
+            items: action.response.items,
+            data: state.data.slice(0, index)
+                .concat([action.response])
+                .concat(state.data.slice(index+1))
+        })
+    }
+
+
+
+    if (action.type === Constants.DELETE_COMMENT_RESPONSE) {
+        var index = -1;
+        for(var i=0; i<state.data.length; i++) {
+            if(state.data[i]["_id"] == action.response["_id"]) {
+                index = i;
+                break;
+            }
+        }
+
+        return Object.assign({}, state,  {
+            hydrated: true,
+            loading: false,
+            pages: action.response.pages,
+            items: action.response.items,
+            data: state.data.slice(0, index)
+                .concat([action.response])
+                .concat(state.data.slice(index+1))
+        })
     }
 
     return state;

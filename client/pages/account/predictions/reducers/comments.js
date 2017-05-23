@@ -14,16 +14,6 @@ const initialState = {
 
 const reducer = function (state = initialState, action) {
 
-    if (action.type === Constants.ADD_COMMENT_RESPONSE) {
-        return ObjectAssign({}, state, {
-            hydrated: true,
-            loading: false,
-            data: action.response.data,
-            pages: action.response.pages,
-            items: action.response.items
-        })
-    }
-
     return state;
 };
 

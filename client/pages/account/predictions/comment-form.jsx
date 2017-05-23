@@ -82,7 +82,7 @@ class CommentForm extends React.Component {
         //         message="Success. Changes have been saved."
         //     />);
         // }
-
+        //
         // if (this.props.error) {
         //     alerts.push(<Alert
         //         key="danger"
