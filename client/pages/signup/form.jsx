@@ -22,8 +22,8 @@ class Form extends React.Component {
 
         this.unsubscribeStore = Store.subscribe(this.onStoreChange.bind(this));
 
-        if (this.input.name) {
-            this.input.name.focus();
+        if (this.input.email) {
+            this.input.email.focus();
         }
     }
 
@@ -43,7 +43,6 @@ class Form extends React.Component {
         event.stopPropagation();
 
         Actions.sendRequest({
-            name: this.input.name.value(),
             username: this.input.username.value(),
             password: this.input.password.value(),
             email: this.input.email.value()
@@ -71,14 +70,6 @@ class Form extends React.Component {
 
         if (!this.state.success) {
             formElements = <fieldset>
-                <TextControl
-                    ref={(c) => (this.input.name = c)}
-                    name="name"
-                    label="Name"
-                    hasError={this.state.hasError.name}
-                    help={this.state.help.name}
-                    disabled={this.state.loading}
-                />
                 <TextControl
                     ref={(c) => (this.input.email = c)}
                     name="email"

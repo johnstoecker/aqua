@@ -64,17 +64,6 @@ class HomePage extends React.Component {
             )
         }
 
-        const houseImages = Houses.map((houseHash) => {
-            return (
-                <div className="house-picker-wrapper" key={houseHash.name}>
-                    <a href="#" className="house-picker" onClick={this.joinHouse.bind(this, houseHash)}>
-                        <img className="house-picker-image" src={"/public/media/tag_images/"+houseHash.image} />
-                        <div>{houseHash.name}</div>
-                    </a>
-                </div>
-            )
-        });
-
         return (
             <section className="section-home container">
                 <div className="row">
@@ -109,8 +98,57 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className={this.state.showHouses ? "house-picker-container" : "hidden"}>
-                    {houseImages}
+                <div className={this.state.showHouses ? "col-sm-12 house-picker-container" : "hidden"}>
+                    <div className="house-picker-wrapper">
+                        <a href="#" className="house-picker" onClick={this.joinHouse.bind(this, Houses[0])}>
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[0].image} />
+                            <div>{Houses[0].name}</div>
+                            <div className="house-attribute-title">⚓ We Do Not Sow ⚓</div>
+                            <div className="house-attribute-detail">+12 for each naval battle (2+ ships)</div>
+                            <div className="house-attribute-title">🐙 What is dead, could die 🐙</div>
+                            <div className="house-attribute-detail">-2 For each week no Greyjoy is seen on a ship</div>
+                        </a>
+                    </div>
+                    <div className="house-picker-wrapper">
+                        <a href="#" className="house-picker" onClick={this.joinHouse.bind(this, Houses[1])}>
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[1].image} />
+                            <div>{Houses[1].name}</div>
+                            <div className="house-attribute-title">👑 Golden Crown 👑</div>
+                            <div className="house-attribute-detail">+5 for each week Cersei is Queen</div>
+                            <div className="house-attribute-title">👫 Twincest 👫</div>
+                            <div className="house-attribute-detail">-2 for each week Cersei and Jaime don't meet</div>
+                        </a>
+                    </div>
+                    <div className="house-picker-wrapper">
+                        <a href="#" className="house-picker" onClick={this.joinHouse.bind(this, Houses[2])}>
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[2].image} />
+                            <div>{Houses[2].name}</div>
+                            <div className="house-attribute-title">🐍 Sand Sneks 🐍</div>
+                            <div className="house-attribute-detail">+8 for each week a Sand Snake kills</div>
+                            <div className="house-attribute-title">🌞 Solar 🌞</div>
+                            <div className="house-attribute-detail">-3 for xxx</div>
+                        </a>
+                    </div>
+                    <div className="house-picker-wrapper">
+                        <a href="#" className="house-picker" onClick={this.joinHouse.bind(this, Houses[3])}>
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
+                            <div>{Houses[3].name}</div>
+                            <div className="house-attribute-title">⚔ Needlework ⚔</div>
+                            <div className="house-attribute-detail">+3 for each Arya kill, cooldown: 5 minutes</div>
+                            <div className="house-attribute-title">🤔 Knows Nothing 🤔</div>
+                            <div className="house-attribute-detail">-2 for each week Jon Snow makes a big mistake</div>
+                        </a>
+                    </div>
+                    <div className="house-picker-wrapper">
+                        <a href="#" className="house-picker" onClick={this.joinHouse.bind(this, Houses[4])}>
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
+                            <div>{Houses[4].name}</div>
+                            <div className="house-attribute-title">✨ Overpowered ✨</div>
+                            <div className="house-attribute-detail">+20 for each new magical power Daenerys gets</div>
+                            <div className="house-attribute-title">🐲 Dragon Along 🐲</div>
+                            <div className="house-attribute-detail">-2 for each week a dragon disobeys</div>
+                        </a>
+                    </div>
                 </div>
             </section>
         );

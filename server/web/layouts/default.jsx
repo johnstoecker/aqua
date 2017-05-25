@@ -25,6 +25,7 @@ class DefaultLayout extends React.Component {
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <link rel="stylesheet" href="/public/core.min.css" />
                     <link rel="stylesheet" href="/public/layouts/default.min.css" />
+                    <link rel="stylesheet" href="/public/pages/components.min.css" />,
                     <link rel="shortcut icon" href="/public/media/favicon.ico" />
                     <script async defer src="https://buttons.github.io/buttons.js"></script>
                     {this.props.neck}
