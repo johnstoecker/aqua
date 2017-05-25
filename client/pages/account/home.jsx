@@ -125,16 +125,16 @@ class HomePage extends React.Component {
                             <div>{Houses[2].name}</div>
                             <div className="house-attribute-title">🐍 Sand Sneks 🐍</div>
                             <div className="house-attribute-detail">+8 for each week a Sand Snake kills</div>
-                            <div className="house-attribute-title">🌞 Solar 🌞</div>
-                            <div className="house-attribute-detail">-3 for xxx</div>
+                            <div className="house-attribute-title">❄ Global Cooling ❄</div>
+                            <div className="house-attribute-detail">-2 for each week the Night King is south of the Wall</div>
                         </a>
                     </div>
                     <div className="house-picker-wrapper">
                         <a href="#" className="house-picker" onClick={this.joinHouse.bind(this, Houses[3])}>
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
                             <div>{Houses[3].name}</div>
-                            <div className="house-attribute-title">⚔ Needlework ⚔</div>
-                            <div className="house-attribute-detail">+3 for each Arya kill, cooldown: 5 minutes</div>
+                            <div className="house-attribute-title">🗡 Needlework 🗡</div>
+                            <div className="house-attribute-detail">+4 for each Arya kill, cooldown: 5 minutes</div>
                             <div className="house-attribute-title">🤔 Knows Nothing 🤔</div>
                             <div className="house-attribute-detail">-2 for each week Jon Snow makes a big mistake</div>
                         </a>

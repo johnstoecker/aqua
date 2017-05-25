@@ -70,6 +70,10 @@ class Navbar extends React.Component {
                             <li className={this.classForPath(/^\/admin\/users/)}>
                                 <Link to="/admin/users">Users</Link>
                             </li>
+                            <li className={this.classForPath(/^\/admin\/approvals/)}>
+                                <Link to="/admin/approvals">Approvals</Link>
+                            </li>
+
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li>

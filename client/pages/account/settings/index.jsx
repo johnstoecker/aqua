@@ -40,7 +40,6 @@ class SettingsPage extends React.Component {
                 <h1 className="page-header">Account settings</h1>
                 <div className="row">
                     <div className="col-sm-6">
-                        <DetailsForm {...this.state.details} />
                         <UserForm {...this.state.user} />
                         <PasswordForm {...this.state.password} />
                     </div>

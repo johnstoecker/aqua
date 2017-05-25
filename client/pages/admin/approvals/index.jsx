@@ -2,10 +2,7 @@
 const React = require('react');
 const Store = require('./store');
 const Actions = require('./actions')
-const CommentForm = require('./comment-form.jsx');
-const Button = require('../../../components/form/button.jsx');
-const tagImageHash = require('../../../../data/tag_hash.json');
-
+const PredictionApprovalForm = require('./prediction-approval-form.jsx');
 
 class ApprovalsPage extends React.Component {
     constructor(props) {
@@ -73,12 +70,15 @@ class ApprovalsPage extends React.Component {
     render() {
         console.log(this.state)
         const predictions = this.state.predictions.data.map((pred) => {
-            <PredictionApproval {pred}/>
+            return (
+                <PredictionApprovalForm {...pred}/>
+                    // <CommentForm onCommentSubmit={this.handleCommentSubmit} parentId={pred._id} {...this.state.details}/>
+            )
         });
         return (
             <section className="container">
                 <h1 className="page-header">
-                    Game of Thrones Season 6 Prediction Approbal
+                    Game of Thrones Season 6 Prediction Approval
                 </h1>
                 <div className="row">
                     <div className="col-sm-8">
@@ -91,4 +91,4 @@ class ApprovalsPage extends React.Component {
 }
 
 
-module.exports = PredictionsPage;
+module.exports = ApprovalsPage;

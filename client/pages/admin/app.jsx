@@ -15,6 +15,7 @@ const StatusDetails = require('./statuses/details/index.jsx');
 const StatusSearch = require('./statuses/search/index.jsx');
 const UserDetails = require('./users/details/index.jsx');
 const UserSearch = require('./users/search/index.jsx');
+const ApprovalsPage = require('./approvals/index.jsx');
 
 
 const Router = ReactRouter.BrowserRouter;
@@ -37,6 +38,7 @@ const App = (
                 <Route exact path="/admin/statuses" component={StatusSearch} />
                 <Route path="/admin/statuses/:id" component={StatusDetails} />
                 <Route exact path="/admin/users" component={UserSearch} />
+                <Route path="/admin/approvals" component={ApprovalsPage} />
                 <Route path="/admin/users/:id" component={UserDetails} />
                 <Route component={NotFound} />
             </Switch>

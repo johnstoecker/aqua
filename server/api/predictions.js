@@ -106,6 +106,35 @@ internals.applyRoutes = function (server, next) {
     // Can only update text/tags
 
     server.route({
+        method: 'PUT',
+        path: '/predictions/{id}',
+        config: {
+            auth: {
+                strategy: 'session',
+                scope: ['admin']
+            }
+        },
+        handler: function(request, reply) {
+            const update = {
+                $set: {
+                    status: request.payload.status
+                }
+            }
+            const findParam = {
+                _id: Mongodb.ObjectId(request.params.id),
+            }
+            console.log(findParam)
+            Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
+                if (err) {
+                    return reply(err);
+                }
+                reply(prediction);
+            });
+        }
+    })
+
+
+    server.route({
         method: 'POST',
         path: '/predictions/{id}/comments',
         config: {

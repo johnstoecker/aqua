@@ -8,7 +8,9 @@ class AdminPage extends React.Component {
 
         const neck = [
             <link key="layout" rel="stylesheet" href="/public/layouts/default.min.css" />,
-            <link key="page" rel="stylesheet" href="/public/pages/admin.min.css" />
+            <link key="page" rel="stylesheet" href="/public/pages/admin.min.css" />,
+            <link rel="stylesheet" href="/public/pages/components.min.css" />
+
         ];
         const feet = <script src="/public/pages/admin.min.js"></script>;
 
