@@ -101,7 +101,7 @@ class CommentForm extends React.Component {
                     disabled={this.props.loading}
                     placeholder="leave a comment"
                 />
-                <input type="submit" value="Post" />
+               
             </form>
         );
     }
