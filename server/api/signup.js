@@ -30,7 +30,6 @@ internals.applyRoutes = function (server, next) {
             },
             validate: {
                 payload: {
-                    name: Joi.string().required(),
                     email: Joi.string().email().lowercase().required(),
                     username: Joi.string().token().lowercase().required(),
                     password: Joi.string().required()
@@ -95,9 +94,7 @@ internals.applyRoutes = function (server, next) {
                 },
                 account: ['user', function (results, done) {
 
-                    const name = request.payload.name;
-
-                    Account.create(name, done);
+                    Account.create("No Name", done);
                 }],
                 linkUser: ['account', function (results, done) {
 
