@@ -16,7 +16,7 @@ const StatusSearch = require('./statuses/search/index.jsx');
 const UserDetails = require('./users/details/index.jsx');
 const UserSearch = require('./users/search/index.jsx');
 const ApprovalsPage = require('./approvals/index.jsx');
-
+const CyclesPage = require('./cycles/index.jsx');
 
 const Router = ReactRouter.BrowserRouter;
 const Route = ReactRouter.Route;
@@ -39,6 +39,7 @@ const App = (
                 <Route path="/admin/statuses/:id" component={StatusDetails} />
                 <Route exact path="/admin/users" component={UserSearch} />
                 <Route path="/admin/approvals" component={ApprovalsPage} />
+                <Route path="/admin/cycles" component={CyclesPage} />
                 <Route path="/admin/users/:id" component={UserDetails} />
                 <Route component={NotFound} />
             </Switch>

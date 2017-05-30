@@ -76,7 +76,8 @@ const manifest = {
                         Character: './server/models/character',
                         ThroneTeam: './server/models/throne-team',
                         Prediction: './server/models/prediction',
-                        Wager: './server/models/wager'
+                        Wager: './server/models/wager',
+                        House: './server/models/house'
                     },
                     autoIndex: Config.get('/hapiMongoModels/autoIndex')
                 }
@@ -174,6 +175,12 @@ const manifest = {
         },
         {
             plugin: './server/api/predictions',
+            options: {
+                routes: { prefix: '/api' }
+            }
+        },
+        {
+            plugin: './server/api/houses',
             options: {
                 routes: { prefix: '/api' }
             }

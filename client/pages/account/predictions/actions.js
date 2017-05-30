@@ -31,6 +31,16 @@ class Actions {
         )
     }
 
+    static getHouseStats() {
+        ApiActions.get(
+            '/api/houses',
+            undefined,
+            Store,
+            Constants.GET_HOUSESTATS,
+            Constants.GET_HOUSESTATS_RESPONSE
+        )
+    }
+
     static updatePrediction(data) {
         ApiActions.put(
           '/api/throne-teams/' + data._id,

@@ -16,6 +16,7 @@ class PredictionsPage extends React.Component {
         // TODO: figure out a way to share user between pages
         Actions.getUser();
 
+        Actions.getHouseStats();
         this.state = Store.getState();
     }
 
@@ -69,7 +70,7 @@ class PredictionsPage extends React.Component {
                 tag = "/public/media/tag_images/"+tagImageHash[tag];
 
                 return (
-                    <div className="tag-image-container" key={Math.random().toString().substr(2)}>
+                    <div className="tag-image-container" key={Math.random().toString().substr(12)}>
                         <img className="tag-image" src={tag} />
                     </div>
                 )
@@ -115,14 +116,34 @@ class PredictionsPage extends React.Component {
             makePrediction = (<div>0 coins available to wager</div>);
         }
 
-        const houseBankrolls = (
-            <div>
-                <div className="house-bankroll-housename">House Stark(2)</div>
-                <div>2 open predictions</div>
-                <div>23 coins banked</div>
-                <div>300 coins left to wager</div>
-            </div>
-        );
+
+        // const comments = pred.comments.map((comment) => {
+        //     let commentDelete
+        //     if(comment.author == this.state.user.username) {
+        //         commentDelete = (<a href="#" className="comment-box-delete fa fa-trash" onClick={this.deleteComment.bind(this, comment, pred)}/>)
+        //     }
+        //     return (
+        //         <div className="comment-box" key={comment._id}>
+        //             <div className="comment-box-header">Comment by {comment.author}{commentDelete}</div>
+        //             <div>{comment.text}</div>
+        //         </div>
+        //     );
+        // })
+
+
+        const houseBankrolls = this.state.houseStats.data.map((house) => {
+            return (
+                <div className="house-bankroll-container" key={house._id}>
+                    <div className={"house-bankroll "+house.name.toLowerCase()}>
+                        <div className="house-bankroll-housename">{house.name}({house.userCount})</div>
+                        <div>{house.numPredictions} open predictions</div>
+                        <div>{house.coins} coins banked</div>
+                        <div>{house.availableCoins} coins left to wager</div>
+                    </div>
+                </div>
+            );
+        })
+
 
         return (
             <section className="container">
