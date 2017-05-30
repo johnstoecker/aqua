@@ -36,6 +36,7 @@ const reducer = function (state = initialState, action) {
             username: action.response.username,
             email: action.response.email,
             coins: action.response.coins,
+            availableCoins: action.response.availableCoins,
             reservedCoins: action.response.reservedCoins
         });
     }

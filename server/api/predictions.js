@@ -123,13 +123,89 @@ internals.applyRoutes = function (server, next) {
             const findParam = {
                 _id: Mongodb.ObjectId(request.params.id),
             }
-            console.log(findParam)
-            Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
+            Prediction.findOne(findParam, (err, pred) => {
                 if (err) {
                     return reply(err);
                 }
-                reply(prediction);
-            });
+                console.log(pred)
+
+                if (request.payload.status =='rejected') {
+                    // send message to user
+                    // increment availableCoins
+
+                    const userUpdate = {
+                        $inc: {
+                            availableCoins: pred.coins
+                        },
+                        $push: {
+                            messages: {
+                                message: "Your prediction " + pred.text +" has been rejected by the Iron Bank. Please check the help page for prediction guidelines.",
+                                dismissed: false,
+                                _id: Mongodb.ObjectId()
+                            }
+                        }
+                    }
+                    const userFindParam = {
+                        _id: Mongodb.ObjectId(pred.user_id)
+                    }
+                    User.findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
+                        if (err) {
+                            return reply(err);
+                        }
+                        Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
+                            if (err) {
+                                return reply(err);
+                            }
+                            reply(prediction);
+                        });
+                    });
+
+                } else if (request.payload.status == 'standing') {
+                    // send message to user
+                    // decrement availableCoins, increase reservedCoins
+
+                    const userUpdate = {
+                        $inc: {
+                            availableCoins: -pred.coins,
+                            reservedCoins: pred.coins
+                        },
+                        $push: {
+                            messages: {
+                                message: "Your prediction " + pred.text +" has been approved by the Iron Bank.",
+                                dismissed: false,
+                                _id: Mongodb.ObjectId()
+                            }
+                        }
+                    }
+                    const userFindParam = {
+                        _id: Mongodb.ObjectId(pred.user_id)
+                    }
+                    User.findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
+                        if (err) {
+                            return reply(err);
+                        }
+                        Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
+                            if (err) {
+                                return reply(err);
+                            }
+                            reply(prediction);
+                        });
+                    });
+
+                } else if (request.payload.status == 'true') {
+                    // send message to user
+                    // decrement availableCoins, decrese reserved
+                    // do this for all wagers on this pred!
+                } else if (request.payload.status == 'false') {
+                    // send message to user
+                    // decrement reservedCoins
+                    //
+                }
+
+                console.log(findParam)
+
+
+            })
         }
     })
 
@@ -199,6 +275,7 @@ internals.applyRoutes = function (server, next) {
             const params = {
               user_id : request.auth.credentials.user._id.toString(),
               author: request.auth.credentials.user.username.toString(),
+              authorHouse: (request.auth.credentials.user.house && request.auth.credentials.user.house.name) || "unaffiliated",
               text : request.payload.text,
               tags : request.payload.tags,
               season: 6,

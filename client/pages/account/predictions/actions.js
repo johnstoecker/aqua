@@ -72,7 +72,6 @@ class Actions {
     }
 
     static getUser() {
-
         ApiActions.get(
             '/api/users/my',
             undefined,

@@ -36,9 +36,6 @@ class PredictionsPage extends React.Component {
     }
 
     handleCommentSubmit(id, newComment) {
-        console.log(id)
-        console.log(newComment)
-        console.log(this.state);
         // this.state.predictions.data[0].comments.push(newComment);
         // this.state.predictions[0].comments.push(newComment);
         Actions.addComment(id, newComment);
@@ -52,28 +49,8 @@ class PredictionsPage extends React.Component {
         console.log("make a prediction")
     }
 
-    addCharacter(character) {
-        console.log(this.state)
-        console.log(character)
-        // console.log(Store.getState());
-        if (this.state.throneTeamDetails.error == "Not Found") {
-          this.state.throneTeamDetails = {
-              characters: [character]
-          }
-          Actions.createThroneTeam(this.state.throneTeamDetails);
-        } else {
-          this.state.throneTeamDetails.characters.push(character);
-          Actions.updateThroneTeam(this.state.throneTeamDetails);
-        }
-    }
-
-
-    // toggleHideAddCharacter() {
-    //     this.setState({hideAddCharacter: true})
-    // }
-
     render() {
-        let actions
+        let makePrediction
         console.log(this.state)
         const predictions = this.state.predictions.data.map((pred) => {
             const comments = pred.comments.map((comment) => {
@@ -97,10 +74,9 @@ class PredictionsPage extends React.Component {
                     </div>
                 )
             })) || []
-            console.log(tags)
             return (
                 <div className="prediction-container" key={pred._id}>
-                    <div className="prediction-box">
+                    <div className= {"prediction-box " + (pred.authorHouse || "").toLowerCase()}>
                         <div className="prediction-box-details">
                             <div className="prediction">{pred.text}</div>
                             <div className="author">Predicted by {pred.author}</div>
@@ -121,19 +97,45 @@ class PredictionsPage extends React.Component {
                     </div>
                 </div>
             );
-        })
+        });
+
+        if (!this.state.user.hydrated) {
+            makePrediction = (<div>...</div>);
+        } else if (this.state.user.availableCoins > 0) {
+            makePrediction = (
+                <div>
+                    <h1>{this.state.user.availableCoins} coins</h1>
+                    are available to wager
+                    <Button inputClasses={{ 'btn-primary': true }} onClick={this.goToNewPrediction.bind(this)}>
+                        Make a Prediction
+                    </Button>
+                </div>);
+        } else {
+            console.log(this.state.user)
+            makePrediction = (<div>0 coins available to wager</div>);
+        }
+
+        const houseBankrolls = (
+            <div>
+                <div className="house-bankroll-housename">House Stark(2)</div>
+                <div>2 open predictions</div>
+                <div>23 coins banked</div>
+                <div>300 coins left to wager</div>
+            </div>
+        );
+
         return (
             <section className="container">
                 <h1 className="page-header">
                     Game of Thrones Season 6
-                    <Button inputClasses={{ 'btn-primary': true }} onClick={this.goToNewPrediction.bind(this)}>
-                          Make a Prediction
-                    </Button>
                 </h1>
                 <div className="row">
-                    <div className="col-sm-8">
+                    <div className="col-sm-9">
                       {predictions}
-                      {actions}
+                    </div>
+                    <div className="col-sm-3">
+                        {makePrediction}
+                        {houseBankrolls}
                     </div>
                 </div>
             </section>

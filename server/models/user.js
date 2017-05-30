@@ -49,6 +49,7 @@ class User extends MongoModels {
                     timeCreated: new Date(),
                     coins: 0,
                     reservedCoins: 0,
+                    messages: [],
                     availableCoins: STARTING_COINS
                 };
 
@@ -188,6 +189,10 @@ User.schema = Joi.object().keys({
     reservedCoins: Joi.number().integer().min(0),
     availableCoins: Joi.number().integer().min(0),
     house: House.schema,
+    messages: Joi.object().keys({
+        message: Joi.string().required(),
+        dissmissed: Joi.boolean().required()
+    }),
     roles: Joi.object().keys({
         admin: Joi.object().keys({
             id: Joi.string().required(),

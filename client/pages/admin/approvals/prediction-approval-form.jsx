@@ -43,12 +43,12 @@ class PredictionApprovalForm extends React.Component {
 
     approvePrediction() {
         console.log('approved')
-        Actions.updatePrediction({_id: this.props._id, status: 'approved'})
+        Actions.updatePrediction({_id: this.props._id, status: 'standing'})
     }
 
     denyPrediction() {
         console.log('denied')
-        Actions.updatePrediction({_id: this.props._id, status: 'denied'})
+        Actions.updatePrediction({_id: this.props._id, status: 'rejected'})
     }
 
     handleSubmit(event) {

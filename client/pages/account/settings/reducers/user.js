@@ -15,6 +15,7 @@ const initialState = {
     email: '',
     coins: '-',
     reservedCoins: '-',
+    messages: [],
     availableCoins: '-',
     // // TODO: loading image for house
     house: {
@@ -23,7 +24,6 @@ const initialState = {
     }
 };
 const reducer = function (state = initialState, action) {
-
     if (action.type === Constants.GET_USER) {
         return ObjectAssign({}, state, {
             loading: true,
@@ -45,6 +45,7 @@ const reducer = function (state = initialState, action) {
             coins: action.response.coins,
             reservedCoins: action.response.reservedCoins,
             availableCoins: action.response.availableCoins,
+            messages: action.response.messages,
             house: action.response.house
         });
     }

@@ -3,7 +3,7 @@ const Joi = require('joi');
 const MongoModels = require('mongo-models');
 const Comment = require('./comment')
 
-// Statuses: pending,standing,true,false
+// Statuses: pending,rejected,standing,true,false
 
 class Prediction extends MongoModels {
 
@@ -36,6 +36,7 @@ Prediction.schema = Joi.object().keys({
     _id: Joi.object(),
     userId: Joi.string().required(),
     author: Joi.string(),
+    authorHouse: Joi.string(),
     text: Joi.string().required(),
     tags: Joi.array().items(Joi.string()),
     time: Joi.date().required(),
