@@ -5,10 +5,10 @@ const Store = require('./store');
 
 
 class Actions {
-    static getPredictions() {
+    static getPredictions(params = {}) {
         ApiActions.get(
             '/api/predictions',
-            undefined,
+            params,
             Store,
             Constants.GET_PREDICTIONS,
             Constants.GET_PREDICTIONS_RESPONSE
@@ -89,6 +89,16 @@ class Actions {
             Constants.GET_USER,
             Constants.GET_USER_RESPONSE
         );
+    }
+
+    static getScopedUser(username) {
+        ApiActions.get(
+            '/api/users/username/' + username,
+            undefined,
+            Store,
+            Constants.GET_SCOPED_USER,
+            Constants.GET_SCOPED_USER_RESPONSE
+        )
     }
 }
 

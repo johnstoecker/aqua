@@ -8,7 +8,10 @@ const Redux = require('redux');
 module.exports = Redux.createStore(
     Redux.combineReducers({
         predictions: Predictions,
+        // current user
         user: User,
-        houseStats: HouseStats
+        houseStats: HouseStats,
+        // user for scoping predictions
+        scopedUser: User
     })
 );

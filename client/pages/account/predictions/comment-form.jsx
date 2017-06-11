@@ -32,7 +32,6 @@ class CommentForm extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("next props")
         // this.setState({
         //     name: nextProps.name
         // });
@@ -46,7 +45,6 @@ class CommentForm extends React.Component {
 
 
         event.preventDefault();
-        // var author = this.state.author.trim();
         var text = this.state.text.trim();
         if (!text) {
           return;
@@ -54,44 +52,9 @@ class CommentForm extends React.Component {
         this.props.onCommentSubmit(this.props.parentId, {text: text});
         this.setState({text: ''});
 
-        // event.preventDefault();
-        // event.stopPropagation();
-        //
-        // Actions.saveDetails({
-        //     name: this.state.name
-        // });
     }
 
     render() {
-
-        // if (!this.props.hydrated) {
-        //     return (
-        //         <div className="alert alert-info">
-        //             Loading contact info data...
-        //         </div>
-        //     );
-        // }
-        //
-        // const alerts = [];
-
-        // if (this.props.showSaveSuccess) {
-        //     alerts.push(<Alert
-        //         key="success"
-        //         type="success"
-        //         onClose={Actions.hideDetailsSaveSuccess}
-        //         message="Success. Changes have been saved."
-        //     />);
-        // }
-        //
-        // if (this.props.error) {
-        //     alerts.push(<Alert
-        //         key="danger"
-        //         type="danger"
-        //         message={this.props.error}
-        //     />);
-        // }
-        // <input type="text" placeholder="Add a comment" value={this.state.text} onChange={this.handleTextChange.bind(this)}/>
-
         return (
             <form className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
                 <TextControl
@@ -101,7 +64,7 @@ class CommentForm extends React.Component {
                     disabled={this.props.loading}
                     placeholder="leave a comment"
                 />
-               
+
             </form>
         );
     }

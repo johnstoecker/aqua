@@ -3,6 +3,7 @@ const AuthPlugin = require('../auth');
 const Boom = require('boom');
 const EscapeRegExp = require('escape-string-regexp');
 const Joi = require('joi');
+const Dotenv = require('dotenv');
 
 
 const internals = {};
@@ -97,6 +98,37 @@ internals.applyRoutes = function (server, next) {
 
     server.route({
         method: 'GET',
+        path: '/users/username/{username}',
+        config: {
+            auth: {
+                strategy: 'session',
+                scope: ['admin', 'account']
+            }
+        },
+        handler: function (request, reply) {
+
+            const fields = User.fieldsAdapter('username coins reservedCoins availableCoins house');
+
+            // User.findById(id, fields, (err, user) => {
+            User.findOne({ username: request.params.username}, {password: 0, email: 0, roles: 0}, (err, user) => {
+                if (err) {
+                    return reply(err);
+                }
+
+                if (!user) {
+                    return reply(Boom.notFound('Document not found. That is strange.'));
+                }
+
+                reply(user);
+            });
+        }
+    });
+
+
+
+
+    server.route({
+        method: 'GET',
         path: '/users/my',
         config: {
             auth: {
@@ -110,9 +142,6 @@ internals.applyRoutes = function (server, next) {
 
             // User.findById(id, fields, (err, user) => {
             User.findById(id, {password: 0}, (err, user) => {
-                console.log(user);
-
-
                 if (err) {
                     return reply(err);
                 }
@@ -190,7 +219,11 @@ internals.applyRoutes = function (server, next) {
             ]
         },
         handler: function (request, reply) {
-
+            // TODO: recaptcha server side verification
+            console.log(process.env.RECAPTCHA_KEY)
+            if (process.env.RECAPTCHA_KEY) {
+                console.log(process.env.RECAPTCHA_KEY);
+            }
             const username = request.payload.username;
             const password = request.payload.password;
             const email = request.payload.email;

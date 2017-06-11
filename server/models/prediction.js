@@ -34,7 +34,7 @@ Prediction.collection = 'predictions';
 
 Prediction.schema = Joi.object().keys({
     _id: Joi.object(),
-    userId: Joi.string().required(),
+    user_id: Joi.string().required(),
     author: Joi.string(),
     authorHouse: Joi.string(),
     text: Joi.string().required(),
@@ -47,7 +47,9 @@ Prediction.schema = Joi.object().keys({
 
 // TODO: add more indices for text
 Prediction.indexes = [
-  { key: { userId: 1 } }
+  { key: { user_id: 1 } },
+  { author: 1},
+  { tags: "text", text: "text" }
 ];
 
 module.exports = Prediction;

@@ -5,19 +5,32 @@ const Actions = require('./actions')
 const CommentForm = require('./comment-form.jsx');
 const Button = require('../../../components/form/button.jsx');
 const tagImageHash = require('../../../../data/tag_hash.json');
+const Houses = require('../../../../data/houses.json');
 
 
 class PredictionsPage extends React.Component {
     constructor(props) {
 
         super(props);
-
-        Actions.getPredictions();
+        console.log(props);
+        this.loadPredictions(props);
         // TODO: figure out a way to share user between pages
         Actions.getUser();
 
         Actions.getHouseStats();
         this.state = Store.getState();
+    }
+
+    loadPredictions(props) {
+        let params = {};
+        if (props.match.params.username) {
+            Actions.getScopedUser(props.match.params.username)
+            params.author = props.match.params.username
+        } else if (props.match.params.house) {
+            params.house = props.match.params.house
+        }
+
+        Actions.getPredictions(params);
     }
 
     componentDidMount() {
@@ -36,6 +49,16 @@ class PredictionsPage extends React.Component {
         Actions.deleteComment(pred._id, comment._id)
     }
 
+    searchPredictions(tag) {
+        Actions.getPredictions({text: tag})
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.match.params != nextProps.match.params) {
+            this.loadPredictions(nextProps);
+        }
+    }
+
     handleCommentSubmit(id, newComment) {
         // this.state.predictions.data[0].comments.push(newComment);
         // this.state.predictions[0].comments.push(newComment);
@@ -46,13 +69,9 @@ class PredictionsPage extends React.Component {
         this.props.history.push('/account/predictions/new');
     }
 
-    addPrediction(state) {
-        console.log("make a prediction")
-    }
-
     render() {
         let makePrediction
-        console.log(this.state)
+        console.log(this.props)
         const predictions = this.state.predictions.data.map((pred) => {
             const comments = pred.comments.map((comment) => {
                 let commentDelete
@@ -67,11 +86,13 @@ class PredictionsPage extends React.Component {
                 );
             })
             const tags = (pred.tags && pred.tags.map((tag) => {
-                tag = "/public/media/tag_images/"+tagImageHash[tag];
+                const tagImage = "/public/media/tag_images/"+tagImageHash[tag];
 
                 return (
                     <div className="tag-image-container" key={Math.random().toString().substr(12)}>
-                        <img className="tag-image" src={tag} />
+                        <a href="#" onClick={this.searchPredictions.bind(this, tag)}>
+                            <img className="tag-image" src={tagImage} />
+                        </a>
                     </div>
                 )
             })) || []
@@ -80,7 +101,10 @@ class PredictionsPage extends React.Component {
                     <div className= {"prediction-box " + (pred.authorHouse || "").toLowerCase()}>
                         <div className="prediction-box-details">
                             <div className="prediction">{pred.text}</div>
-                            <div className="author">Predicted by {pred.author}</div>
+                            <div>
+                                <span className="author">Predicted by </span>
+                                <a href={"/account/predictions/user/" + pred.author}>{pred.author}</a>
+                            </div>
                         </div>
                         <div className="prediction-box-footer">
                             <div className="iron-coin" />
@@ -116,34 +140,34 @@ class PredictionsPage extends React.Component {
             makePrediction = (<div>0 coins available to wager</div>);
         }
 
-
-        // const comments = pred.comments.map((comment) => {
-        //     let commentDelete
-        //     if(comment.author == this.state.user.username) {
-        //         commentDelete = (<a href="#" className="comment-box-delete fa fa-trash" onClick={this.deleteComment.bind(this, comment, pred)}/>)
-        //     }
-        //     return (
-        //         <div className="comment-box" key={comment._id}>
-        //             <div className="comment-box-header">Comment by {comment.author}{commentDelete}</div>
-        //             <div>{comment.text}</div>
-        //         </div>
-        //     );
-        // })
-
-
-        const houseBankrolls = this.state.houseStats.data.map((house) => {
-            return (
-                <div className="house-bankroll-container" key={house._id}>
-                    <div className={"house-bankroll "+house.name.toLowerCase()}>
-                        <div className="house-bankroll-housename">{house.name}({house.userCount})</div>
-                        <div>{house.numPredictions} open predictions</div>
-                        <div>{house.coins} coins banked</div>
-                        <div>{house.availableCoins} coins left to wager</div>
+        let sideBarContext;
+        if (this.props.match.params.username && this.state.scopedUser.hydrated) {
+            sideBarContext = (
+                <div className="house-bankroll-container">
+                    <div className={"house-bankroll "+ this.state.scopedUser.house.name.toLowerCase()}>
+                        <div>{this.props.match.params.username}</div>
+                        <div>House {this.state.scopedUser.house.name}</div>
+                        <img className="house-picker-image" src={"/public/media/tag_images/House-"+this.state.scopedUser.house.name+"-Main-Shield.png"} />
+                        <div>{this.state.scopedUser.coins} coins banked</div>
                     </div>
                 </div>
-            );
-        })
+            )
+        } else if (this.props.match.params.house) {
 
+        } else {
+            sideBarContext = this.state.houseStats.data.map((house) => {
+                return (
+                    <div className="house-bankroll-container" key={house._id}>
+                        <div className={"house-bankroll "+house.name.toLowerCase()}>
+                            <div className="house-bankroll-housename">{house.name}({house.userCount})</div>
+                            <div>{house.numPredictions} open predictions</div>
+                            <div>{house.coins} coins banked</div>
+                            <div>{house.availableCoins} coins left to wager</div>
+                        </div>
+                    </div>
+                );
+            })
+        }
 
         return (
             <section className="container">
@@ -156,7 +180,7 @@ class PredictionsPage extends React.Component {
                     </div>
                     <div className="col-sm-3">
                         {makePrediction}
-                        {houseBankrolls}
+                        {sideBarContext}
                     </div>
                 </div>
             </section>

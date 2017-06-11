@@ -95,6 +95,7 @@ class Form extends React.Component {
                     help={this.state.help.password}
                     disabled={this.state.loading}
                 />
+            <div className="g-recaptcha" data-sitekey="6LdP9SMUAAAAAA1riPaEvWQfLUSjdlP-TBJsZb4b"></div>
                 <ControlGroup hideLabel={true} hideHelp={true}>
                     <Button
                         type="submit"

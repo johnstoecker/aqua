@@ -25,7 +25,6 @@ internals.applyRoutes = function (server, next) {
             },
         },
         handler: function (request, reply) {
-
             const query = {};
             if (request.query.author) {
                 query.author = new RegExp('^.*?' + EscapeRegExp(request.query.author) + '.*$', 'i');
@@ -36,13 +35,16 @@ internals.applyRoutes = function (server, next) {
             if (request.query.userId) {
                 query.userId = request.query.userId
             }
+            if (request.query.text) {
+                query.text = request.query.text
+            }
             const fields = request.query.fields;
             const sort = request.query.sort || "-_id";
             const limit = request.query.limit;
             const page = request.query.page;
-
+            console.log(query)
             Prediction.pagedFind(query, fields, sort, limit, page, (err, results) => {
-
+                // console.log(results)
                 if (err) {
                     return reply(err);
                 }

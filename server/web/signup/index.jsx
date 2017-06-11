@@ -5,12 +5,13 @@ const React = require('react');
 
 class SignupPage extends React.Component {
     render() {
-
+        const neck = <script src='https://www.google.com/recaptcha/api.js'></script>;
         const feet = <script src="/public/pages/signup.min.js"></script>;
 
         return (
             <Layout
                 title="Sign up"
+                neck={neck}
                 feet={feet}
                 activeTab="signup">
 

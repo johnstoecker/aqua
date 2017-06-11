@@ -23,6 +23,8 @@ const App = (
                 <Route path="/account/settings" component={Settings} />
                 <Route path="/account/throne-team" component={ThroneTeam} />
                 <Route path="/account/predictions/new" component={NewPrediction} />
+                <Route path="/account/predictions/user/:username" component={Predictions} />
+                <Route path="/account/predictions/house/:house" component={Predictions} />
                 <Route path="/account/predictions" component={Predictions} />
                 <Route component={NotFound} />
             </Switch>
