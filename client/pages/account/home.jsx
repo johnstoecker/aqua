@@ -38,6 +38,29 @@ class HomePage extends React.Component {
     }
 
     render() {
+        console.log(this.props)
+        if (this.props.location.search == "?onboard=true") {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-12 onboarding-splash">
+                            <img src="/public/media/bran.png"/>
+                            <h1 className="page-header">A Song of Predictions and Wagers</h1>
+                            <p>
+                                Welcome to Iron Wagers, a game where your predictions for GoT are your strongest weapons
+                            </p>
+                            <form action="/account/intro">
+                                <input className="thronesy-button onboarding-button" type="submit" value="Learn How to Play" />
+                            </form>
+                            <form action="/account">
+                                <input className="thronesy-white-button onboarding-button" type="submit" value="Skip" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
         let house
         if(this.state.user.house){
             house = (

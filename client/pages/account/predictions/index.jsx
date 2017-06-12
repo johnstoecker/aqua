@@ -107,7 +107,7 @@ class PredictionsPage extends React.Component {
                             </div>
                         </div>
                         <div className="prediction-box-footer">
-                            <div className="iron-coin" />
+                            <div className={"iron-coin " + (pred.authorHouse || "").toLowerCase()}/>
                             <div className="wager-points">
                                 <div>{pred.coins}</div>
                                 <div>coins</div>

@@ -189,6 +189,9 @@ const manifest = {
             plugin: './server/web/about'
         },
         {
+            plugin: './server/web/intro'
+        },
+        {
             plugin: './server/web/account'
         },
         {
