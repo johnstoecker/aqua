@@ -40,7 +40,7 @@ class IntroPage extends React.Component {
                         <div className="col-sm-4">
                             <img src="/public/media/whitewalker.png"/>
                         </div>
-                        <div id="myCarousel" className="carousel col-sm-8" data-ride="carousel" data-interval="false">
+                        <div id="myCarousel" className="carousel col-sm-6" data-ride="carousel" data-interval="false">
 
                             <ol className="carousel-indicators">
                                 <li onClick={this.goToPage.bind(this, 0)} className={(this.state.currentPage == 0 && "active") || ""}></li>
