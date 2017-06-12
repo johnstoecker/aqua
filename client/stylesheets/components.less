@@ -1,28 +1,32 @@
 // figure out why import is not working
 @import "./navbar.less";
 // TODO: make these correct like #xxyyzz with good colors
-@greyjoy: yellow;
-@lannister: red;
-@martell: orange;
-@stark: green;
-@targaryen: black;
+@greyjoy: #2294F2;
+@lannister: #D0011B;
+@martell: #FF9900;
+@stark: #379107;
+@targaryen: #232323;
 @thronesy-black: #333;
 
 @house-border-left: {
     .greyjoy {
         border-left: 4px solid @greyjoy;
+
     }
     .lannister {
         border-left: 4px solid @lannister;
     }
     .martell {
         border-left: 4px solid @martell;
+
     }
     .stark {
         border-left: 4px solid @stark
+
     }
     .targaryen {
         border-left: 4px solid @targaryen;
+
     }
 };
 
@@ -41,7 +45,7 @@
 }
 
 .navbar {
-    background-color: #323232;
+    background-color: #232323;
     position: fixed;
     top: 0;
     left: 0;
@@ -50,12 +54,28 @@
     margin-bottom: 20px;
 }
 
+.navbar .container li a {
+    color: #2294F2 !important;
+}
+
+
 .navbar .navbar-brand {
     color: white;
 }
 
 .house-bankroll-container {
     @house-border-left();
+    margin: 10px 0;
+    font-weight: 300;
+    letter-spacing: .3px;
+}
+
+.house-bankroll-housename {
+    font-weight:500;
+}
+
+.house-bankroll {
+    padding-left:10px;
 }
 
 .prediction-container {
@@ -151,7 +171,7 @@
 .rules {
     background-color: #fff;
     font-weight:300;
-    padding: 10px 10px 10px 0;
+    padding: 20px;
 
 }
 
