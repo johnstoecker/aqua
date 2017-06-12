@@ -121,26 +121,42 @@ class PredictionForm extends React.Component {
         return (
             <div>
                 {alerts}
-                <form className="comment-form" onSubmit={this.handleSubmit.bind(this)}>
-                    <input
-                        type="text"
-                        name="text"
-                        value={this.state.text}
-                        onChange={this.handleTextChange.bind(this)}
-                        disabled={this.props.loading}
-                        placeholder="Enter your prediction"
-                    />
-                    Coins:
-                    <input
-                        type="number"
-                        name="number"
-                        value={this.state.coins}
-                        onChange={this.handleCoinChange.bind(this)}
-                        disabled={this.props.loading}
-                        placeholder='10'
-                    />
-                    <input type="submit" value="Post" />
-                    <Spinner space="left" show={this.props.loading} />
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                    <fieldset>
+                        <div className="form-group">
+                        <label className="control-label">
+                                Your Prediction:
+                            </label>
+                            <input
+                                type="text"
+                                name="text"
+                                value={this.state.text}
+                                onChange={this.handleTextChange.bind(this)}
+                                disabled={this.props.loading}
+                                placeholder="Be as detailed as you like"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="control-label">
+                                Coins to Wager: 
+                            </label>
+                            <input
+                                type="number"
+                                name="number"
+                                value={this.state.coins}
+                                onChange={this.handleCoinChange.bind(this)}
+                                disabled={this.props.loading}
+                                placeholder='10'
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input type="submit" value="Place Your Wager" className="btn btn-primary"/>
+                        </div>
+                        <Spinner space="left" show={this.props.loading} />
+
+                    </fieldset>
                 </form>
                 <div className="tag-images-container">
                     {tagImages}
