@@ -103,6 +103,36 @@
     font-size:18px;
 }
 
+.prediction-status-info {
+    position: relative;
+}
+
+.prediction-status-info:hover {
+    cursor: pointer;
+}
+
+.prediction-status-info:hover .prediction-status-box {
+    display: block;
+}
+
+.prediction-status-box {
+    position: absolute;
+    display: none;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid black;
+    top: 30px;
+    width: 180px;
+}
+
+.prediction-status-box:before {
+    position: absolute;
+    font-family: FontAwesome;
+    content: '\f077';
+    top: -15px;
+    left: 1px;
+}
+
 .author {
     max-width:20%;
     font-weight: 600;

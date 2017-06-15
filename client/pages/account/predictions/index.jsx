@@ -112,7 +112,12 @@ class PredictionsPage extends React.Component {
                                 <div>{pred.coins}</div>
                                 <div>coins</div>
                             </div>
-                            <div>{pred.status}</div>
+                            <div className="prediction-status-info">{pred.status}
+                                <div className="prediction-status-box">{(pred.status == "pending" && "This prediction is not yet approved by the admin") ||
+                                    (pred.status ==  "standing" && "Watch GoT to see if this prediction comes true") ||
+                                    (pred.status ==  "rejected" && "This salt wager has been rejected.")
+                                }</div>
+                            </div>
                             {tags}
                         </div>
                     </div>
