@@ -5,13 +5,13 @@ const EscapeRegExp = require('escape-string-regexp');
 const Joi = require('joi');
 const Dotenv = require('dotenv');
 
-
 const internals = {};
 
 
 internals.applyRoutes = function (server, next) {
 
     const User = server.plugins['hapi-mongo-models'].User;
+    const Prediction = server.plugins['hapi-mongo-models'].Prediction;
 
 
     server.route({
@@ -490,29 +490,29 @@ internals.applyRoutes = function (server, next) {
                     name: Joi.string().required(),
                     image: Joi.string().required()
                 }
-            },
+            }
             // TODO: validate house name/image in thing, or just grab from DB?
-            pre: [
-                AuthPlugin.preware.ensureNotRoot,
-                {
-                    assign: 'house',
-                    method: function (request, reply) {
-
-                        User.findById(request.auth.credentials.user._id, (err, user) => {
-
-                            if (err) {
-                                return reply(err);
-                            }
-
-                            if (user.house) {
-                                return reply(Boom.conflict('House already set.'));
-                            }
-
-                            reply(true);
-                        });
-                    }
-                }
-            ]
+            // pre: [
+            //     AuthPlugin.preware.ensureNotRoot,
+            //     {
+            //         assign: 'house',
+            //         method: function (request, reply) {
+            //
+            //             User.findById(request.auth.credentials.user._id, (err, user) => {
+            //
+            //                 if (err) {
+            //                     return reply(err);
+            //                 }
+            //
+            //                 if (user.house) {
+            //                     return reply(Boom.conflict('House already set.'));
+            //                 }
+            //
+            //                 reply(true);
+            //             });
+            //         }
+            //     }
+            // ]
         },
         handler: function (request, reply) {
 
@@ -527,12 +527,23 @@ internals.applyRoutes = function (server, next) {
             };
 
             User.findByIdAndUpdate(id, update, (err, user) => {
-
+                console.log(user)
                 if (err) {
                     return reply(err);
                 }
 
-                reply(user);
+                const predictionUpdate = {
+                    $set: {
+                        authorHouse: request.payload.name
+                    }
+                }
+
+                Prediction.updateMany({author: user["username"]}, predictionUpdate, (err, count) => {
+                    if(err) {
+                        return reply(err);
+                    }
+                    reply(user);
+                })
             });
         }
     });

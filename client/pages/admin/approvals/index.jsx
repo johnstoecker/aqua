@@ -9,7 +9,7 @@ class ApprovalsPage extends React.Component {
 
         super(props);
 
-        Actions.getPredictions();
+        Actions.getPendingPredictions();
 
         this.state = Store.getState();
     }
@@ -26,42 +26,13 @@ class ApprovalsPage extends React.Component {
         this.setState(Store.getState());
     }
 
-    deleteComment(comment, pred) {
-        Actions.deleteComment(pred._id, comment._id)
+    showPending() {
+        Actions.getPendingPredictions();
     }
 
-    handleCommentSubmit(id, newComment) {
-        console.log(id)
-        console.log(newComment)
-        console.log(this.state);
-        // this.state.predictions.data[0].comments.push(newComment);
-        // this.state.predictions[0].comments.push(newComment);
-        Actions.addComment(id, newComment);
+    showStanding() {
+        Actions.getStandingPredictions();
     }
-
-    goToNewPrediction() {
-        this.props.history.push('/account/predictions/new');
-    }
-
-    addPrediction(state) {
-        console.log("make a prediction")
-    }
-
-    addCharacter(character) {
-        console.log(this.state)
-        console.log(character)
-        // console.log(Store.getState());
-        if (this.state.throneTeamDetails.error == "Not Found") {
-          this.state.throneTeamDetails = {
-              characters: [character]
-          }
-          Actions.createThroneTeam(this.state.throneTeamDetails);
-        } else {
-          this.state.throneTeamDetails.characters.push(character);
-          Actions.updateThroneTeam(this.state.throneTeamDetails);
-        }
-    }
-
 
     // toggleHideAddCharacter() {
     //     this.setState({hideAddCharacter: true})
@@ -80,6 +51,8 @@ class ApprovalsPage extends React.Component {
                 <h1 className="page-header">
                     Game of Thrones Season 6 Prediction Approval
                 </h1>
+                <button onClick={this.showPending.bind(this)}>Show Pending</button>
+                <button onClick={this.showStanding.bind(this)}>Show Standing</button>
                 <div className="row">
                     <div className="col-sm-8">
                       {predictions}

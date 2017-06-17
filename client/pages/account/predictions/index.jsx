@@ -115,7 +115,9 @@ class PredictionsPage extends React.Component {
                             <div className="prediction-status-info">{pred.status}
                                 <div className="prediction-status-box">{(pred.status == "pending" && "This prediction is not yet approved by the admin") ||
                                     (pred.status ==  "standing" && "Watch GoT to see if this prediction comes true") ||
-                                    (pred.status ==  "rejected" && "This salt wager has been rejected.")
+                                    (pred.status ==  "rejected" && "This salt wager has been rejected.") ||
+                                    (pred.status ==  "true" && "This has come true!") ||
+                                    (pred.status ==  "false" && "This has not come true.")
                                 }</div>
                             </div>
                             {tags}

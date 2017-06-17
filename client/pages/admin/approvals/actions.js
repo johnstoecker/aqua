@@ -5,13 +5,23 @@ const Store = require('./store');
 
 
 class Actions {
-    static getPredictions() {
+    static getPendingPredictions() {
         ApiActions.get(
-            '/api/predictions',
+            '/api/predictions?status=pending',
             undefined,
             Store,
-            Constants.GET_PREDICTIONS,
-            Constants.GET_PREDICTIONS_RESPONSE
+            Constants.GET_PENDING_PREDICTIONS,
+            Constants.GET_PENDING_PREDICTIONS_RESPONSE
+        );
+    }
+
+    static getStandingPredictions() {
+        ApiActions.get(
+            '/api/predictions?status=standing',
+            undefined,
+            Store,
+            Constants.GET_STANDING_PREDICTIONS,
+            Constants.GET_STANDING_PREDICTIONS_RESPONSE
         );
     }
 

@@ -50,9 +50,17 @@ class PredictionApprovalForm extends React.Component {
         console.log('denied')
         Actions.updatePrediction({_id: this.props._id, status: 'rejected'})
     }
+    truePrediction() {
+        console.log('true')
+        Actions.updatePrediction({_id: this.props._id, status: 'true'})
+    }
+
+    falsePrediction() {
+        console.log('false')
+        Actions.updatePrediction({_id: this.props._id, status: 'false'})
+    }
 
     handleSubmit(event) {
-
 
         event.preventDefault();
         // var author = this.state.author.trim();
@@ -73,48 +81,29 @@ class PredictionApprovalForm extends React.Component {
 
     render() {
 
-        // if (!this.props.hydrated) {
-        //     return (
-        //         <div className="alert alert-info">
-        //             Loading contact info data...
-        //         </div>
-        //     );
-        // }
-        //
-        // const alerts = [];
+        let form
+        if(this.props.status == 'pending') {
+            form = (
+                <div className="prediction-approval-form" onSubmit={this.handleSubmit.bind(this)}>
+                    <div>{this.props.text}</div>
+                    <Button type="submit" onClick={this.approvePrediction.bind(this)}>Approve</Button>
+                    <Button type="submit" onClick={this.denyPrediction.bind(this)}>Deny</Button>
+                </div>
+            )
+        } else if(this.props.status == 'standing') {
+            form = (
+                <div className="prediction-approval-form" onSubmit={this.handleSubmit.bind(this)}>
+                    <div>{this.props.text}</div>
+                    <Button type="submit" onClick={this.truePrediction.bind(this)}>True</Button>
+                    <Button type="submit" onClick={this.falsePrediction.bind(this)}>False</Button>
+                </div>
+            )
+        } else {
+            form = (<div>nothing</div>)
+            // TODO: update true/false predictions if they become false/true?
+        }
 
-        // if (this.props.showSaveSuccess) {
-        //     alerts.push(<Alert
-        //         key="success"
-        //         type="success"
-        //         onClose={Actions.hideDetailsSaveSuccess}
-        //         message="Success. Changes have been saved."
-        //     />);
-        // }
-        //
-        // if (this.props.error) {
-        //     alerts.push(<Alert
-        //         key="danger"
-        //         type="danger"
-        //         message={this.props.error}
-        //     />);
-        // }
-        // <input type="text" placeholder="Add a comment" value={this.state.text} onChange={this.handleTextChange.bind(this)}/>
-
-        // <TextControl
-        //     name="text"
-        //     value={this.state.text}
-        //     onChange={LinkState.bind(this)}
-        //     disabled={this.props.loading}
-        //     placeholder="leave a comment"
-        // />
-        // <input type="submit" value="Post" />
-
-        return (
-            <div className="prediction-approval-form" onSubmit={this.handleSubmit.bind(this)}>
-                <div>{this.props.text}</div>
-                <Button type="submit" onClick={this.approvePrediction.bind(this)}>Approve</Button>
-                <Button type="submit" onClick={this.denyPrediction.bind(this)}>Deny</Button>
+        return (<div>{form}
             </div>
         );
     }

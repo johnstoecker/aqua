@@ -197,11 +197,72 @@ internals.applyRoutes = function (server, next) {
                 } else if (request.payload.status == 'true') {
                     // send message to user
                     // decrement availableCoins, decrese reserved
+                    // TODO:
                     // do this for all wagers on this pred!
+
+                    const userUpdate = {
+                        $inc: {
+                            coins: pred.coins,
+                            reservedCoins: -pred.coins
+                        },
+                        $push: {
+                            messages: {
+                                message: "Your prediction " + pred.text +" has come true! Coins banked: +" + pred.coins,
+                                dismissed: false,
+                                _id: Mongodb.ObjectId()
+                            }
+                        }
+                    }
+                    const userFindParam = {
+                        _id: Mongodb.ObjectId(pred.user_id)
+                    }
+                    User.findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
+                        if (err) {
+                            return reply(err);
+                        }
+                        Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
+                            if (err) {
+                                return reply(err);
+                            }
+                            reply(prediction);
+                        });
+                    });
+
+
                 } else if (request.payload.status == 'false') {
                     // send message to user
                     // decrement reservedCoins
                     //
+
+                    const userUpdate = {
+                        $inc: {
+                            reservedCoins: -pred.coins
+                        },
+                        $push: {
+                            messages: {
+                                message: "Your prediction " + pred.text +" has not come true.",
+                                dismissed: false,
+                                _id: Mongodb.ObjectId()
+                            }
+                        }
+                    }
+                    const userFindParam = {
+                        _id: Mongodb.ObjectId(pred.user_id)
+                    }
+                    User.findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
+                        if (err) {
+                            return reply(err);
+                        }
+                        Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
+                            if (err) {
+                                return reply(err);
+                            }
+                            reply(prediction);
+                        });
+                    });
+
+
+
                 }
 
                 console.log(findParam)
@@ -286,6 +347,9 @@ internals.applyRoutes = function (server, next) {
               comments: []
             }
 
+            if(params.coins < 1) {
+                return reply(Boom.badRequest("Incorrect coins"))
+            }
             const userUpdate = {
                 $inc: {
                     availableCoins: -params.coins,

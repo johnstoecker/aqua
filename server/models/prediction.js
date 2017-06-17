@@ -48,8 +48,8 @@ Prediction.schema = Joi.object().keys({
 // TODO: add more indices for text
 Prediction.indexes = [
   { key: { user_id: 1 } },
-  { author: 1},
-  { tags: "text", text: "text" }
+  { key: { author: 1} },
+  { key: { tags: "text", text: "text"} }
 ];
 
 module.exports = Prediction;

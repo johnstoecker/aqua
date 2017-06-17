@@ -98,7 +98,7 @@ class HomePage extends React.Component {
                                     <div className="stat-value">
                                         {this.state.user.coins}
                                     </div>
-                                    <div className="stat-label">Coins</div>
+                                    <div className="stat-label">Coins Won</div>
                                 </div>
                             </div>
                             <div className="col-sm-4">

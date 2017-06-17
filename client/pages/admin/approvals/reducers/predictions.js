@@ -13,14 +13,14 @@ const initialState = {
 };
 const reducer = function (state = initialState, action) {
 
-    if (action.type === Constants.GET_PREDICTIONS) {
+    if (action.type === Constants.GET_PENDING_PREDICTIONS || action.type === Constants.GET_STANDING_PREDICTIONS) {
         return ObjectAssign({}, state, {
             hydrated: false,
             loading: true
         });
     }
 
-    if (action.type === Constants.GET_PREDICTIONS_RESPONSE) {
+    if (action.type === Constants.GET_PENDING_PREDICTIONS_RESPONSE || action.type === Constants.GET_STANDING_PREDICTIONS_RESPONSE) {
         return ObjectAssign({}, state, {
             hydrated: true,
             loading: false,
@@ -28,49 +28,6 @@ const reducer = function (state = initialState, action) {
             pages: action.response.pages,
             items: action.response.items
         });
-    }
-
-
-    if (action.type === Constants.ADD_COMMENT_RESPONSE) {
-        var index = -1;
-        for(var i=0; i<state.data.length; i++) {
-            if(state.data[i]["_id"] == action.response["_id"]) {
-                index = i;
-                break;
-            }
-        }
-
-        return Object.assign({}, state,  {
-            hydrated: true,
-            loading: false,
-            pages: action.response.pages,
-            items: action.response.items,
-            data: state.data.slice(0, index)
-                .concat([action.response])
-                .concat(state.data.slice(index+1))
-        })
-    }
-
-
-
-    if (action.type === Constants.DELETE_COMMENT_RESPONSE) {
-        var index = -1;
-        for(var i=0; i<state.data.length; i++) {
-            if(state.data[i]["_id"] == action.response["_id"]) {
-                index = i;
-                break;
-            }
-        }
-
-        return Object.assign({}, state,  {
-            hydrated: true,
-            loading: false,
-            pages: action.response.pages,
-            items: action.response.items,
-            data: state.data.slice(0, index)
-                .concat([action.response])
-                .concat(state.data.slice(index+1))
-        })
     }
 
     return state;

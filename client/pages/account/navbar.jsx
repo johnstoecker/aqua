@@ -64,7 +64,7 @@ class Navbar extends React.Component {
                     </div>
                     <div className={navBarCollapse}>
                         <ul className="nav navbar-nav">
-                            // TODO: personal page
+
                             <li className={this.classForPath('/account')}>
                                 <Link to="/account">My account</Link>
                             </li>
@@ -72,7 +72,7 @@ class Navbar extends React.Component {
                                 <Link to="/account/settings">Settings</Link>
                             </li>
                             <li className={this.classForPath('/account/predictions')}>
-                                <Link to="/account/predictions">Predictions</Link>
+                                <Link to="/account/predictions">Wagers</Link>
                             </li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
