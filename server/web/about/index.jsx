@@ -57,6 +57,19 @@ class AboutPage extends React.Component {
                         </div>
                     </div>
                 </div>
+
+                <div className="row">
+                    <div className="col-sm-6">
+                        <h1 className="page-header">Contact</h1>
+                        <p>
+                            <a href="https://twitter.com/ironwagers">@ironwagers</a>
+                        </p>
+                        <p>
+                            <a href="https://github.com/johnstoecker/ironwagers">ironwagers on github</a>
+                        </p>
+                    </div>
+                </div>
+
             </Layout>
         );
     }
