@@ -34,7 +34,7 @@ class HomePage extends React.Component {
                     <div className="col-sm-6">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                <h3>About Iron Wagers</h3>
+                                <h3>Iron Wagers</h3>
                                 <p>
                                     A weekly game of thronesy predictions
                                 </p>

@@ -201,6 +201,9 @@ const manifest = {
             plugin: './server/web/contact'
         },
         {
+            plugin: './server/web/splash'
+        },
+        {
             plugin: './server/web/home'
         },
         {
