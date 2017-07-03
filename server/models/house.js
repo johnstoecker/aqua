@@ -3,6 +3,7 @@ const Joi = require('joi');
 const MongoModels = require('mongo-models');
 const User = require('./user');
 const Prediction = require('./prediction');
+// const Wager = require('./wager');
 
 class House extends MongoModels {
     static updateAllHouses() {

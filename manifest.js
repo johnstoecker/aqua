@@ -189,6 +189,12 @@ const manifest = {
             plugin: './server/web/about'
         },
         {
+            plugin: './server/web/intro'
+        },
+        {
+            plugin: './server/web/leaderboard'
+        },
+        {
             plugin: './server/web/account'
         },
         {
@@ -196,6 +202,9 @@ const manifest = {
         },
         {
             plugin: './server/web/contact'
+        },
+        {
+            plugin: './server/web/splash'
         },
         {
             plugin: './server/web/home'

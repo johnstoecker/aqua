@@ -2,6 +2,7 @@
 const Async = require('async');
 const Boom = require('boom');
 const Config = require('../../config');
+const Request = require('request');
 const Joi = require('joi');
 
 
@@ -32,7 +33,8 @@ internals.applyRoutes = function (server, next) {
                 payload: {
                     email: Joi.string().email().lowercase().required(),
                     username: Joi.string().token().lowercase().required(),
-                    password: Joi.string().required()
+                    password: Joi.string().required(),
+                    recaptcha: Joi.string().required()
                 }
             },
             pre: [{
@@ -81,9 +83,34 @@ internals.applyRoutes = function (server, next) {
         },
         handler: function (request, reply) {
 
-            const mailer = request.server.plugins.mailer;
+                const mailer = request.server.plugins.mailer;
 
             Async.auto({
+                recaptcha: function(done) {
+                    const recaptcha = request.payload['recaptcha']
+                    // Put your secret key here.
+                    var secretKey = process.env.RECAPTCHA_KEY
+
+                    // skip recaptcha on dev local
+                    if(!secretKey) {
+                        done();
+                    }else {
+                        // req.connection.remoteAddress will provide IP address of connected user.
+                        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + recaptcha;
+                        // Hitting GET request to the URL, Google will respond with success or error scenario.
+                        Request(verificationUrl,function(error,response,body) {
+                            body = JSON.parse(body);
+                            // Success will be true or false depending upon captcha validation.
+                            if(body.success !== undefined && !body.success) {
+                                reply(Boom.badRequest("Recaptcha Error"));
+                            } else {
+                                done();
+                            }
+                        });
+
+                    }
+
+                },
                 user: function (done) {
 
                     const username = request.payload.username;

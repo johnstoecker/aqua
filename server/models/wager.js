@@ -1,21 +1,16 @@
 'use strict';
 const Joi = require('joi');
 const MongoModels = require('mongo-models');
-const User = require('./user')
-const Prediction = require('./prediction')
+const User = require('./user');
 
 class Wager extends MongoModels {
 
-    static create(user_id, predictionId, coins, callback) {
-        //????
-    }
 }
 
 Wager.collection = 'wagers';
 
 Wager.schema = Joi.object().keys({
     _id: Joi.object(),
-    user: User.schema,
     coin: Joi.number().integer(),
     userId: Joi.string().required(),
     predictionId: Joi.string().required(),

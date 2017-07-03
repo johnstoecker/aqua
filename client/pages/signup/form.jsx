@@ -38,14 +38,14 @@ class Form extends React.Component {
     }
 
     handleSubmit(event) {
-
         event.preventDefault();
         event.stopPropagation();
 
         Actions.sendRequest({
             username: this.input.username.value(),
             password: this.input.password.value(),
-            email: this.input.email.value()
+            email: this.input.email.value(),
+            recaptcha: grecaptcha.getResponse()
         });
     }
 
@@ -95,7 +95,8 @@ class Form extends React.Component {
                     help={this.state.help.password}
                     disabled={this.state.loading}
                 />
-            <div className="g-recaptcha" data-sitekey="6LdP9SMUAAAAAA1riPaEvWQfLUSjdlP-TBJsZb4b"></div>
+                <div className="g-recaptcha" data-sitekey="6LdP9SMUAAAAAA1riPaEvWQfLUSjdlP-TBJsZb4b"></div>
+                <br/>
                 <ControlGroup hideLabel={true} hideHelp={true}>
                     <Button
                         type="submit"

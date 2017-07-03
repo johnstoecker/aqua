@@ -18,7 +18,7 @@ class HomePage extends React.Component {
                 <div className="jumbotron">
                     <h2>THE IRON BANK WILL HAVE ITS DUE</h2>
                     <h2>
-                        <img src="http://media-cache-ak0.pinimg.com/736x/1b/16/98/1b169875c1952cf4272eb245fee48add.jpg" />
+                        <img className="max-hundred" src="http://media-cache-ak0.pinimg.com/736x/1b/16/98/1b169875c1952cf4272eb245fee48add.jpg" />
                         <h2>
                             <a className="btn btn-primary btn-lg" href="/signup">
                                 Create an account
@@ -34,11 +34,10 @@ class HomePage extends React.Component {
                     <div className="col-sm-6">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                <h3>About us</h3>
                                 <p>
-                                    John and Kit are GOT superfans.
+                                    A weekly game of thronesy predictions
                                 </p>
-                                <a href="/about" className="btn btn-default btn-block">
+                                <a href="/intro" className="btn btn-default btn-block">
                                     Learn more
                                 </a>
                             </div>
@@ -47,12 +46,11 @@ class HomePage extends React.Component {
                     <div className="col-sm-6">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                <h3>Contact us</h3>
                                 <p>
-                                    <a href="https://twitter.com/ironwagers">@ironwagers</a>, <a href="https://reddit.com/r/ironwagers">r/ironwagers</a>, or email below
+                                    Wagerers of salt, wagerers of iron
                                 </p>
-                                <a href="/contact" className="btn btn-default btn-block">
-                                    Learn more
+                                <a href="/leaderboard" className="btn btn-default btn-block">
+                                    Leaderboard
                                 </a>
                             </div>
                         </div>

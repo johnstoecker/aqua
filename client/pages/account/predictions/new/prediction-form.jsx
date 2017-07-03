@@ -139,7 +139,7 @@ class PredictionForm extends React.Component {
                         </div>
                         <div className="form-group">
                             <label className="control-label">
-                                Coins to Wager: 
+                                Coins to Wager:
                             </label>
                             <input
                                 type="number"
@@ -149,6 +149,7 @@ class PredictionForm extends React.Component {
                                 disabled={this.props.loading}
                                 placeholder='10'
                                 className="form-control"
+                                min="1"
                             />
                         </div>
                         <div className="form-group">

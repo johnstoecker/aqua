@@ -3,7 +3,7 @@ const Layout = require('../layouts/default.jsx');
 const React = require('react');
 
 
-class AboutPage extends React.Component {
+class SplashPage extends React.Component {
     render() {
 
         return (
@@ -12,8 +12,8 @@ class AboutPage extends React.Component {
                 activeTab="about">
 
                 <div className="row">
-                    <div className="col-sm-6">
-                        <h1 className="page-header">About us</h1>
+                    <div className="col-sm-10">
+                        <h1 className="page-header">Praise for Iron Wagers</h1>
                         <div className="media">
                             <div className="pull-left">
                                 <div className="media-object">
@@ -21,10 +21,9 @@ class AboutPage extends React.Component {
                                 </div>
                             </div>
                             <div className="media-body">
-                                <h4 className="media-heading">John Stoecker</h4>
+                                <h4 className="media-heading">Erik Strom</h4>
                                 <p>
-                                    Spends most of his time on various hype trains.
-                                    Thinks the show is better than the books.
+                                    I don't really watch Game of Thrones
                                 </p>
                             </div>
                         </div>
@@ -35,10 +34,9 @@ class AboutPage extends React.Component {
                                 </div>
                             </div>
                             <div className="media-body">
-                                <h4 className="media-heading">Kit Richert</h4>
+                                <h4 className="media-heading">My Mom</h4>
                                 <p>
-                                    Excited about season 7.
-                                    Can't wait to create more GOT-themed Christmas Carols.
+                                    Oh that's nice that you're keeping busy
                                 </p>
                             </div>
                         </div>
@@ -49,31 +47,31 @@ class AboutPage extends React.Component {
                                 </div>
                             </div>
                             <div className="media-body">
-                                <h4 className="media-heading">3rd Team Member?</h4>
+                                <h4 className="media-heading">My Supervisor</h4>
                                 <p>
-                                    Contribute to <a href="https://github.com/johnstoecker/ironwagers"> our github</a> and oooweee, this could be *you*
+                                    It's....so great...that you are....learning from this project
+                                </p>
+                            </div>
+                        </div>
+                        <div className="media text-right">
+                            <div className="pull-right">
+                                <div className="media-object">
+                                    <i className="fa fa-camera-retro fa-4x"></i>
+                                </div>
+                            </div>
+                            <div className="media-body">
+                                <h4 className="media-heading">Eric Marberg</h4>
+                                <p>
+                                    It looks like a lot of fun but it isn't
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div className="row">
-                    <div className="col-sm-6">
-                        <h1 className="page-header">Contact</h1>
-                        <p>
-                            <a href="https://twitter.com/ironwagers">@ironwagers</a>
-                        </p>
-                        <p>
-                            <a href="https://github.com/johnstoecker/ironwagers">ironwagers on github</a>
-                        </p>
-                    </div>
-                </div>
-
             </Layout>
         );
     }
 }
 
 
-module.exports = AboutPage;
+module.exports = SplashPage;
