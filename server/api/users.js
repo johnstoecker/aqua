@@ -16,6 +16,30 @@ internals.applyRoutes = function (server, next) {
 
     server.route({
         method: 'GET',
+        path: '/users/top',
+        handler: function (request, reply) {
+
+            const query = {};
+            const fields = "coins username house";
+            const sort = "-coins";
+            const limit = 20;
+            const page = 1;
+
+            User.pagedFind(query, fields, sort, limit, page, (err, results) => {
+
+                if (err) {
+                    return reply(err);
+                }
+                console.log(results)
+
+                reply(results);
+            });
+        }
+    });
+
+
+    server.route({
+        method: 'GET',
         path: '/users',
         config: {
             auth: {

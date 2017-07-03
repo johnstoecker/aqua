@@ -192,6 +192,9 @@ const manifest = {
             plugin: './server/web/intro'
         },
         {
+            plugin: './server/web/leaderboard'
+        },
+        {
             plugin: './server/web/account'
         },
         {
