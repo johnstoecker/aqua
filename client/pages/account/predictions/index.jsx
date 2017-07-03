@@ -138,7 +138,7 @@ class PredictionsPage extends React.Component {
                 )
             })) || []
             return (
-                <div className="prediction-container" key={pred._id}>
+                <div className="prediction-container " key={pred._id}>
                     <div className= {"prediction-box " + (pred.authorHouse || "").toLowerCase().replace(/\s/, "-")}>
                         <div className={"prediction-box-details " + (pred.status == "rejected" && "prediction-box-details-rejected ") + (pred.status == "lost" && " prediction-box-details-false")}>
                             <div className="prediction">{pred.text}</div>

@@ -54,14 +54,16 @@ internals.applyRoutes = function (server, next) {
                 numPredictions: 0,
                 coins: 0,
                 availableCoins: 0,
+                lostCoins: 0,
                 name: name
             }
             User.find(findParam, (err, users) => {
-                console.log(users.length)
-                for (var user in users) {
+                users.forEach(function (user) {
                     retVal.userCount += 1;
                     retVal.coins += user.coins || 0;
-                }
+                    retVal.availableCoins += user.availableCoins || 0;
+                    retVal.lostCoins += user.lostCoins || 0;
+                });
 
                 const predFindParam = {
                     authorHouse: name
