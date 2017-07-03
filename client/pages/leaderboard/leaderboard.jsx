@@ -4,6 +4,7 @@ const React = require('react');
 const Store = require('./store');
 
 
+
 class Leaderboard extends React.Component {
     constructor(props) {
 
@@ -34,9 +35,9 @@ class Leaderboard extends React.Component {
         const users = this.state.topUsers.data.map((user) => {
             return (
                 <div className="prediction-container" key={user._id}>
-                    <div className= {"prediction-box " + (user.house && user.house.name || "").toLowerCase()}>
+                    <div className= {"prediction-box " + (user.house && user.house.name || "").toLowerCase().replace(/\s/, "-")}>
                         <div className="prediction-box-footer">
-                            <div className={"iron-coin " + (user.house && user.house.name || "").toLowerCase()}/>
+                            <div className={"iron-coin " + (user.house && user.house.name || "").toLowerCase().replace(/\s/, "-")}/>
                             <div className="wager-points">
                                 <div>{user.coins}</div>
                                 <div>coins</div>

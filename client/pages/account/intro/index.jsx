@@ -64,7 +64,7 @@ class IntroPage extends React.Component {
                                         <h3 className="onboarding-header">HOW TO PLAY</h3>
                                         <h3 className="onboarding-step">2. Place a wager on each prediction</h3>
                                         <p>
-                                            You have 100 coins to start, and more each week. Your wager amount is a statement of your confidence in a prediction. You can also wager on other players predictions??!
+                                            You have 100 coins to start, and more each week. Your wager amount is a statement of your confidence in a prediction. You can also wager on other players predictions.
                                         </p>
                                     </div>
 

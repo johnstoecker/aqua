@@ -103,7 +103,7 @@ class PredictionsPage extends React.Component {
                 if(comment.coins) {
                     return(
                         <div className="comment-and-wager-box comment-and-wager-coin-box">
-                            <div className={"iron-coin " + (comment.authorHouse || "").toLowerCase()}/>
+                            <div className={"iron-coin " + (comment.authorHouse || "").toLowerCase().replace(/\s/, "-")}/>
                             <div className="wager-points">
                                 <div>{comment.coins}</div>
                                 <div>coins</div>
@@ -139,8 +139,8 @@ class PredictionsPage extends React.Component {
             })) || []
             return (
                 <div className="prediction-container" key={pred._id}>
-                    <div className= {"prediction-box " + (pred.authorHouse || "").toLowerCase()}>
-                        <div className={"prediction-box-details " + (pred.status == "rejected" && "prediction-box-details-rejected ") + (pred.status == "false" && " prediction-box-details-false")}>
+                    <div className= {"prediction-box " + (pred.authorHouse || "").toLowerCase().replace(/\s/, "-")}>
+                        <div className={"prediction-box-details " + (pred.status == "rejected" && "prediction-box-details-rejected ") + (pred.status == "lost" && " prediction-box-details-false")}>
                             <div className="prediction">{pred.text}</div>
                             <div>
                                 <span className="author">Predicted by </span>
@@ -148,7 +148,7 @@ class PredictionsPage extends React.Component {
                             </div>
                         </div>
                         <div className="prediction-box-footer">
-                            <div className={"iron-coin " + (pred.authorHouse || "").toLowerCase()}/>
+                            <div className={"iron-coin " + (pred.authorHouse || "").toLowerCase().replace(/\s/, "-")}/>
                             <div className="wager-points">
                                 <div>{pred.coins}</div>
                                 <div>coins</div>
@@ -157,8 +157,8 @@ class PredictionsPage extends React.Component {
                                 <div className="prediction-status-box">{(pred.status == "pending" && "This prediction is not yet approved by the admin") ||
                                     (pred.status ==  "standing" && "Watch GoT to see if this prediction comes true") ||
                                     (pred.status ==  "rejected" && "This salt wager has been rejected.") ||
-                                    (pred.status ==  "true" && "This has come true!") ||
-                                    (pred.status ==  "false" && "This has not come true.")
+                                    (pred.status ==  "won" && "This has come true!") ||
+                                    (pred.status ==  "lost" && "This has not come true.")
                                 }</div>
                             </div>
                             {tags}
@@ -211,7 +211,7 @@ class PredictionsPage extends React.Component {
         if (this.props.match.params.username && this.state.scopedUser.hydrated && this.state.scopedUser.house) {
             sideBarContext = (
                 <div className="house-bankroll-container">
-                    <div className={"house-bankroll "+ this.state.scopedUser.house.name.toLowerCase()}>
+                    <div className={"house-bankroll "+ this.state.scopedUser.house.name.toLowerCase().replace(/\s/, "-")}>
                         <div>{this.props.match.params.username}</div>
                         <div>House {this.state.scopedUser.house.name}</div>
                         <img className="house-picker-image" src={"/public/media/tag_images/House-"+this.state.scopedUser.house.name+"-Main-Shield.png"} />
@@ -235,7 +235,7 @@ class PredictionsPage extends React.Component {
             sideBarContext = this.state.houseStats.data.map((house) => {
                 return (
                     <div className="house-bankroll-container" key={house._id}>
-                        <div className={"house-bankroll "+house.name.toLowerCase()}>
+                        <div className={"house-bankroll "+house.name.toLowerCase().replace(/\s/, "-")}>
                             <div className="house-bankroll-housename">{house.name}({house.userCount})</div>
                             <div>{house.numPredictions} open predictions</div>
                             <div>{house.coins} coins banked</div>

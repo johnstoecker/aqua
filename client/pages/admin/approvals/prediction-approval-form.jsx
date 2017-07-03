@@ -52,12 +52,12 @@ class PredictionApprovalForm extends React.Component {
     }
     truePrediction() {
         console.log('true')
-        Actions.updatePrediction({_id: this.props._id, status: 'true'})
+        Actions.updatePrediction({_id: this.props._id, status: 'won'})
     }
 
     falsePrediction() {
         console.log('false')
-        Actions.updatePrediction({_id: this.props._id, status: 'false'})
+        Actions.updatePrediction({_id: this.props._id, status: 'lost'})
     }
 
     handleSubmit(event) {

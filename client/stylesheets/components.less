@@ -1,12 +1,13 @@
 // figure out why import is not working
 @import "./navbar.less";
 // TODO: make these correct like #xxyyzz with good colors
-@greyjoy: #2294F2;
+@greyjoy: #FF9900;
 @lannister: #EA0825;
-@martell: #FF9900;
+// @martell:
 @stark: #549F00;
 @targaryen: #232323;
 @thronesy-black: #333;
+@white-walkers: #2294F2;
 
 @house-border-left: {
     .greyjoy {
@@ -16,8 +17,8 @@
     .lannister {
         border-left: 4px solid @lannister;
     }
-    .martell {
-        border-left: 4px solid @martell;
+    .white-walkers {
+        border-left: 4px solid @white-walkers;
     }
     .stark {
         border-left: 4px solid @stark
@@ -202,6 +203,9 @@
 }
 .iron-coin.targaryen {
     background-color: white;
+}
+.iron-coin.white-walkers {
+    background-color: @white-walker;
 }
 
 
@@ -419,7 +423,7 @@ margin-bottom: 10px;
 
 .onboarding-header {
     // TODO: make me white walker blue
-    color: @greyjoy;
+    color: @white-walkers;
 }
 
 .onboarding-splash p {

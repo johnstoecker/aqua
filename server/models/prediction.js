@@ -7,7 +7,7 @@ const Mongodb = require('mongodb');
 const Wager = require('./wager');
 const User = require('./user');
 const Async = require('async');
-// Statuses: pending,rejected,standing,true,false
+// Statuses: pending,rejected,standing,won,lost
 //
 class Prediction extends MongoModels {
 
@@ -37,10 +37,6 @@ class Prediction extends MongoModels {
     // decrement availableCoins, increase reservedCoins
     static updateStandingPredictionUser(userId, pred, wager, callback) {
         const userUpdate = {
-            $inc: {
-                availableCoins: -wager.coins,
-                reservedCoins: wager.coins
-            },
             $push: {
                 messages: {
                     message: "The wager " + pred.text +" has been approved by the Iron Bank.",
@@ -63,7 +59,6 @@ class Prediction extends MongoModels {
             callback(pred);
         });
         console.log('x')
-
     }
 
     // send message to user
@@ -71,7 +66,8 @@ class Prediction extends MongoModels {
     static updateRejectedPredictionUser(userId, pred, wager, callback) {
         const userUpdate = {
             $inc: {
-                availableCoins: wager.coins
+                availableCoins: wager.coins,
+                reservedCoins: -wager.coins
             },
             $push: {
                 messages: {
@@ -133,7 +129,8 @@ class Prediction extends MongoModels {
 
         const userUpdate = {
             $inc: {
-                reservedCoins: -wager.coins
+                reservedCoins: -wager.coins,
+                lostCoins: wager.coins
             },
             $push: {
                 messages: {
@@ -162,9 +159,9 @@ class Prediction extends MongoModels {
             this.updateRejectedPredictionUser(wager.userId, pred, wager, callback)
         } else if (request.payload.status == 'standing') {
             this.updateStandingPredictionUser(wager.userId, pred, wager, callback)
-        } else if (request.payload.status == 'true') {
+        } else if (request.payload.status == 'won') {
             this.updateTruePredictionUser(wager.userId, pred, wager, callback)
-        } else if (request.payload.status == 'false') {
+        } else if (request.payload.status == 'lost') {
             this.updateFalsePredictionUser(wager.userId, pred, wager, callback)
         }
     }
@@ -260,7 +257,7 @@ Prediction.schema = Joi.object().keys({
     time: Joi.date().required(),
     awards: Joi.array().items(Joi.string()),
     comments: Joi.array().items(Comment.schema),
-    status: Joi.string().default("pending").valid('pending', 'standing', 'true', 'false')
+    status: Joi.string().default("pending").valid('pending', 'standing', 'won', 'lost')
 });
 
 // TODO: add more indices for text

@@ -55,7 +55,8 @@ class User extends MongoModels {
                     coins: 0,
                     reservedCoins: 0,
                     messages: [],
-                    availableCoins: STARTING_COINS
+                    availableCoins: STARTING_COINS,
+                    lostCoins: 0
                 };
 
                 self.insertOne(document, done);

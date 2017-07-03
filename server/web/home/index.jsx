@@ -24,7 +24,7 @@ class HomePage extends React.Component {
                                 Create an account
                             </a>
                             &nbsp;&nbsp;
-                            <a className="btn btn-success btn-lg" href="/login">
+                            <a className="btn btn-primary btn-success btn-lg" href="/login">
                                 Sign In
                             </a>
                         </h2>
