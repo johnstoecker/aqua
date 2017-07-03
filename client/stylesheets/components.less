@@ -98,6 +98,16 @@
     background-color:white;
 }
 
+.prediction-box-details-rejected, .prediction-box-details-false {
+    background: repeating-linear-gradient(
+      45deg,
+      #f1f3ff,
+      #f1f3ff 10px,
+      #fbfbfb 10px,
+      #fbfbfb 20px
+    );
+}
+
 .prediction {
     max-width:70%;
     font-size:18px;
@@ -222,16 +232,76 @@ margin-bottom: 10px;
     margin-bottom: 10px;
 }
 
-.comment-box {
+.user-message-container {
+    display: flex;
+}
+
+.double-down-box {
+    margin-left: 20px;
+    display: none;
+    align-items: center;
+    position: relative;
+}
+
+.double-down-box-visible {
+    display: flex;
+}
+
+.double-down-text {
+    margin-left: 5px;
+}
+
+.double-down-popup {
+    position: absolute;
+    background-color: white;
+    border: 2px solid gray;
+    display: none;
+    padding: 30px;
+    height:260px;
+    width: 300px;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+.popup-close {
+    position: absolute;
+    top:10px;
+    right:10px;
+    font-size:20px;
+    color: red;
+}
+
+.popup-close:hover {
+    cursor: pointer;
+}
+
+.double-down-popup h3 {
+    margin-top: 0px;
+}
+
+.double-down-popup.double-down-popup-visible {
+    display: flex;
+}
+
+.comment-and-wager-box {
     border: 1px solid #bcbcbc;
     border-top-color: #e9e9e9;
     padding: 10px 15px;
     font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.comment-and-wager-coin-box{
+    justify-content: space-between;
+}
+
+.comment-and-wager-coin-box .wager-points{
+    margin-right: auto;
 }
 
 .comment-form {
     display: flex;
-
 }
 
 .comment-form input[type='text'] {
@@ -274,6 +344,10 @@ margin-bottom: 10px;
 
 .comment-form .help-block {
     display:none;
+}
+
+.comment-box {
+    width: 100%;
 }
 
 .comment-box-header {

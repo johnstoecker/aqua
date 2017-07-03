@@ -40,14 +40,19 @@ class NewPredictionPage extends React.Component {
                 </h1>
                 <div className="row">
                     <div className="col-sm-6">
-                    <p>Will Arya and Sansa reunite?  Will Bran fight the Night King as a warg?  What depravity will George R.R. Martin show us this season? If you have a hunch, write down each prediction for season 7 and wager points on how sure you are.  If others agree, they might just wager some of their coins too.  If not, they may troll you in the comments section.  The night is dark and full of terrors. </p>
+                        <p></p>
                         <PredictionForm {...this.state.prediction} />
+                        <p>
+                            <span>Will Arya and Sansa reunite?  Will Bran fight the Night King as a warg?  What depravity will George R.R. Martin show us this season? If you have a hunch, write down each prediction for season 7 and wager points on how sure you are.  If others agree, they might just wager some of their coins too.  If not, they may troll you in the comments section.  The night is dark and full of terrors. Learn more about wagers here-</span>
+                            <a href="/account/criteria" className="fa fa-external-link"/>
+                        </p>
+
                     </div>
                     <div className="col-sm-2"></div>
                     <div className="col-sm-4 rules">
                         <h4>Rules of Engagement</h4>
                         <ul>
-                        <li>Each player has 100 coins to play with</li>
+                        <li>Each player has 100 coins to start with</li>
                         <li>Write predictions for GoT Season 7</li>
                         <li>You must wager on each prediction you write</li>
                         <li>You can also bet coin on others predictions</li>

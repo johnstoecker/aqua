@@ -31,6 +31,10 @@ class Actions {
         )
     }
 
+    static showDoubleDown(prediction) {
+        Store.dispatch
+    }
+
     static getHouseStats() {
         ApiActions.get(
             '/api/houses',
@@ -58,6 +62,17 @@ class Actions {
           Store,
           Constants.CREATE_PREDICTION,
           Constants.CREATE_PREDICTION_RESPONSE
+        )
+    }
+
+    static addWager(prediction, data) {
+        console.log(data)
+        ApiActions.post(
+            '/api/predictions/'+ prediction._id + '/wagers',
+            data,
+            Store,
+            Constants.ADD_WAGER,
+            Constants.ADD_WAGER_RESPONSE
         )
     }
 

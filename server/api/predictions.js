@@ -92,12 +92,100 @@ internals.applyRoutes = function (server, next) {
             }
         },
         handler: function (request, reply) {
-            Wager.create(request.auth.credentials.user._id.toString(), request.params.id, parseInt(request.payload.coins), (err, prediction)=>{
+            Prediction.findById(request.params.id, (err, pred) => {
                 if (err) {
-                    return reply(err)
+                    reply(err);
                 }
-                reply(prediction)
-            } )
+                if (!pred) {
+                    reply(Boom.notFound())
+                }
+                console.log(request.params.id)
+                console.log("the prediction:")
+                console.log(pred)
+
+                const params = {
+                  user_id : request.auth.credentials.user._id.toString(),
+                  author: request.auth.credentials.user.username.toString(),
+                  authorHouse: (request.auth.credentials.user.house && request.auth.credentials.user.house.name) || "unaffiliated",
+                  status: 'pending',
+                  coins: parseInt(request.payload.coins),
+                  comments: []
+                }
+
+                if(params.coins < 1) {
+                    return reply(Boom.badRequest("Incorrect coins"))
+                }
+                const userUpdate = {
+                    $inc: {
+                        availableCoins: -params.coins,
+                        reservedCoins: params.coins
+                    }
+                }
+                const findParam = {
+                    _id: Mongodb.ObjectId(params.user_id),
+                    availableCoins: { $gt: params.coins-1 }
+                }
+                console.log(findParam)
+                User.findOneAndUpdate(findParam, userUpdate, (err, user) => {
+
+                    if (err) {
+                        return reply(err);
+                    }
+
+                    if (!user) {
+                        return reply(Boom.badRequest("Not enough coins"))
+                    }
+
+                    const wagerParams = {
+                        userId: params.user_id,
+                        user: request.auth.credentials.user,
+                        coins: params.coins,
+                        predictionId: params._id,
+                        status: 'pending'
+                    }
+                    Wager.insertOne(wagerParams, (err, wager) => {
+                        if (err) {
+                            return reply(err);
+                        }
+
+                        const predictionCommentParams = {
+                            user_id: request.auth.credentials.user._id.toString(),
+                            author: request.auth.credentials.user.username.toString(),
+                            authorHouse: request.auth.credentials.user.house && request.auth.credentials.user.house.toString(),
+                            coins: params.coins,
+                            text : request.auth.credentials.user.username.toString() + " has wagered " + params.coins
+                        }
+
+                        Prediction.addComment(request.params.id, predictionCommentParams, (err, prediction) => {
+                            if (err) {
+                                return reply(err);
+                            }
+
+                            const userMessageUpdate = {
+                                $push: {
+                                    messages: {
+                                        message: request.auth.credentials.user.username.toString() + " has wagered " + params.coins + " on your prediction " + pred.text,
+                                        dismissed: false,
+                                        seen: false,
+                                        type: "doubledown",
+                                        _id: Mongodb.ObjectId()
+                                    }
+                                }
+                            }
+                            const predictionUserFindParam = {
+                                _id: Mongodb.ObjectId(params.userId)
+                            }
+                            User.findOneAndUpdate(predictionUserFindParam, userMessageUpdate, (err, user) => {
+                                if (err) {
+                                    reply(err);
+                                }
+                                reply(prediction)
+                            });
+
+                        })
+                    })
+                });
+            })
         }
     })
 
@@ -117,158 +205,7 @@ internals.applyRoutes = function (server, next) {
             }
         },
         handler: function(request, reply) {
-            const update = {
-                $set: {
-                    status: request.payload.status
-                }
-            }
-            const findParam = {
-                _id: Mongodb.ObjectId(request.params.id),
-            }
-            Prediction.findOne(findParam, (err, pred) => {
-                if (err) {
-                    return reply(err);
-                }
-                console.log(pred)
-
-                if (request.payload.status =='rejected') {
-                    // send message to user
-                    // increment availableCoins
-
-                    const userUpdate = {
-                        $inc: {
-                            availableCoins: pred.coins
-                        },
-                        $push: {
-                            messages: {
-                                message: "Your prediction " + pred.text +" has been rejected by the Iron Bank. Please check the help page for prediction guidelines.",
-                                dismissed: false,
-                                _id: Mongodb.ObjectId()
-                            }
-                        }
-                    }
-                    const userFindParam = {
-                        _id: Mongodb.ObjectId(pred.user_id)
-                    }
-                    User.findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
-                        if (err) {
-                            return reply(err);
-                        }
-                        Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
-                            if (err) {
-                                return reply(err);
-                            }
-                            reply(prediction);
-                        });
-                    });
-
-                } else if (request.payload.status == 'standing') {
-                    // send message to user
-                    // decrement availableCoins, increase reservedCoins
-
-                    const userUpdate = {
-                        $inc: {
-                            availableCoins: -pred.coins,
-                            reservedCoins: pred.coins
-                        },
-                        $push: {
-                            messages: {
-                                message: "Your prediction " + pred.text +" has been approved by the Iron Bank.",
-                                dismissed: false,
-                                _id: Mongodb.ObjectId()
-                            }
-                        }
-                    }
-                    const userFindParam = {
-                        _id: Mongodb.ObjectId(pred.user_id)
-                    }
-                    User.findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
-                        if (err) {
-                            return reply(err);
-                        }
-                        Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
-                            if (err) {
-                                return reply(err);
-                            }
-                            reply(prediction);
-                        });
-                    });
-
-                } else if (request.payload.status == 'true') {
-                    // send message to user
-                    // decrement availableCoins, decrese reserved
-                    // TODO:
-                    // do this for all wagers on this pred!
-
-                    const userUpdate = {
-                        $inc: {
-                            coins: pred.coins,
-                            reservedCoins: -pred.coins
-                        },
-                        $push: {
-                            messages: {
-                                message: "Your prediction " + pred.text +" has come true! Coins banked: +" + pred.coins,
-                                dismissed: false,
-                                _id: Mongodb.ObjectId()
-                            }
-                        }
-                    }
-                    const userFindParam = {
-                        _id: Mongodb.ObjectId(pred.user_id)
-                    }
-                    User.findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
-                        if (err) {
-                            return reply(err);
-                        }
-                        Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
-                            if (err) {
-                                return reply(err);
-                            }
-                            reply(prediction);
-                        });
-                    });
-
-
-                } else if (request.payload.status == 'false') {
-                    // send message to user
-                    // decrement reservedCoins
-                    //
-
-                    const userUpdate = {
-                        $inc: {
-                            reservedCoins: -pred.coins
-                        },
-                        $push: {
-                            messages: {
-                                message: "Your prediction " + pred.text +" has not come true.",
-                                dismissed: false,
-                                _id: Mongodb.ObjectId()
-                            }
-                        }
-                    }
-                    const userFindParam = {
-                        _id: Mongodb.ObjectId(pred.user_id)
-                    }
-                    User.findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
-                        if (err) {
-                            return reply(err);
-                        }
-                        Prediction.findOneAndUpdate(findParam, update, (err, prediction) => {
-                            if (err) {
-                                return reply(err);
-                            }
-                            reply(prediction);
-                        });
-                    });
-
-
-
-                }
-
-                console.log(findParam)
-
-
-            })
+            Prediction.updatePredictionStatus(request, reply)
         }
     })
 
@@ -376,12 +313,13 @@ internals.applyRoutes = function (server, next) {
                     if (err) {
                         return reply(err);
                     }
-
+                    console.log(params)
+                    console.log(params._id)
                     const wagerParams = {
                         userId: params.user_id,
                         user: request.auth.credentials.user,
                         coins: params.coins,
-                        predictionId: prediction._id,
+                        predictionId: params._id,
                         status: 'pending'
                     }
                     Wager.insertOne(wagerParams, (err, docs) => {

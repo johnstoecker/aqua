@@ -19,6 +19,7 @@ class PredictionsPage extends React.Component {
 
         Actions.getHouseStats();
         this.state = Store.getState();
+        this.hideDoubleDown = this.hideDoubleDown.bind(this);
     }
 
     loadPredictions(props) {
@@ -69,21 +70,61 @@ class PredictionsPage extends React.Component {
         this.props.history.push('/account/predictions/new');
     }
 
+    doubleDown(prediction) {
+        if (this.state.doubleDownCoins) {
+            Actions.addWager(prediction, {coins: this.state.doubleDownCoins});
+            this.setState({showPredictionDoubleDown: ""})
+        }
+    }
+
+    handleCoinChange(event) {
+        // TODO: max coinage set to available coins
+        this.setState({doubleDownCoins: event.target.value});
+    }
+
+    hideDoubleDown(event) {
+        event.preventDefault;
+        this.setState({showPredictionDoubleDown: ""})
+    }
+
+    showDoubleDown(prediction) {
+        this.setState({showPredictionDoubleDown: prediction._id})
+    }
+
     render() {
+        console.log(this.state)
         let makePrediction
-        console.log(this.props)
         const predictions = this.state.predictions.data.map((pred) => {
             const comments = pred.comments.map((comment) => {
-                let commentDelete
-                if(comment.author == this.state.user.username) {
+                let commentDelete, commentCoins
+                if(comment.author == this.state.user.username && !comment.coins) {
                     commentDelete = (<a href="#" className="comment-box-delete fa fa-trash" onClick={this.deleteComment.bind(this, comment, pred)}/>)
                 }
-                return (
-                    <div className="comment-box" key={comment._id}>
-                        <div className="comment-box-header">Comment by {comment.author}{commentDelete}</div>
-                        <div>{comment.text}</div>
-                    </div>
-                );
+                if(comment.coins) {
+                    return(
+                        <div className="comment-and-wager-box comment-and-wager-coin-box">
+                            <div className={"iron-coin " + (comment.authorHouse || "").toLowerCase()}/>
+                            <div className="wager-points">
+                                <div>{comment.coins}</div>
+                                <div>coins</div>
+                            </div>
+                            <div className="comment-wager-author">
+                                <span className="author">Wagered by </span>
+                                <a href={"/account/predictions/user/" + comment.author}>{comment.author}</a>
+                            </div>
+                        </div>
+                    );
+                }
+                else {
+                    return (
+                        <div className="comment-and-wager-box">
+                            <div className="comment-box" key={comment._id}>
+                                <div className="comment-box-header">Comment by {comment.author}{commentDelete}</div>
+                                <div>{comment.text}</div>
+                            </div>
+                        </div>
+                    );
+                }
             })
             const tags = (pred.tags && pred.tags.map((tag) => {
                 const tagImage = "/public/media/tag_images/"+tagImageHash[tag];
@@ -99,7 +140,7 @@ class PredictionsPage extends React.Component {
             return (
                 <div className="prediction-container" key={pred._id}>
                     <div className= {"prediction-box " + (pred.authorHouse || "").toLowerCase()}>
-                        <div className="prediction-box-details">
+                        <div className={"prediction-box-details " + (pred.status == "rejected" && "prediction-box-details-rejected ") + (pred.status == "false" && " prediction-box-details-false")}>
                             <div className="prediction">{pred.text}</div>
                             <div>
                                 <span className="author">Predicted by </span>
@@ -124,8 +165,26 @@ class PredictionsPage extends React.Component {
                         </div>
                     </div>
                     {comments}
-                    <div className="comment-box">
-                        <CommentForm onCommentSubmit={this.handleCommentSubmit} parentId={pred._id} {...this.state.details}/>
+                    <div className="comment-and-wager-box">
+                        <div className="comment-form-box">
+                            <CommentForm onCommentSubmit={this.handleCommentSubmit} parentId={pred._id} {...this.state.details}/>
+                        </div>
+                        <div className={"double-down-box " + ((pred.status=="pending" || pred.status=="standing") && "double-down-box-visible")} onClick={this.showDoubleDown.bind(this, pred)}>
+                            <div className="fa fa-plus"></div>
+                            <div className="double-down-text">wager</div>
+                        </div>
+                        <div className={"double-down-popup " + (this.state.showPredictionDoubleDown == pred._id && " double-down-popup-visible")}>
+                            <div className="popup-close fa fa-close" onClick={this.hideDoubleDown}></div>
+                            <h3>Like this prediction?</h3>
+                            <p>Place a wager on it. It's fine if it's from another house.</p>
+                            <div className="form-group">
+                                <label className="control-label">Coins to wager:</label>
+                                <input className="form-control" type="number" value={this.state.doubleDownCoins} onChange={this.handleCoinChange.bind(this)} min="1"/>
+                            </div>
+                            <div className="form-group">
+                                <input type="submit" value="Place Your Wager" className="btn btn-primary" onClick={this.doubleDown.bind(this, pred)}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             );

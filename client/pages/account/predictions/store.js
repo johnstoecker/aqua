@@ -12,6 +12,7 @@ module.exports = Redux.createStore(
         user: User,
         houseStats: HouseStats,
         // user for scoping predictions
-        scopedUser: User
+        scopedUser: User,
+        doubleDownCoins: 10
     })
 );

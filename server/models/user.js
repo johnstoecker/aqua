@@ -9,6 +9,11 @@ const STARTING_COINS = 100;
 const House = require('./house')
 
 class User extends MongoModels {
+
+    static findOneAndUpdatez(x, y, z, callback) {
+        callback('hi');
+    }
+
     static generatePasswordHash(password, callback) {
 
         Async.auto({

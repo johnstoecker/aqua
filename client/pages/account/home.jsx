@@ -87,13 +87,37 @@ class HomePage extends React.Component {
             )
         }
 
+        const messages = (this.state.user.messages && this.state.user.messages.map((message) => {
+            let userMessageEmoji, userMessageLink
+            if(message.type == "approval") {
+                userMessageEmoji = "✅"
+            } else if(message.type == "rejection") {
+                userMessageEmoji = "🚫"
+            } else if(message.type == "true") {
+                userMessageEmoji = "💰"
+            } else if(message.type == "false") {
+                userMessageEmoji = "⛔"
+            }
+            // if(message.link == "/account/criteria") {
+            //     userMesageLink = "criteria";
+            // }
+            // <div className="fa fa-external-link">
+            return (
+                <div className="user-message-container" key={message._id}>
+                    <div className="user-message-type">{userMessageEmoji}</div>
+                    <div className="user-message">{message.message}</div>
+                    <div className="user-message-dismiss"></div>
+                </div>
+            )
+        })) || []
+
         return (
             <section className="section-home container">
                 <div className="row">
-                    <div className="col-sm-7">
+                    <div className="col-sm-9">
                         <h1 className="page-header">My account</h1>
                         <div className="row">
-                            <div className="col-sm-4">
+                            <div className="col-sm-3">
                                 <div className="well text-center">
                                     <div className="stat-value">
                                         {this.state.user.coins}
@@ -101,7 +125,7 @@ class HomePage extends React.Component {
                                     <div className="stat-label">Coins Won</div>
                                 </div>
                             </div>
-                            <div className="col-sm-4">
+                            <div className="col-sm-3">
                                 <div className="well text-center">
                                     <div className="stat-value">
                                         {this.state.user.reservedCoins}
@@ -109,7 +133,7 @@ class HomePage extends React.Component {
                                     <div className="stat-label">Reserved</div>
                                 </div>
                             </div>
-                            <div className="col-sm-4">
+                            <div className="col-sm-3">
                                 <div className="well text-center">
                                     <div className="stat-value">
                                         {this.state.user.availableCoins}
@@ -171,6 +195,12 @@ class HomePage extends React.Component {
                             <div className="house-attribute-title">🐲 Dragon Along 🐲</div>
                             <div className="house-attribute-detail">-2 for each week a dragon disobeys</div>
                         </a>
+                    </div>
+                </div>
+                <div className="row">
+                    <h2 className="page-header">Ravens from the Iron Bank</h2>
+                    <div className="col-sm-9">
+                        {messages}
                     </div>
                 </div>
             </section>
