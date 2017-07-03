@@ -43,7 +43,7 @@ internals.applyRoutes = function (server, next) {
         },
         handler: function (request, reply) {
             var name = request.payload.name
-            if (["Greyjoy", "Lannister", "Martell", "Stark", "Targaryen"].indexOf(name) == -1) {
+            if (["Greyjoy", "Lannister", "Martell", "Stark", "Targaryen", "White Walkers"].indexOf(name) == -1) {
                 return reply(Boom.badRequest("Not a valid house name"));
             }
             const findParam = {

@@ -31,7 +31,7 @@ const reducer = function (state = initialState, action) {
         });
     }
 
-    if (action.type === Constants.GET_USER_RESPONSE) {
+    if (action.type === Constants.GET_USER_RESPONSE || action.type==Constants.DISMISS_MESSAGES_RESPONSE) {
         const validation = ParseValidation(action.response);
         console.log(action.response);
         return ObjectAssign({}, state, {

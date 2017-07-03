@@ -193,7 +193,7 @@ class PredictionsPage extends React.Component {
         if (!this.state.user.hydrated) {
             makePrediction = (<div>...</div>);
         } else if (this.state.user.availableCoins > 0) {
-            makePrediction = (                  
+            makePrediction = (
 
                 <div>
                     <h1>{this.state.user.availableCoins} coins</h1>
@@ -208,13 +208,23 @@ class PredictionsPage extends React.Component {
         }
 
         let sideBarContext;
-        if (this.props.match.params.username && this.state.scopedUser.hydrated) {
+        if (this.props.match.params.username && this.state.scopedUser.hydrated && this.state.scopedUser.house) {
             sideBarContext = (
                 <div className="house-bankroll-container">
                     <div className={"house-bankroll "+ this.state.scopedUser.house.name.toLowerCase()}>
                         <div>{this.props.match.params.username}</div>
                         <div>House {this.state.scopedUser.house.name}</div>
                         <img className="house-picker-image" src={"/public/media/tag_images/House-"+this.state.scopedUser.house.name+"-Main-Shield.png"} />
+                        <div>{this.state.scopedUser.coins} coins banked</div>
+                    </div>
+                </div>
+            )
+        } else if(this.props.match.params.username && this.state.scopedUser.hydrated && !this.state.scopedUser.house) {
+            sideBarContext = (
+                <div className="house-bankroll-container">
+                    <div className="house-bankroll">
+                        <div>{this.props.match.params.username}</div>
+                        <div>[No House]</div>
                         <div>{this.state.scopedUser.coins} coins banked</div>
                     </div>
                 </div>

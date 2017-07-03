@@ -138,6 +138,12 @@ const manifest = {
             }
         },
         {
+            plugin: './server/api/messages',
+            options: {
+                routes: { prefix: '/api' }
+            }
+        },
+        {
             plugin: './server/api/sessions',
             options: {
                 routes: { prefix: '/api' }

@@ -102,6 +102,16 @@ class Actions {
             type: Constants.HIDE_PASSWORD_SAVE_SUCCESS
         });
     }
+
+    static dismissMessages() {
+        ApiActions.put(
+            '/api/messages/my',
+            undefined,
+            Store,
+            Constants.DISMISS_MESSAGES,
+            Constants.DISMISS_MESSAGES_RESPONSE
+        )
+    }
 }
 
 

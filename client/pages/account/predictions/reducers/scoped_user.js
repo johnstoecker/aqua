@@ -18,14 +18,16 @@ const initialState = {
 };
 const reducer = function (state = initialState, action) {
 
-    if (action.type === Constants.GET_USER) {
+    if (action.type === Constants.GET_SCOPED_USER) {
         return ObjectAssign({}, state, {
             loading: true,
             hydrated: false
         });
     }
 
-    if (action.type === Constants.GET_USER_RESPONSE) {
+    if (action.type === Constants.GET_SCOPED_USER_RESPONSE) {
+        console.log("scoped user....")
+        console.log(state)
         console.log(action.response)
         const validation = ParseValidation(action.response);
         return ObjectAssign({}, state, {
@@ -42,7 +44,6 @@ const reducer = function (state = initialState, action) {
             reservedCoins: action.response.reservedCoins
         });
     }
-
     return state;
 };
 

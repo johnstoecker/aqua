@@ -37,8 +37,20 @@ class HomePage extends React.Component {
         this.setState(Store.getState());
     }
 
+    readRavens() {
+        Actions.dismissMessages();
+    }
+
+    seeOldRavens() {
+        this.setState({showAllMessages: true})
+    }
+
+    hideOldRavens() {
+        this.setState({showAllMessages: false})
+    }
+
     render() {
-        console.log(this.props)
+        console.log(this.state)
         if (this.props.location.search == "?onboard=true") {
             return (
                 <div className="container">
@@ -87,11 +99,15 @@ class HomePage extends React.Component {
             )
         }
         let messages;
-        if(!this.state.user.messages || this.state.user.messages.length == 0) {
-            messages = (<div>[You have no messages]</div>)
+        var allMessages = this.state.user.messages || []
+        if(allMessages.length == 0) {
+            messages = (<div>[You have no ravens]</div>)
+        } else if((allMessages.filter(function(x){ return x.dismissed == false}).length == 0 && !this.state.showAllMessages)) {
+            messages = (<div>[You have no new ravens]</div>)
         }
         else {
-            messages = (this.state.user.messages && this.state.user.messages.map((message) => {
+            var userMessages = [...this.state.user.messages].reverse();
+            messages = (userMessages.map((message) => {
                 let userMessageEmoji, userMessageLink
                 if(message.type == "approval") {
                     userMessageEmoji = "✅"
@@ -106,14 +122,18 @@ class HomePage extends React.Component {
                 //     userMesageLink = "criteria";
                 // }
                 // <div className="fa fa-external-link">
-                return (
-                    <div className="user-message-container" key={message._id}>
-                        <div className="user-message-type">{userMessageEmoji}</div>
-                        <div className="user-message">{message.message}</div>
-                        <div className="user-message-dismiss"></div>
-                    </div>
-                )
-            })) || []
+                if(message.dismissed && !this.state.showAllMessages) {
+                    return (<div/>);
+                }else {
+                    return (
+                        <div className="user-message-container" key={message._id}>
+                            <div className="user-message-type">{userMessageEmoji}</div>
+                            <div className="user-message">{message.message}</div>
+                            <div className="user-message-dismiss"></div>
+                        </div>
+                    )
+                }
+            }))
         }
         return (
             <section className="section-home container">
@@ -174,10 +194,10 @@ class HomePage extends React.Component {
                         <a href="#" className="house-picker" onClick={this.joinHouse.bind(this, Houses[2])}>
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[2].image} />
                             <div>{Houses[2].name}</div>
-                            <div className="house-attribute-title">🐍 Sand Sneks 🐍</div>
-                            <div className="house-attribute-detail">+8 for each week a Sand Snake kills</div>
-                            <div className="house-attribute-title">❄ Global Cooling ❄</div>
-                            <div className="house-attribute-detail">-2 for each week the Night King is south of the Wall</div>
+                            <div className="house-attribute-title">❄ Ice Nine ❄</div>
+                            <div className="house-attribute-detail">+9 for each week the Night King is South of the Wall</div>
+                            <div className="house-attribute-title">🔵 Seeing Blue 🔵</div>
+                            <div className="house-attribute-detail">-1 for each week walker burnt to death, cooldown: 5 mins</div>
                         </a>
                     </div>
                     <div className="house-picker-wrapper">
@@ -202,8 +222,11 @@ class HomePage extends React.Component {
                     </div>
                 </div>
                 <div className="row">
-                    <h2 className="page-header">Ravens from the Iron Bank</h2>
-                    <div className="col-sm-9">
+                    <div className="col-sm-9 the-rookery">
+                        <h2 className="page-header">Ravens from the Iron Bank</h2>
+                        <a href="#" className="read-ravens" onClick={this.readRavens.bind(this)}>Mark Ravens as Read</a>|
+                            <a href="#" className={"view-ravens " + (this.state.showAllMessages == true && "hidden")}  onClick={this.seeOldRavens.bind(this)}>View Old Ravens</a>
+                            <a href="#" className={"view-ravens " + (!!!this.state.showAllMessages == true && "hidden")}  onClick={this.hideOldRavens.bind(this)}>Hide Old Ravens</a>
                         {messages}
                     </div>
                 </div>
