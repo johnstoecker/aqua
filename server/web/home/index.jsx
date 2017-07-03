@@ -34,12 +34,23 @@ class HomePage extends React.Component {
                     <div className="col-sm-6">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                <h3>Iron Wagers</h3>
                                 <p>
                                     A weekly game of thronesy predictions
                                 </p>
-                                <a href="/about" className="btn btn-default btn-block">
+                                <a href="/intro" className="btn btn-default btn-block">
                                     Learn more
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-6">
+                        <div className="panel panel-default">
+                            <div className="panel-body">
+                                <p>
+                                    Wagerers of salt, wagerers of iron
+                                </p>
+                                <a href="/leaderboard" className="btn btn-default btn-block">
+                                    Leaderboard
                                 </a>
                             </div>
                         </div>

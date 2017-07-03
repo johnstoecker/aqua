@@ -86,31 +86,35 @@ class HomePage extends React.Component {
                 </a>
             )
         }
-
-        const messages = (this.state.user.messages && this.state.user.messages.map((message) => {
-            let userMessageEmoji, userMessageLink
-            if(message.type == "approval") {
-                userMessageEmoji = "✅"
-            } else if(message.type == "rejection") {
-                userMessageEmoji = "🚫"
-            } else if(message.type == "true") {
-                userMessageEmoji = "💰"
-            } else if(message.type == "false") {
-                userMessageEmoji = "⛔"
-            }
-            // if(message.link == "/account/criteria") {
-            //     userMesageLink = "criteria";
-            // }
-            // <div className="fa fa-external-link">
-            return (
-                <div className="user-message-container" key={message._id}>
-                    <div className="user-message-type">{userMessageEmoji}</div>
-                    <div className="user-message">{message.message}</div>
-                    <div className="user-message-dismiss"></div>
-                </div>
-            )
-        })) || []
-
+        let messages;
+        if(!this.state.user.messages || this.state.user.messages.length == 0) {
+            messages = (<div>[You have no messages]</div>)
+        }
+        else {
+            messages = (this.state.user.messages && this.state.user.messages.map((message) => {
+                let userMessageEmoji, userMessageLink
+                if(message.type == "approval") {
+                    userMessageEmoji = "✅"
+                } else if(message.type == "rejection") {
+                    userMessageEmoji = "🚫"
+                } else if(message.type == "true") {
+                    userMessageEmoji = "💰"
+                } else if(message.type == "false") {
+                    userMessageEmoji = "⛔"
+                }
+                // if(message.link == "/account/criteria") {
+                //     userMesageLink = "criteria";
+                // }
+                // <div className="fa fa-external-link">
+                return (
+                    <div className="user-message-container" key={message._id}>
+                        <div className="user-message-type">{userMessageEmoji}</div>
+                        <div className="user-message">{message.message}</div>
+                        <div className="user-message-dismiss"></div>
+                    </div>
+                )
+            })) || []
+        }
         return (
             <section className="section-home container">
                 <div className="row">
