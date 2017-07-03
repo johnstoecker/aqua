@@ -40,7 +40,7 @@ class NewPredictionPage extends React.Component {
                 </h1>
                 <div className="row">
                     <div className="col-sm-6">
-                    <p>Will Arya and Sansa reunite?  Will Bran fight the Night King as a warg?  What depravity will George R.R. Martin show us this season? If you have a hunch, write down each prediction for season 7 and wager points on how sure you are.  If others agree, they might just wager some of their coins too.  If not, they may troll you in the comments section.  The night is dark and full of terrors. </p>
+                    <p className="extra-margin">Will Arya and Sansa reunite?  Will Bran fight the Night King as a warg?  What depravity will George R.R. Martin show us this season? If you have a hunch, write down each prediction for season 7 and wager points on how sure you are.  If others agree, they might just wager some of their coins too.  If not, they may troll you in the comments section.  The night is dark and full of terrors. </p>
                         <PredictionForm {...this.state.prediction} />
                     </div>
                     <div className="col-sm-2"></div>
@@ -54,10 +54,12 @@ class NewPredictionPage extends React.Component {
                         <li>Heckle</li>
                         <li>Get heckled</li>
                         <li>If the thing happens, coins go to your bank</li>
+                        <li>The admin is the approver of wagers and awards</li>
                         <li>Biggest bank roll at the end wins</li>
                         <li>Biggest house bank roll at the end wins</li>
-                        <li>The admin is the approver of wagers</li>
                         <li>There are no real winners in GoT</li>
+                       
+                        
                         </ul>
                    </div>
                 </div>

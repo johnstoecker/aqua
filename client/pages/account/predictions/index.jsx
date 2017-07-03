@@ -134,10 +134,11 @@ class PredictionsPage extends React.Component {
         if (!this.state.user.hydrated) {
             makePrediction = (<div>...</div>);
         } else if (this.state.user.availableCoins > 0) {
-            makePrediction = (
+            makePrediction = (                  
+
                 <div>
                     <h1>{this.state.user.availableCoins} coins</h1>
-                    are available to wager
+                    <p>are available to wager</p>
                     <Button inputClasses={{ 'btn-primary': true }} onClick={this.goToNewPrediction.bind(this)}>
                         Make a Prediction
                     </Button>

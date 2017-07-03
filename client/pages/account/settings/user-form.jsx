@@ -81,47 +81,35 @@ class UserForm extends React.Component {
             />);
         }
 
-                return (
-            <div>
-                {alerts}
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <fieldset>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                name="text"
-                                value={this.state.text}
-                                onChange={this.handleTextChange.bind(this)}
-                                disabled={this.props.loading}
-                                placeholder="Enter your prediction"
-                                className="form-control"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label className="control-label">
-                                Coins:
-                            </label>
-                            <input
-                                type="number"
-                                name="number"
-                                value={this.state.coins}
-                                onChange={this.handleCoinChange.bind(this)}
-                                disabled={this.props.loading}
-                                placeholder='10'
-                                className="form-control"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input type="submit" value="Post" className="btn btn-primary"/>
-                        </div>
-                        <Spinner space="left" show={this.props.loading} />
+        return (
+            <form onSubmit={this.handleSubmit.bind(this)}>
+                <fieldset>
+                    <legend>Identity</legend>
+                    {alerts}
+                    <TextControl
+                        name="email"
+                        label="Email"
+                        value={this.state.email}
+                        onChange={LinkState.bind(this)}
+                        hasError={this.props.hasError.email}
+                        help={this.props.help.email}
+                        disabled={this.props.loading}
+                    />
+                    <ControlGroup hideLabel={true} hideHelp={true}>
+                        <Button
+                            type="submit"
+                            inputClasses={{ 'btn-primary': true }}
+                            disabled={this.props.loading}>
 
-                    </fieldset>
-                </form>
-                <div className="tag-images-container">
-                    {tagImages}
-                </div>
-            </div>
+                            Update identity
+                            <Spinner
+                                space="left"
+                                show={this.props.loading}
+                            />
+                        </Button>
+                    </ControlGroup>
+                </fieldset>
+            </form>
         );
     }
 }
