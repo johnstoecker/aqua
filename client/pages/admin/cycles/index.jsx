@@ -17,11 +17,11 @@ class CyclesPage extends React.Component {
     }
 
     updateHouses() {
-        // Actions.refreshHouse({name: "Greyjoy"});
-        // Actions.refreshHouse({name: "Lannister"});
+        Actions.refreshHouse({name: "Greyjoy"});
+        Actions.refreshHouse({name: "Lannister"});
         Actions.refreshHouse({name: "White Walkers"});
-        // Actions.refreshHouse({name: "Targaryen"});
-        // Actions.refreshHouse({name: "Stark"});
+        Actions.refreshHouse({name: "Targaryen"});
+        Actions.refreshHouse({name: "Stark"});
     }
 
     render() {
