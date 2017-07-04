@@ -4,6 +4,7 @@ const Boom = require('boom');
 const EscapeRegExp = require('escape-string-regexp');
 const Joi = require('joi');
 const Dotenv = require('dotenv');
+const Mongodb = require('mongodb');
 
 const internals = {};
 
@@ -539,7 +540,20 @@ internals.applyRoutes = function (server, next) {
             // ]
         },
         handler: function (request, reply) {
-
+            let message
+            if(request.payload.name == "Greyjoy") {
+                message = "The salt in your beard, or merkin, marks you as a great reaver. Pay the iron price and reap thronesy rewards. You have joined House Greyjoy."
+            } else if(request.payload.name == "Lannister") {
+                message = "Welcome, cousin, to the A Team. You have joined House Lannister"
+            } else if(request.payload.name == "White Walkers") {
+                message = "Your skin grows chill. Your breath turns to ice, and blue creeps into your eyes. March with us and we will cover the world in everlasting winter. You have become a white walker."
+            } else if(request.payload.name == "Stark") {
+                message = "A new King in North rises. You have answered his call. You have joined House Stark."
+            } else if(request.payload.name == "Targaryen") {
+                message = "The Mother of Dragons and Breaker of Chains welcomes you. Serve your Queen and wager well. You have joined House Targaryen."
+            } else {
+                return reply(Boom.badRequest("Bad house"))
+            }
             const id = request.auth.credentials.user._id.toString();
             const update = {
                 $set: {
@@ -547,13 +561,25 @@ internals.applyRoutes = function (server, next) {
                         name: request.payload.name,
                         image: request.payload.image
                     }
+                },
+                $push: {
+                    messages: {
+                        message: message,
+                        dismissed: false,
+                        seen: false,
+                        type: "housejoin",
+                        _id: Mongodb.ObjectId()
+                    }
                 }
             };
 
-            User.findByIdAndUpdate(id, update, (err, user) => {
+            User.findOneAndUpdate({_id: Mongodb.ObjectId(id), house: null}, update, (err, user) => {
                 console.log(user)
                 if (err) {
                     return reply(err);
+                }
+                if (!user) {
+                    return reply(Boom.badRequest("Already in house"))
                 }
 
                 const predictionUpdate = {

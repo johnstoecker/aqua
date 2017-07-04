@@ -49,7 +49,9 @@
     }
 };
 
-
+.page-section-header {
+    margin-top: 0px;
+}
 
 .tag-images-container {
     display: flex;
@@ -112,6 +114,10 @@
 
 .font-size-16 {
     font-size: 16px;
+}
+
+.font-center {
+    text-align: center;
 }
 
 .prediction-container {
@@ -214,6 +220,7 @@
     display: flex;
     @house-border-left-thick();
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .house-picker-image {
@@ -222,10 +229,23 @@
 }
 
 .house-picker-wrapper {
+    display: flex;
+    flex-direction: column;
     width: 175px;
     border: 1px solid gray;
-    padding: 0px 10px;
+    padding: 0px 10px 70px 10px;
     margin-bottom: 10px;
+    position: relative;
+}
+
+.house-player-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 175px;
+    border: 1px solid gray;
+    padding: 0px 10px 10px 10px;
+    margin-bottom: 10px;
+    position: relative;
 }
 
 .house-picker-wrapper:not(:last-child) {
@@ -249,6 +269,23 @@
 
 .house-attribute-detail {
     font-size: 12px;
+}
+
+.house-join-button {
+    width: 120px;
+    margin: 10px;
+    position: absolute;
+    bottom: 10px;
+}
+
+.iron-wagers-throne-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.iron-wagers-throne {
+    width: 150px;
 }
 
 .iron-coin {
