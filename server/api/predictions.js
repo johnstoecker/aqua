@@ -27,7 +27,7 @@ internals.applyRoutes = function (server, next) {
         handler: function (request, reply) {
             const query = {};
             if (request.query.author) {
-                query.author = new RegExp('^.*?' + EscapeRegExp(request.query.author) + '.*$', 'i');
+                query.author = EscapeRegExp(request.query.author);
             }
             if (request.query.status) {
                 query.status = request.query.status

@@ -44,6 +44,10 @@ class HomePage extends React.Component {
         window.location.href = "/account/predictions"
     }
 
+    goToUserPredictions() {
+        window.location.href = "/account/predictions/user/"+ this.state.user.username
+    }
+
     seeOldRavens() {
         this.setState({showAllMessages: true})
     }
@@ -98,7 +102,7 @@ class HomePage extends React.Component {
             }
             accountDetails = (
                 <div>
-                    <div className="prediction-container">
+                    <div href="#" onClick={this.goToUserPredictions.bind(this)} className="prediction-container hover-zoom">
                         <div className={"prediction-box " + (this.state.user.house && this.state.user.house.name || "").toLowerCase().replace(/\s/, "-")}>
                             <div className="prediction-box-footer">
                                 <div className={"iron-coin " + (this.state.user.house && this.state.user.house.name || "").toLowerCase().replace(/\s/, "-")}/>
@@ -111,7 +115,7 @@ class HomePage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="prediction-container">
+                    <div href="#" onClick={this.goToUserPredictions.bind(this)} className="prediction-container hover-zoom">
                         <div className="prediction-box">
                             <div className="wager-stat-box background-white">
                                 <div className={"iron-coin " + (this.state.user.house && this.state.user.house.name || "").toLowerCase().replace(/\s/, "-")}/>
@@ -124,7 +128,7 @@ class HomePage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="prediction-container">
+                    <div href="#" onClick={this.goToUserPredictions.bind(this)} className="prediction-container hover-zoom">
                         <div className="prediction-box">
                             <div className="wager-stat-box prediction-box-details-rejected">
                                 <div className="iron-coin iron-coin-lost"/>
@@ -247,12 +251,13 @@ class HomePage extends React.Component {
                 <a href="#" className="read-ravens" onClick={this.readRavens.bind(this)}>Mark Ravens as Read</a>|
                     <a href="#" className={"view-ravens " + (this.state.showAllMessages == true && "hidden")}  onClick={this.seeOldRavens.bind(this)}>View Old Ravens</a>
                     <a href="#" className={"view-ravens " + (!!!this.state.showAllMessages == true && "hidden")}  onClick={this.hideOldRavens.bind(this)}>Hide Old Ravens</a>
-
+                    <br/>
                 [You have no new ravens]</div>)
         }
         else {
+            let showMessages
             var userMessages = [...this.state.user.messages].reverse();
-            messages = (userMessages.map((message) => {
+            showMessages = (userMessages.map((message) => {
                 let userMessageEmoji, userMessageLink
                 if(message.type == "approval") {
                     userMessageEmoji = "✅"
@@ -274,19 +279,23 @@ class HomePage extends React.Component {
                 }else {
                     return (
                         <div>
-                        <a href="#" className="read-ravens" onClick={this.readRavens.bind(this)}>Mark Ravens as Read</a>|
-                            <a href="#" className={"view-ravens " + (this.state.showAllMessages == true && "hidden")}  onClick={this.seeOldRavens.bind(this)}>View Old Ravens</a>
-                            <a href="#" className={"view-ravens " + (!!!this.state.showAllMessages == true && "hidden")}  onClick={this.hideOldRavens.bind(this)}>Hide Old Ravens</a>
-
-                        <div className="user-message-container" key={message._id}>
-                            <div className="user-message-type">{userMessageEmoji}</div>
-                            <div className="user-message">{message.message}</div>
-                            <div className="user-message-dismiss"></div>
-                        </div>
+                            <div className="user-message-container" key={message._id}>
+                                <div className="user-message-type">{userMessageEmoji}</div>
+                                <div className="user-message">{message.message}</div>
+                                <div className="user-message-dismiss"></div>
+                            </div>
                     </div>
                     )
                 }
             }))
+            messages = (
+                <div>
+                    <a href="#" className="read-ravens" onClick={this.readRavens.bind(this)}>Mark Ravens as Read</a>|
+                        <a href="#" className={"view-ravens " + (this.state.showAllMessages == true && "hidden")}  onClick={this.seeOldRavens.bind(this)}>View Old Ravens</a>
+                        <a href="#" className={"view-ravens " + (!!!this.state.showAllMessages == true && "hidden")}  onClick={this.hideOldRavens.bind(this)}>Hide Old Ravens</a>
+                    {showMessages}
+                </div>
+            )
         }
         return (
             <section className="section-home container">

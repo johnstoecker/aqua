@@ -1,6 +1,6 @@
-### Welcome Aboard
+### The Iron Bank Will Have Its Due
 
-Thanks for signing up. As requested, your account has been created.
+Welcome to Iron Wagers.
 Here are your login credentials:
 
 | Details   |              |
@@ -9,5 +9,4 @@ Here are your login credentials:
 | Email:    | {{email}}    |
 
 Love,
-
-The Plot Device
+Kit & John

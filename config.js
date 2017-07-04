@@ -12,7 +12,7 @@ const criteria = {
 
 const config = {
     $meta: 'This file configures the plot device.',
-    projectName: 'Aqua',
+    projectName: 'Iron Wagers',
     port: {
         web: {
             $filter: 'env',
@@ -58,11 +58,11 @@ const config = {
     },
     system: {
         fromAddress: {
-            name: 'Aqua',
+            name: 'Iron Wagers',
             address: 'ironwagers@gmail.com'
         },
         toAddress: {
-            name: 'Aqua',
+            name: 'Iron Wagers',
             address: 'ironwagers@gmail.com'
         }
     }
