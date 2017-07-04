@@ -86,7 +86,7 @@ class HomePage extends React.Component {
                 <div className="prediction-container">
                     <div className= "prediction-box">
                         <div className="wager-stat-box background-white">
-                            Welcome to Iron Wagers, the game of thronesy predictions! You have made 0 wagers...so far
+                            Welcome to Iron Wagers, the game of thronesy predictions! You have no stats -- yet!  
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ class HomePage extends React.Component {
         let house
         if(!this.state.user.house) {
             house = (
-                <div className="col-sm-3 iron-wagers-throne-container">
+                <div className="col-sm-3 playingfor-container">
                     <h1 className="page-section-header">Join a House</h1>
                     <p>This gets you into the team game</p>
                 <button className="btn btn-primary" onClick={this.goToJoinHouse.bind(this)} type="submit">Select a House</button>
@@ -155,13 +155,13 @@ class HomePage extends React.Component {
             )
         } else if(this.state.user.house.name == "Greyjoy") {
             house = (
-                <div className="col-sm-3 iron-wagers-throne-container">
+                <div className="col-sm-3 playingfor-container">
                     <h1 className="page-section-header">Playing for:</h1>
 
                     <div className="house-player-wrapper greyjoy">
                         <div className="house-banner">
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[0].image} />
-                            <div className="house-banner-name">{Houses[0].name}</div>
+                            <div className="house-banner-name">House Greyjoy</div>
                         </div>
                         <div className="house-attribute-title">⚓ We Do Not Sow ⚓</div>
                         <div className="house-attribute-detail">+12 for each naval battle (2+ ships)</div>
@@ -171,13 +171,13 @@ class HomePage extends React.Component {
                 </div>)
         } else if(this.state.user.house.name == "Lannister") {
             house = (
-                <div className="col-sm-3 iron-wagers-throne-container">
+                <div className="col-sm-3 playingfor-container">
                     <h1 className="page-section-header">Playing for:</h1>
 
                     <div className="house-player-wrapper lannister">
                         <div className="house-banner">
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[1].image} />
-                            <div className="house-banner-name">{Houses[1].name}</div>
+                            <div className="house-banner-name">House Lannister</div>
                         </div>
                         <div className="house-attribute-title">👑 Golden Crown 👑</div>
                         <div className="house-attribute-detail">+5 for each week Cersei is Queen</div>
@@ -188,12 +188,12 @@ class HomePage extends React.Component {
             )
         } else if(this.state.user.house.name == "White Walkers") {
             house = (
-                <div className="col-sm-3 iron-wagers-throne-container">
+                <div className="col-sm-3 playingfor-container">
                     <h1 className="page-section-header">Playing for:</h1>
                     <div className="house-player-wrapper white-walkers">
                         <div className="house-banner">
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[2].image} />
-                            <div className="house-banner-name">{Houses[2].name}</div>
+                            <div className="house-banner-name">White Walkers</div>
                         </div>
                         <div className="house-attribute-title">❄ Ice Nine ❄</div>
                         <div className="house-attribute-detail">+9 for each week the Night King is South of the Wall</div>
@@ -204,12 +204,12 @@ class HomePage extends React.Component {
             )
         } else if(this.state.user.house.name == "Stark") {
             house = (
-                <div className="col-sm-3 iron-wagers-throne-container">
+                <div className="col-sm-3 playingfor-container">
                     <h1 className="page-section-header">Playing for:</h1>
                     <div className="house-player-wrapper stark">
                         <div className="house-banner">
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
-                            <div className="house-banner-name">{Houses[3].name}</div>
+                            <div className="house-banner-name">House Stark</div>
                         </div>
                         <div className="house-attribute-title">🗡 Needlework 🗡</div>
                         <div className="house-attribute-detail">+5 for each Arya kill</div>
@@ -220,12 +220,12 @@ class HomePage extends React.Component {
             )
         } else if(this.state.user.house.name == "Targaryen") {
             house = (
-                <div className="col-sm-3 iron-wagers-throne-container">
+                <div className="col-sm-3 playingfor-container">
                     <h1 className="page-section-header">Playing for:</h1>
                     <div className="house-player-wrapper targaryen">
                         <div className="house-banner">
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
-                            <div className="house-banner-name">{Houses[4].name}</div>
+                            <div className="house-banner-name">House Targaryen</div>
                         </div>
                         <div className="house-attribute-title">🐲 Wild Fire 🐲</div>
                         <div className="house-attribute-detail">+5 for each dragon flame, cooldown: 1 minute</div>
@@ -304,22 +304,25 @@ class HomePage extends React.Component {
         }
         return (
             <section className="section-home container">
+              <h1 className="page-header">Wager stats for {this.state.user.username}</h1>
                 <div className="row">
-                    <h1 className="page-header">Wager stats for {this.state.user.username}</h1>
-                    <div className="col-sm-9">
+                  
+                    <div className="col-sm-8">
                         {accountDetails}
                         <br/>
-                        <p className="font-bold font-size-16">{this.state.user.availableCoins} coins are available to wager</p>
-                        <p>Wager on your own predictions or bet on someone else's!</p>
+                        <p className="font-bold font-size-18">{this.state.user.availableCoins} coins are available to wager</p>
+                        <p className="margin-bottom-20px">Wager on your own Season 7 predictions, or bet on someone else's</p>
                         <button className="btn btn-primary" onClick={this.goToPredictions.bind(this)} type="submit">See All Wagers</button>
                     </div>
+                    <div className="col-sm-1"></div>
                     {house}
                 </div>
                 <div className="row">
-                    <div className="col-sm-9 the-rookery">
+                    <div className="col-sm-8 the-rookery">
                         <h2 className="page-header">Ravens from the Iron Bank</h2>
                         {messages}
                     </div>
+                    <div className="col-sm-1"></div>
                 </div>
             </section>
         );
