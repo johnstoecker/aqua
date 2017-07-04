@@ -248,9 +248,9 @@ class HomePage extends React.Component {
             )
         } else if((allMessages.filter(function(x){ return x.dismissed == false}).length == 0 && !this.state.showAllMessages)) {
             messages = (<div>
-                <a href="#" className="read-ravens" onClick={this.readRavens.bind(this)}>Mark Ravens as Read</a>|
-                    <a href="#" className={"view-ravens " + (this.state.showAllMessages == true && "hidden")}  onClick={this.seeOldRavens.bind(this)}>View Old Ravens</a>
-                    <a href="#" className={"view-ravens " + (!!!this.state.showAllMessages == true && "hidden")}  onClick={this.hideOldRavens.bind(this)}>Hide Old Ravens</a>
+                <a href="#" className="tab-picker" onClick={this.readRavens.bind(this)}>Mark Ravens as Read</a>|
+                    <a href="#" className={"tab-picker " + (this.state.showAllMessages == true && "hidden")}  onClick={this.seeOldRavens.bind(this)}>View Old Ravens</a>
+                    <a href="#" className={"tab-picker " + (!!!this.state.showAllMessages == true && "hidden")}  onClick={this.hideOldRavens.bind(this)}>Hide Old Ravens</a>
                     <br/>
                 [You have no new ravens]</div>)
         }

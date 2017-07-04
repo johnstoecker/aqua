@@ -16,6 +16,9 @@ class Prediction extends MongoModels {
         const updateParams = { '$push':
             {
                 "comments": params
+            },
+            $inc: {
+                "commentsCount": 1
             }
         };
         this.findByIdAndUpdate(id, updateParams, callback)

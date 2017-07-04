@@ -2,7 +2,7 @@
 const Actions = require('./actions');
 const React = require('react');
 const Store = require('./store');
-
+const TopWagers = require('./topwagers')
 
 
 class Leaderboard extends React.Component {
@@ -30,8 +30,11 @@ class Leaderboard extends React.Component {
         this.setState(Store.getState());
     }
 
+    showTab(tab) {
+        this.setState({showTab: tab})
+    }
+
     render() {
-        console.log(this.state)
         const users = this.state.topUsers.data.map((user) => {
             return (
                 <div className="prediction-container" key={user._id}>
@@ -43,6 +46,9 @@ class Leaderboard extends React.Component {
                                 <div>coins</div>
                             </div>
                             <div>{user.username}</div>
+                            <div className="leaderboard-swing-right">
+                                <span>{user.house && user.house.name}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,11 +58,17 @@ class Leaderboard extends React.Component {
         return (
             <section className="container">
                 <h1 className="page-header">
-                    Game of Thrones Season 6
+                    Wagers of Salt, Wagers of Iron
                 </h1>
+                <a href="#" className={"tab-picker " + (this.state.showTab=="users" && "tab-picker-active")} onClick={this.showTab.bind(this, "users")}>Top Users</a>|
+                    <a href="#" className={"tab-picker " + (this.state.showTab == "wagers" && "tab-picker-active")} onClick={this.showTab.bind(this, "wagers")}>Top Wagers</a>
+                    <br/>
                 <div className="row">
-                    <div className="col-sm-9">
+                    <div className={"col-sm-9 " + (this.state.showTab=="users" || "hidden")}>
                       {users}
+                    </div>
+                    <div className={"col-sm-9 " + (this.state.showTab=="wagers" || "hidden")}>
+                      <TopWagers/>
                     </div>
                 </div>
             </section>

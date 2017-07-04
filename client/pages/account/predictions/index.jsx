@@ -249,7 +249,7 @@ class PredictionsPage extends React.Component {
         return (
             <section className="container">
                 <h1 className="page-header">
-                    Game of Thrones Season 6
+                    Game of Thrones Season 7
                 </h1>
                 <div className="row">
                     <div className="col-sm-9">

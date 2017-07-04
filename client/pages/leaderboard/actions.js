@@ -21,6 +21,23 @@ class Actions {
             }
         );
     }
+
+    static topPredictions(data) {
+        ApiActions.get(
+            '/api/predictions/top',
+            undefined,
+            Store,
+            Constants.TOP_PREDICTIONS,
+            Constants.TOP_PREDICTIONS_RESPONSE,
+            (err, response) => {
+
+                if (!err) {
+                    // window.location.href = '/account?onboard=true';
+                }
+            }
+        );
+    }
+
 };
 
 

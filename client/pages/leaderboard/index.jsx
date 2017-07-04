@@ -1,6 +1,7 @@
 /* global window */
 'use strict';
 const Leaderboard = require('./leaderboard.jsx');
+const TopWagers = require('./topwagers.jsx');
 const React = require('react');
 const ReactDOM = require('react-dom');
 
@@ -9,7 +10,7 @@ class Page {
     static blastoff() {
 
         this.mainElement = ReactDOM.render(
-            <Leaderboard />,
+            <Leaderboard/>,
             window.document.getElementById('app-mount')
         );
     }

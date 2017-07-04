@@ -56,6 +56,31 @@ internals.applyRoutes = function (server, next) {
 
     server.route({
         method: 'GET',
+        path: '/predictions/top',
+        handler: function (request, reply) {
+            const query = {};
+            if (request.query.author) {
+                query.author = EscapeRegExp(request.query.author);
+            }
+            const fields = request.query.fields;
+            const sort = request.query.sort || "-_commentsCount";
+            const limit = 20;
+            const page = 1;
+
+            Prediction.pagedFind(query, fields, sort, limit, page, (err, results) => {
+                // console.log(results)
+                if (err) {
+                    return reply(err);
+                }
+
+                reply(results);
+            });
+        }
+    });
+
+
+    server.route({
+        method: 'GET',
         path: '/predictions/my',
         config: {
             auth: {
@@ -281,7 +306,8 @@ internals.applyRoutes = function (server, next) {
               season: 6,
               status: 'pending',
               coins: parseInt(request.payload.coins),
-              comments: []
+              comments: [],
+              commentsCount: 0
             }
 
             if(params.coins < 1) {

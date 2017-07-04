@@ -12,6 +12,7 @@ const JoinHousePage = require('./joinahouse/index.jsx');
 const CoinsAndWagersPage = require('./coinsandwagers/index.jsx')
 const ThroneTeam = require('./throne-team/index.jsx')
 const Predictions = require('./predictions/index.jsx')
+const Leaderboard = require('./leaderboard/index.jsx')
 const NewPrediction = require('./predictions/new/index.jsx')
 
 const Route = ReactRouter.Route;
@@ -35,6 +36,7 @@ const App = (
                 <Route path="/account/predictions/user/:username" component={Predictions} />
                 <Route path="/account/predictions/house/:house" component={Predictions} />
                 <Route path="/account/predictions" component={Predictions} />
+                <Route path="/account/leaderboard" component={Leaderboard} />
                 <Route component={NotFound} />
             </Switch>
             <Footer />
