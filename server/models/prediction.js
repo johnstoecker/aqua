@@ -21,7 +21,42 @@ class Prediction extends MongoModels {
                 "commentsCount": 1
             }
         };
-        this.findByIdAndUpdate(id, updateParams, callback)
+        this.findByIdAndUpdate(id, updateParams, (err, pred) => {
+            // if someone else left a comment, send a raven
+            let message, type
+            if(params.author != pred.author && params.coins) {
+                message = "A user has wagered " + params.coins + " on your prediction "
+                type = "doubledown"
+            } else if(params.author != pred.author){
+                message = "A user commented on your prediction"
+                type = "newcomment"
+            }
+            const userMessageUpdate = {
+                $push: {
+                    messages: {
+                        message: message,
+                        dismissed: false,
+                        seen: false,
+                        type: type,
+                        // in real life, dont expose ids to the user
+                        link: "/account/predictions?id="+pred._id,
+                        _id: Mongodb.ObjectId()
+                    }
+                }
+            }
+
+            const userFindParam = {
+                _id: Mongodb.ObjectId(pred.user_id)
+            }
+
+            // WTF
+            MongoModels.db.collection('users').findOneAndUpdate(userFindParam, userMessageUpdate, (err, user) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(pred);
+            });
+        })
     }
 
     static deleteCommentFromPrediction(predictionId, commentId, userId, callback) {

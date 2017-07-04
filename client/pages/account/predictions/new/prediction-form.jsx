@@ -113,7 +113,7 @@ class PredictionForm extends React.Component {
 
             return (
                 <div className="tag-image" key={tag}>
-                    <img src={tag} />
+                    <img className="tag-image-src" src={tag} />
                 </div>
             );
         })
