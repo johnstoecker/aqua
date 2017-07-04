@@ -127,6 +127,9 @@ internals.applyRoutes = function (server, next) {
                 if (!pred) {
                     return reply(Boom.notFound())
                 }
+                if (pred.status != "pending" && pred.status != "standing") {
+                    return reply(Boom.badRequest("only bet on pending or standing predictions"))
+                }
                 console.log(request.params.id)
                 console.log("the prediction:")
                 console.log(pred)
@@ -166,9 +169,10 @@ internals.applyRoutes = function (server, next) {
 
                     const wagerParams = {
                         userId: params.user_id,
-                        user: request.auth.credentials.user,
+                        authorHouse: request.auth.credentials.user.house && request.auth.credentials.user.house.name,
+                        author: request.auth.credentials.user.username,
                         coins: params.coins,
-                        predictionId: params._id,
+                        predictionId: pred._id,
                         status: 'pending'
                     }
                     Wager.insertOne(wagerParams, (err, wager) => {

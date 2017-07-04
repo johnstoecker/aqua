@@ -268,7 +268,7 @@ class PredictionsPage extends React.Component {
             })
         }
         let pagination
-        if (this.state.predictions.items.limit < this.state.predictions.items.total) {
+        if (this.state.predictions.items && this.state.predictions.items.limit < this.state.predictions.items.total) {
             pagination = (
                 <div className="pagination-arrows-container">
                     <a className={"pagination-arrow " + (this.state.predictions.items.begin > 1 || "hidden")} href="#" onClick={this.prevPage.bind(this)}>

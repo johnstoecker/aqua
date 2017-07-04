@@ -592,7 +592,12 @@ internals.applyRoutes = function (server, next) {
                     if(err) {
                         return reply(err);
                     }
-                    reply(user);
+                    Prediction.updateMany({author: user["username"]}, predictionUpdate, (err, count) => {
+                        if (err) {
+                            return reply(err);
+                        }
+                        reply(user);
+                    })
                 })
             });
         }

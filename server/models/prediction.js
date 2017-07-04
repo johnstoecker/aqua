@@ -227,12 +227,11 @@ class Prediction extends MongoModels {
             // 2. Find all wagers inside prediction
             // 3. For each wager user, update accordingly
 
-            console.log
             Wager.find({predictionId: Mongodb.ObjectId(request.params.id)}, (err, wagers) => {
                 if (err) {
                     return callback(err);
                 }
-
+                console.log("here are all wagers")
                 console.log(wagers)
 
                 if (wagers.length < 1) {
