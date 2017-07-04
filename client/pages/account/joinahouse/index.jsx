@@ -25,15 +25,16 @@ class JoinHousePage extends React.Component {
 
         return (
             <section className="container">
-                <div className="col-sm-9">
+                <div className="col-sm-8">
                     <h1 className="page-header">Join a House - Enter the Team Game</h1>
                     <p>Winter is here and you must join a house to survive. Other house members are your teammates. Together you must win the most wagers and take the Iron Wagers Throne! Each house has a few quirky rules to pad your iron bank account.</p>
                     <p className="font-bold">Choose wisely -- you cannot switch</p>
                 </div>
+                <div className="col-sm-1"></div>
                 <div className="col-sm-3">
                     <div className="iron-wagers-throne-container">
                         <img className="iron-wagers-throne" src="/public/media/ironwagersthrone.png"/>
-                        <div className="font-bold font-center">Who will sit upon the Iron Wagers Throne for Season 7?</div>
+                        <div className="font-center">Who will sit upon the Iron Wagers Throne for Season 7?</div>
                     </div>
                 </div>
                 <div className="col-sm-12 house-picker-container">
