@@ -29,6 +29,28 @@
     }
 };
 
+@house-border-left-thick: {
+    .greyjoy {
+        border-left: 8px solid @greyjoy;
+
+    }
+    .lannister {
+        border-left: 8px solid @lannister;
+    }
+    .white-walkers {
+        border-left: 8px solid @white-walkers;
+    }
+    .stark {
+        border-left: 8px solid @stark
+
+    }
+    .targaryen {
+        border-left: 8px solid @targaryen;
+    }
+};
+
+
+
 .tag-images-container {
     display: flex;
 }
@@ -82,6 +104,14 @@
 
 .house-bankroll {
     padding-left:10px;
+}
+
+.font-bold {
+    font-weight: 600;
+}
+
+.font-size-16 {
+    font-size: 16px;
 }
 
 .prediction-container {
@@ -149,6 +179,12 @@
     left: 1px;
 }
 
+.wager-stat-detail {
+    font-weight: 600;
+    position: absolute;
+    margin-left: 150px;
+}
+
 .author {
     max-width:20%;
     font-weight: 600;
@@ -163,19 +199,56 @@
     align-items: center;
 }
 
+.wager-stat-box {
+    display: flex;
+    height: 50px;
+    padding: 10px 15px;
+    align-items: center;
+}
+
+.background-white {
+    background-color: white;
+}
+
 .house-picker-container {
     display: flex;
-    text-align: center;
+    @house-border-left-thick();
+    flex-wrap: wrap;
 }
 
 .house-picker-image {
-    width: 65px;
     height: 80px;
+    margin: 0 20px 0 0;
 }
 
 .house-picker-wrapper {
-    width: 270px;
-    border: 3px solid gray;
+    width: 175px;
+    border: 1px solid gray;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+}
+
+.house-picker-wrapper:not(:last-child) {
+    margin-right:10px;
+}
+
+.house-banner {
+    display: flex;
+    align-items: center;
+}
+
+.house-banner-name {
+    text-align: left;
+    font-weight: 600;
+}
+
+.house-attribute-title {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.house-attribute-detail {
+    font-size: 12px;
 }
 
 .iron-coin {
@@ -187,6 +260,11 @@
     background-size: contain;
     margin-right: 10px;
     border: none !important;
+}
+
+.iron-coin-lost {
+    background-color: white;
+    opacity: .5;
 }
 
 .iron-coin.greyjoy {
