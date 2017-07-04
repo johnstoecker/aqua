@@ -215,6 +215,9 @@ class HomePage extends React.Component {
                         <div className="house-attribute-detail">+5 for each Arya kill</div>
                         <div className="house-attribute-title">🤔 Power Hungry 🤔</div>
                         <div className="house-attribute-detail">-3 for each week Sansa talks to Littlefinger</div>
+                        <div className="justify-button">
+                        <button className="thronesy-white-button house-join-button" onClick={this.goToPredictions.bind(this)} type="submit">See Stats</button>
+                        </div>
                     </div>
                 </div>
             )
@@ -248,10 +251,13 @@ class HomePage extends React.Component {
             )
         } else if((allMessages.filter(function(x){ return x.dismissed == false}).length == 0 && !this.state.showAllMessages)) {
             messages = (<div>
-                <a href="#" className="tab-picker" onClick={this.readRavens.bind(this)}>Mark Ravens as Read</a>|
+
+                    <div className="margin-bottom-10px">
+                    <a href="#" className="tab-picker" onClick={this.readRavens.bind(this)}>Mark Ravens as Read</a> &nbsp;| &nbsp;
                     <a href="#" className={"tab-picker " + (this.state.showAllMessages == true && "hidden")}  onClick={this.seeOldRavens.bind(this)}>View Old Ravens</a>
                     <a href="#" className={"tab-picker " + (!!!this.state.showAllMessages == true && "hidden")}  onClick={this.hideOldRavens.bind(this)}>Hide Old Ravens</a>
-                    <br/>
+                    </div>
+
                 [You have no new ravens]</div>)
         }
         else {
@@ -295,7 +301,7 @@ class HomePage extends React.Component {
             }))
             messages = (
                 <div>
-                    <a href="#" className="read-ravens" onClick={this.readRavens.bind(this)}>Mark Ravens as Read</a>|
+                    <a href="#" className="read-ravens" onClick={this.readRavens.bind(this)}>Mark Ravens as Read </a> &nbsp;| &nbsp;
                         <a href="#" className={"view-ravens " + (this.state.showAllMessages == true && "hidden")}  onClick={this.seeOldRavens.bind(this)}>View Old Ravens</a>
                         <a href="#" className={"view-ravens " + (!!!this.state.showAllMessages == true && "hidden")}  onClick={this.hideOldRavens.bind(this)}>Hide Old Ravens</a>
                     {showMessages}
@@ -313,17 +319,17 @@ class HomePage extends React.Component {
                         <p className="font-bold font-size-18">{this.state.user.availableCoins} coins are available to wager</p>
                         <p className="margin-bottom-20px">Wager on your own Season 7 predictions, or bet on someone else's</p>
                         <button className="btn btn-primary" onClick={this.goToPredictions.bind(this)} type="submit">See All Wagers</button>
+                        <div className="the-rookery">
+                        <h2 className="page-header">Ravens from the Iron Bank</h2>
+                        {messages}
+                    </div>
                     </div>
                     <div className="col-sm-1"></div>
                     {house}
                 </div>
-                <div className="row">
-                    <div className="col-sm-8 the-rookery">
-                        <h2 className="page-header">Ravens from the Iron Bank</h2>
-                        {messages}
-                    </div>
-                    <div className="col-sm-1"></div>
-                </div>
+                
+                    
+                
             </section>
         );
     }
