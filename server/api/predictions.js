@@ -38,9 +38,12 @@ internals.applyRoutes = function (server, next) {
             if (request.query.text) {
                 query.text = request.query.text
             }
+            if (request.query.id) {
+                query._id = Mongodb.ObjectId(request.query.id)
+            }
             const fields = request.query.fields;
             const sort = request.query.sort || "-_id";
-            const limit = request.query.limit;
+            const limit = request.query.limit || 50;
             const page = request.query.page;
             console.log(query)
             Prediction.pagedFind(query, fields, sort, limit, page, (err, results) => {
@@ -119,10 +122,13 @@ internals.applyRoutes = function (server, next) {
         handler: function (request, reply) {
             Prediction.findById(request.params.id, (err, pred) => {
                 if (err) {
-                    reply(err);
+                    return reply(err);
                 }
                 if (!pred) {
-                    reply(Boom.notFound())
+                    return reply(Boom.notFound())
+                }
+                if (pred.status != "pending" && pred.status != "standing") {
+                    return reply(Boom.badRequest("only bet on pending or standing predictions"))
                 }
                 console.log(request.params.id)
                 console.log("the prediction:")
@@ -152,7 +158,7 @@ internals.applyRoutes = function (server, next) {
                 }
                 console.log(findParam)
                 User.findOneAndUpdate(findParam, userUpdate, (err, user) => {
-
+                    console.log('updated user')
                     if (err) {
                         return reply(err);
                     }
@@ -163,12 +169,14 @@ internals.applyRoutes = function (server, next) {
 
                     const wagerParams = {
                         userId: params.user_id,
-                        user: request.auth.credentials.user,
+                        authorHouse: request.auth.credentials.user.house && request.auth.credentials.user.house.name,
+                        author: request.auth.credentials.user.username,
                         coins: params.coins,
-                        predictionId: params._id,
+                        predictionId: pred._id,
                         status: 'pending'
                     }
                     Wager.insertOne(wagerParams, (err, wager) => {
+                        console.log('updated wager')
                         if (err) {
                             return reply(err);
                         }
@@ -182,30 +190,10 @@ internals.applyRoutes = function (server, next) {
                         }
 
                         Prediction.addComment(request.params.id, predictionCommentParams, (err, prediction) => {
+                            console.log("added comment")
                             if (err) {
                                 return reply(err);
                             }
-
-                            const userMessageUpdate = {
-                                $push: {
-                                    messages: {
-                                        message: request.auth.credentials.user.username.toString() + " has wagered " + params.coins + " on your prediction " + pred.text,
-                                        dismissed: false,
-                                        seen: false,
-                                        type: "doubledown",
-                                        _id: Mongodb.ObjectId()
-                                    }
-                                }
-                            }
-                            const predictionUserFindParam = {
-                                _id: Mongodb.ObjectId(params.userId)
-                            }
-                            User.findOneAndUpdate(predictionUserFindParam, userMessageUpdate, (err, user) => {
-                                if (err) {
-                                    reply(err);
-                                }
-                                reply(prediction)
-                            });
 
                         })
                     })

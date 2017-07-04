@@ -274,7 +274,11 @@ class HomePage extends React.Component {
                 } else if(message.type == "false") {
                     userMessageEmoji = "⛔"
                 } else if(message.type == "housejoin") {
-                    userMessageEmoji = "🏰"
+                    userMessageEmoji = "⚔"
+                } else if(message.type == "newcomment") {
+                    userMessageEmoji = "💬"
+                } else if(message.type == "doubledown") {
+                    userMessageEmoji = "👍"
                 }
                 // if(message.link == "/account/criteria") {
                 //     userMesageLink = "criteria";
@@ -288,6 +292,7 @@ class HomePage extends React.Component {
                             <div className="user-message-container" key={message._id}>
                                 <div className="user-message-type">{userMessageEmoji}</div>
                                 <div className="user-message">{message.message}</div>
+                                <a className={"fa fa-external-link " + (message.link || "hidden")} href={message.link}/>
                                 <div className="user-message-dismiss"></div>
                             </div>
                     </div>

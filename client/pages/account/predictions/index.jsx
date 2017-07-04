@@ -12,6 +12,7 @@ class PredictionsPage extends React.Component {
     constructor(props) {
 
         super(props);
+        console.log("props here:")
         console.log(props);
         this.loadPredictions(props);
         // TODO: figure out a way to share user between pages
@@ -29,8 +30,13 @@ class PredictionsPage extends React.Component {
             params.author = props.match.params.username
         } else if (props.match.params.house) {
             params.house = props.match.params.house
+        } else if (props.location.search && props.location.search.match("id")) {
+            params.id = props.location.search.substr(props.location.search.indexOf("id")+3)
         }
 
+        if (props.location.search && props.location.search.match("page")) {
+            params.page = parseInt(props.location.search.substr(props.location.search.indexOf("page")+5))
+        }
         Actions.getPredictions(params);
     }
 
@@ -89,6 +95,22 @@ class PredictionsPage extends React.Component {
 
     showDoubleDown(prediction) {
         this.setState({showPredictionDoubleDown: prediction._id})
+    }
+
+    nextPage() {
+        if(!this.props.location.search) {
+            window.location.href = this.props.location.pathname + "?page=2"
+        } else {
+            let currentPage = parseInt(this.props.location.search.substr(this.props.location.search.indexOf("page")+5))
+            let nextPage = currentPage + 1
+            window.location.href = this.props.location.pathname + this.props.location.search.replace("page="+currentPage, "page="+nextPage)
+        }
+    }
+
+    prevPage() {
+        let currentPage = parseInt(this.props.location.search.substr(this.props.location.search.indexOf("page")+5))
+        let nextPage = currentPage - 1
+        window.location.href = this.props.location.pathname + this.props.location.search.replace("page="+currentPage, "page="+nextPage)
     }
 
     render() {
@@ -245,7 +267,19 @@ class PredictionsPage extends React.Component {
                 );
             })
         }
-
+        let pagination
+        if (this.state.predictions.items && this.state.predictions.items.limit < this.state.predictions.items.total) {
+            pagination = (
+                <div className="pagination-arrows-container">
+                    <a className={"pagination-arrow " + (this.state.predictions.items.begin > 1 || "hidden")} href="#" onClick={this.prevPage.bind(this)}>
+                        <img src="/public/media/left-arrow.png"/>
+                    </a>
+                    <a className={"pagination-arrow " + (this.state.predictions.items.end < this.state.predictions.items.total || "hidden")} href="#" onClick={this.nextPage.bind(this)}>
+                        <img src="/public/media/right-arrow.png"/>
+                    </a>
+                </div>
+            )
+        }
         return (
             <section className="container">
                 <h1 className="page-header">
@@ -254,6 +288,7 @@ class PredictionsPage extends React.Component {
                 <div className="row">
                     <div className="col-sm-9">
                       {predictions}
+                      {pagination}
                     </div>
                     <div className="col-sm-3">
                         {makePrediction}
