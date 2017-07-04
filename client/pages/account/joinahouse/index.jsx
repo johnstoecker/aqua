@@ -48,7 +48,7 @@ class JoinHousePage extends React.Component {
                         <div className="house-attribute-title">🐙 What is dead, could die 🐙</div>
                         <div className="house-attribute-detail">-2 For each week no Greyjoy is seen on a ship</div>
                         <div className="justify-button">
-                        <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[0])}>Join</button>
+                        <button className="thronesy-white-button house-join-button" onClick={this.goToPredictions.bind(this)} type="submit">See House Stats</button>
                         </div>
                     </div>
                     <div className="house-picker-wrapper lannister">
@@ -87,7 +87,7 @@ class JoinHousePage extends React.Component {
                         <div className="house-attribute-title">🤔 Power Hungry 🤔</div>
                         <div className="house-attribute-detail">-3 for each week Sansa talks to Littlefinger</div>
                         <div className="justify-button">
-                        <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[3])}>Join</button>
+                        <button className="thronesy-white-button house-join-button" onClick={this.goToPredictions.bind(this)} type="submit">See House Stats</button>
                         </div>
                     </div>
                     <div className="house-picker-wrapper targaryen">
