@@ -220,12 +220,13 @@
     display: flex;
     @house-border-left-thick();
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top:40px
 }
 
 .house-picker-image {
     height: 80px;
-    margin: 0 20px 0 0;
+    margin: 0 10px 0 0;
 }
 
 .hover-zoom {
@@ -244,11 +245,21 @@
 .house-picker-wrapper {
     display: flex;
     flex-direction: column;
-    width: 175px;
+    width: 200px;
     border: 1px solid gray;
     padding: 0px 10px 70px 10px;
     margin-bottom: 10px;
     position: relative;
+}
+
+.justify-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    position: absolute;
+    margin-left: -10px;
+    bottom: 20px;
 }
 
 .house-player-wrapper {
@@ -273,6 +284,7 @@
 .house-banner-name {
     text-align: left;
     font-weight: 600;
+    width:80px;
 }
 
 .house-attribute-title {
@@ -286,19 +298,21 @@
 
 .house-join-button {
     width: 120px;
-    margin: 10px;
-    position: absolute;
-    bottom: 10px;
 }
 
 .iron-wagers-throne-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin:20px 0 0 0;
+    font-size:12px;
+    font-style:italic;
+    font-weight:400px;
 }
 
 .iron-wagers-throne {
-    width: 150px;
+    width: 135px;
+    margin-bottom:10px;
 }
 
 .iron-coin {
