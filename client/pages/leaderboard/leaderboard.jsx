@@ -60,14 +60,16 @@ class Leaderboard extends React.Component {
                 <h1 className="page-header">
                     Wagers of Salt, Wagers of Iron
                 </h1>
-                <a href="#" className={"tab-picker " + (this.state.showTab=="users" && "tab-picker-active")} onClick={this.showTab.bind(this, "users")}>Top Users</a>|
-                    <a href="#" className={"tab-picker " + (this.state.showTab == "wagers" && "tab-picker-active")} onClick={this.showTab.bind(this, "wagers")}>Top Wagers</a>
-                    <br/>
+                <div className="margin-bottom-20px">
+                <a href="#" className={"tab-picker " + (this.state.showTab=="users" && "tab-picker-active")} onClick={this.showTab.bind(this, "users")}>Most Coins Won</a>
+                <a href="#" className={"tab-picker " + (this.state.showTab == "wagers" && "tab-picker-active")} onClick={this.showTab.bind(this, "wagers")}>Hottest TBD Wagers</a>
+                </div>
+                   
                 <div className="row">
-                    <div className={"col-sm-9 " + (this.state.showTab=="users" || "hidden")}>
+                    <div className={"col-sm-8 " + (this.state.showTab=="users" || "hidden")}>
                       {users}
                     </div>
-                    <div className={"col-sm-9 " + (this.state.showTab=="wagers" || "hidden")}>
+                    <div className={"col-sm-8 " + (this.state.showTab=="wagers" || "hidden")}>
                       <TopWagers/>
                     </div>
                 </div>
