@@ -18,6 +18,10 @@ class PlainLayout extends React.Component {
                 <head>
                     <title>{this.props.title}</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <meta property="og:title" content="Iron Wagers"/>
+                    <meta property="og:description" content="A Weekly Game of Thronesy Predictions"/>
+                    <meta property="og:image" content="https://ironwagers.com/public/media/transparent-logo.png"/>
+                    <meta property="og:url" content="https://ironwagers.com"/>
                     <link rel="stylesheet" href="/public/core.min.css" />
                     <link rel="shortcut icon" href="/public/media/favicon.ico" />
                     {this.props.neck}
