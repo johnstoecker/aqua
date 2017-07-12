@@ -164,7 +164,7 @@ class HomePage extends React.Component {
                             <div className="house-banner-name">House Greyjoy</div>
                         </div>
                         <div className="house-attribute-title">⚓ We Do Not Sow ⚓</div>
-                        <div className="house-attribute-detail">+12 for each naval battle (2+ ships)</div>
+                        <div className="house-attribute-detail">+10 for each naval battle (2+ ships)</div>
                         <div className="house-attribute-title">🐙 What is dead, could die 🐙</div>
                         <div className="house-attribute-detail">-2 For each week no Greyjoy is seen on a ship</div>
                     </div>
@@ -180,7 +180,7 @@ class HomePage extends React.Component {
                             <div className="house-banner-name">House Lannister</div>
                         </div>
                         <div className="house-attribute-title">👑 Golden Crown 👑</div>
-                        <div className="house-attribute-detail">+5 for each week Cersei is Queen</div>
+                        <div className="house-attribute-detail">+6 for each week Cersei is Queen</div>
                         <div className="house-attribute-title">👫 Twincest 👫</div>
                         <div className="house-attribute-detail">-2 for each week Cersei and Jaime don't meet</div>
                     </div>
@@ -198,7 +198,7 @@ class HomePage extends React.Component {
                         <div className="house-attribute-title">❄ Ice Nine ❄</div>
                         <div className="house-attribute-detail">+9 for each week the Night King is South of the Wall</div>
                         <div className="house-attribute-title">🔵 Seeing Blue 🔵</div>
-                        <div className="house-attribute-detail">-2 for each week walker burnt to death, cooldown: 5 minutes</div>
+                        <div className="house-attribute-detail">-2 for each walker burnt to death, cooldown: 3 minutes</div>
                     </div>
                 </div>
             )
@@ -213,7 +213,7 @@ class HomePage extends React.Component {
                         </div>
                         <div className="house-attribute-title">🗡 Needlework 🗡</div>
                         <div className="house-attribute-detail">+5 for each Arya kill</div>
-                        <div className="house-attribute-title">🤔 Power Hungry 🤔</div>
+                        <div className="house-attribute-title">🍽 Power Hungry 🍽</div>
                         <div className="house-attribute-detail">-3 for each week Sansa talks to Littlefinger</div>
                         <div className="justify-button">
                         <button className="thronesy-white-button house-join-button" onClick={this.goToPredictions.bind(this)} type="submit">See Stats</button>
