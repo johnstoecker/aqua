@@ -242,6 +242,7 @@ class HomePage extends React.Component {
         var allMessages = this.state.user.messages || []
         if(allMessages.length == 0) {
             messages = (
+
                 <div>
                     <p> First step, <a href="/account/joinahouse">join a house</a></p>
                     <p> Second step, <a href="/account/predictions">see what wagers</a> folks have made </p>
@@ -321,6 +322,9 @@ class HomePage extends React.Component {
                         <button className="btn btn-primary" onClick={this.goToPredictions.bind(this)} type="submit">See All Wagers</button>
                         <div className="the-rookery">
                         <h2 className="page-header">Ravens from the Iron Bank</h2>
+                            <div className="raven">
+                                <img src="/public/media/raven-mail.png" />
+                            </div>
                         {messages}
                     </div>
                     </div>
