@@ -30,6 +30,8 @@ class Prediction extends MongoModels {
             } else if(params.author != pred.author){
                 message = "A user commented on your prediction"
                 type = "newcomment"
+            } else {
+                return callback(pred)
             }
             const userMessageUpdate = {
                 $push: {
@@ -77,7 +79,7 @@ class Prediction extends MongoModels {
         const userUpdate = {
             $push: {
                 messages: {
-                    message: "The wager " + pred.text +" has been approved by the Iron Bank.",
+                    message: "The wager " + pred.text +" has been approved by the Iron Bank. Watch and see if it comes true!",
                     dismissed: false,
                     seen: false,
                     type: "approval",

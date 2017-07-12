@@ -35,8 +35,8 @@ internals.applyRoutes = function (server, next) {
             if (request.query.userId) {
                 query.userId = request.query.userId
             }
-            if (request.query.text) {
-                query.text = request.query.text
+            if (request.query.tag) {
+                query.tags = request.query.tag
             }
             if (request.query.id) {
                 query._id = Mongodb.ObjectId(request.query.id)
@@ -329,9 +329,11 @@ internals.applyRoutes = function (server, next) {
                     }
                     console.log(params)
                     console.log(params._id)
+
                     const wagerParams = {
                         userId: params.user_id,
-                        user: request.auth.credentials.user,
+                        authorHouse: request.auth.credentials.user.house && request.auth.credentials.user.house.name,
+                        author: request.auth.credentials.user.username,
                         coins: params.coins,
                         predictionId: params._id,
                         status: 'pending'
