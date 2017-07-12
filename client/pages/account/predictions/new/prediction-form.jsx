@@ -97,6 +97,7 @@ class PredictionForm extends React.Component {
                 type="success"
                 onClose={Actions.hideDetailsSaveSuccess}
                 message="Your prediction has been created."
+                link="/account/predictions"
             />);
         }
 

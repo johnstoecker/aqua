@@ -51,18 +51,16 @@ class NewPredictionPage extends React.Component {
                         <h4>Rules of Engagement</h4>
                         <ul>
                         <li>Each player has 100 coins to start with</li>
-                        <li>Write predictions for GoT Season 7</li>
-                        <li>You must wager on each prediction you write</li>
-                        <li>You can also bet coin on others predictions</li>
-                        <li>Heckle</li>
-                        <li>Get heckled</li>
-                        <li>If the thing happens, coins go to your bank</li>
-                        <li>The admin is the approver of wagers and awards</li>
+                        <li>Make a wager</li>
+                        <li>The Iron Bank will approve your wagers before the episode</li>
+                        <li>If the wager is too vague, the Iron Bank will reject your wager</li>
+                        <li>(You will just get those coins back)</li>
+                        <li>Otherwise, wait and see if your wager comes true!</li>
                         <li>Biggest bank roll at the end wins</li>
                         <li>Biggest house bank roll at the end wins</li>
                         <li>There are no real winners in GoT</li>
-                       
-                        
+
+
                         </ul>
                    </div>
                 </div>

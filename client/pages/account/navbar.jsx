@@ -68,9 +68,6 @@ class Navbar extends React.Component {
                             <li className={this.classForPath('/account')}>
                                 <Link to="/account">Stats</Link>
                             </li>
-                            <li className={this.classForPath('/account/settings')}>
-                                <Link to="/account/settings">Settings</Link>
-                            </li>
                             <li className={this.classForPath('/account/predictions')}>
                                 <Link to="/account/predictions">Wagers</Link>
                             </li>
@@ -79,6 +76,9 @@ class Navbar extends React.Component {
                             </li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
+                            <li className={this.classForPath('/account/settings')}>
+                                <Link to="/account/settings">Settings</Link>
+                            </li>
                             <li>
                                 <a href="/login/logout">Sign out</a>
                             </li>

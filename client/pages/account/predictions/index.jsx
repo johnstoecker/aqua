@@ -56,8 +56,9 @@ class PredictionsPage extends React.Component {
         Actions.deleteComment(pred._id, comment._id)
     }
 
-    searchPredictions(tag) {
-        Actions.getPredictions({text: tag})
+    searchPredictions(tag, event) {
+        event.preventDefault();
+        Actions.getPredictions({tag: tag})
     }
 
     componentWillReceiveProps(nextProps) {
@@ -187,7 +188,7 @@ class PredictionsPage extends React.Component {
                         </div>
                     </div>
                     {comments}
-                    <div className="comment-and-wager-box">
+                    <div className="comment-and-wager-box new-comment-and-wager-box">
                         <div className="comment-form-box">
                             <CommentForm onCommentSubmit={this.handleCommentSubmit} parentId={pred._id} {...this.state.details}/>
                         </div>
@@ -287,11 +288,16 @@ class PredictionsPage extends React.Component {
                 </h1>
                 <div className="row">
                     <div className="col-sm-9">
+                        <div className="mobile-only">
+                            {makePrediction}
+                        </div>
                       {predictions}
                       {pagination}
                     </div>
                     <div className="col-sm-3">
-                        {makePrediction}
+                        <div className="desktop-only">
+                            {makePrediction}
+                        </div>
                         {sideBarContext}
                     </div>
                 </div>

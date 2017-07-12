@@ -12,8 +12,7 @@ const propTypes = {
 
 class Alert extends React.Component {
     render() {
-
-        let close;
+        let close, alertLink;
 
         if (this.props.onClose) {
             close = <button
@@ -24,11 +23,15 @@ class Alert extends React.Component {
                 &times;
             </button>;
         }
+        if (this.props.link) {
+            alertLink = <a href={this.props.link} className="fa fa-external-link"></a>
+        }
 
         return (
             <div className={`alert alert-${this.props.type}`}>
                 {close}
                 {this.props.message}
+                {alertLink}
             </div>
         );
     }

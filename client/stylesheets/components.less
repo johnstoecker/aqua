@@ -186,7 +186,7 @@
 }
 
 .prediction-status-info:hover {
-    cursor: pointer;
+    cursor: help;
 }
 
 .prediction-status-info:hover .prediction-status-box {
@@ -225,7 +225,8 @@
 
 .prediction-box-footer {
     display: flex;
-    height: 50px;
+    min-height: 50px;
+    flex-wrap: wrap;
     background: #bcbcbc;
     padding: 10px 15px;
     align-items: center;
@@ -347,6 +348,7 @@
     background-size: contain;
     margin-right: 10px;
     border: none !important;
+    flex: 0 0 auto;
 }
 
 .iron-coin-lost {
@@ -691,4 +693,26 @@ margin-bottom: 10px;
 
 .max-hundred {
     max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .mobile-only {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .new-comment-and-wager-box {
+        flex-direction: column;
+    }
+
+    .double-down-box {
+        margin-top: 15px;
+        align-self: flex-end;
+    }
+
 }

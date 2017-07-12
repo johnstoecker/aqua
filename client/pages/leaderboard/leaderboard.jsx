@@ -62,9 +62,9 @@ class Leaderboard extends React.Component {
                 </h1>
                 <div className="margin-bottom-20px">
                 <a href="#" className={"tab-picker " + (this.state.showTab=="users" && "tab-picker-active")} onClick={this.showTab.bind(this, "users")}>Most Coins Won</a>
-                <a href="#" className={"tab-picker " + (this.state.showTab == "wagers" && "tab-picker-active")} onClick={this.showTab.bind(this, "wagers")}>Hottest TBD Wagers</a>
+                <a href="#" className={"tab-picker " + (this.state.showTab == "wagers" && "tab-picker-active")} onClick={this.showTab.bind(this, "wagers")}>Hottest Wagers</a>
                 </div>
-                   
+
                 <div className="row">
                     <div className={"col-sm-8 " + (this.state.showTab=="users" || "hidden")}>
                       {users}

@@ -62,7 +62,7 @@ class CriteriaPage extends React.Component {
 
                                 <div className={"item " + (this.state.currentPage == 1 && "active") || ""}>
                                     <div className="onboarding-inner">
-                                        <h3 className="onboarding-header">SALT WAGERS</h3>
+                                        <h3 className="onboarding-header">A SALT WAGER</h3>
                                         <p>
                                             Arya will kill someone in season 7.
                                         </p>
@@ -72,7 +72,7 @@ class CriteriaPage extends React.Component {
 
                                 <div className={"item " + (this.state.currentPage == 2 && "active") || ""}>
                                     <div className="onboarding-inner">
-                                        <h3 className="onboarding-header">IRON WAGERS</h3>
+                                        <h3 className="onboarding-header">AN IRON WAGER</h3>
                                         <p>
                                             Arya will kill Sansa in season 7.
                                         </p>

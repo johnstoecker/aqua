@@ -86,7 +86,7 @@ class HomePage extends React.Component {
                 <div className="prediction-container">
                     <div className= "prediction-box">
                         <div className="wager-stat-box background-white">
-                            Welcome to Iron Wagers, the game of thronesy predictions! You have no stats -- yet!  
+                            Welcome to Iron Wagers, the game of thronesy predictions! You have no stats -- yet!
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ class HomePage extends React.Component {
                                     <div>coins</div>
                                 </div>
                                 <div className="prediction-status-info">Won</div>
-                                <div className="wager-stat-detail">{this.state.user.house && ("Won for "+houseName)}{!this.state.user.house && "Won (join a House!)"}</div>
+                                <div className="wager-stat-detail">{this.state.user.house && ("Won for "+houseName)}{!this.state.user.house && ""}</div>
                             </div>
                         </div>
                     </div>
@@ -312,7 +312,7 @@ class HomePage extends React.Component {
             <section className="section-home container">
               <h1 className="page-header">Wager stats for {this.state.user.username}</h1>
                 <div className="row">
-                  
+
                     <div className="col-sm-8">
                         {accountDetails}
                         <br/>
@@ -327,9 +327,9 @@ class HomePage extends React.Component {
                     <div className="col-sm-1"></div>
                     {house}
                 </div>
-                
-                    
-                
+
+
+
             </section>
         );
     }
