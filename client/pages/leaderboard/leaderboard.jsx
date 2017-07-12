@@ -36,6 +36,9 @@ class Leaderboard extends React.Component {
 
     render() {
         const users = this.state.topUsers.data.map((user) => {
+            if (user.username == "root") {
+                return (<div/>)
+            } else {
             return (
                 <div className="prediction-container" key={user._id}>
                     <div className= {"prediction-box " + (user.house && user.house.name || "").toLowerCase().replace(/\s/, "-")}>
@@ -52,7 +55,7 @@ class Leaderboard extends React.Component {
                         </div>
                     </div>
                 </div>
-            );
+            );}
         });
 
         return (
