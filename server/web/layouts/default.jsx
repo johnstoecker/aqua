@@ -25,7 +25,7 @@ class DefaultLayout extends React.Component {
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <meta property="og:title" content="Iron Wagers"/>
                     <meta property="og:description" content="A Weekly Game of Thronesy Predictions"/>
-                    <meta property="og:image" content="https://ironwagers.com/public/media/transparent-logo.png"/>
+                    <meta property="og:image" content="https://ironwagers.com/public/media/iron_throne_text.png"/>
                     <meta property="og:url" content="https://ironwagers.com"/>
                     <link rel="stylesheet" href="/public/core.min.css" />
                     <link rel="stylesheet" href="/public/layouts/default.min.css" />
