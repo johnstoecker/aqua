@@ -280,6 +280,8 @@ class HomePage extends React.Component {
                     userMessageEmoji = "💬"
                 } else if(message.type == "doubledown") {
                     userMessageEmoji = "👍"
+                } else if(message.type == "award") {
+                    userMessageEmoji = "🏆"
                 }
                 // if(message.link == "/account/criteria") {
                 //     userMesageLink = "criteria";

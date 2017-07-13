@@ -206,6 +206,47 @@ class Prediction extends MongoModels {
         }
     }
 
+    static awardPrediction(request, callback) {
+        const update = {
+            $push: {
+                awards: request.payload.award
+            }
+        }
+
+        const findParam = {
+            _id: Mongodb.ObjectId(request.params.id),
+        }
+
+        Prediction.findOneAndUpdate(findParam, update, (err, pred) => {
+            if (err) {
+                return callback(err);
+            }
+            const userUpdate = {
+                $inc: {
+                    coins: 20
+                },
+                $push: {
+                    messages: {
+                        message: "Your wager " + pred.text +" has been deemed very thronesy! +20 coins banked",
+                        dismissed: false,
+                        seen: false,
+                        type: "award",
+                        _id: Mongodb.ObjectId()
+                    }
+                }
+            }
+            const userFindParam = {
+                _id: Mongodb.ObjectId(pred.user_id)
+            }
+            MongoModels.db.collection('users').findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(pred)
+            });
+        });
+    }
+
     static updatePredictionStatus(request, callback) {
         const update = {
             $set: {

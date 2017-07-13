@@ -221,7 +221,11 @@ internals.applyRoutes = function (server, next) {
             }
         },
         handler: function(request, reply) {
-            Prediction.updatePredictionStatus(request, reply)
+            if (request.payload.status) {
+                Prediction.updatePredictionStatus(request, reply)
+            } else if (request.payload.award) {
+                Prediction.awardPrediction(request, reply)
+            }
         }
     })
 
