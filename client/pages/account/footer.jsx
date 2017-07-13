@@ -11,7 +11,7 @@ class Footer extends React.Component {
             <div className="footer">
                 <div className="container">
                     <span className="copyright pull-right">
-                        <a className="github-button" href="https://github.com/johnstoecker/ironwagers/issues" data-icon="octicon-issue-opened" aria-label="Issue johnstoecker/ironwagers on GitHub">Help!</a>
+                        <a className="fa fa-twitter" href="https://twitter.com/ironwagers">Help!</a>
                     </span>
                     <ul className="links">
                         <li><a href="/">Home</a></li>

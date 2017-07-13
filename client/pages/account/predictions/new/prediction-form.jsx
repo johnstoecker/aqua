@@ -43,7 +43,8 @@ class PredictionForm extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            name: nextProps.name
+            name: nextProps.name,
+            text: nextProps.text
         });
     }
 
@@ -90,6 +91,8 @@ class PredictionForm extends React.Component {
     }
 
     render() {
+        console.log(this.state)
+        console.log(this.props)
         const alerts = [];
         if (this.props.showSaveSuccess) {
             alerts.push(<Alert

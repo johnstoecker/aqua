@@ -30,8 +30,7 @@ class DefaultLayout extends React.Component {
                     <link rel="stylesheet" href="/public/core.min.css" />
                     <link rel="stylesheet" href="/public/layouts/default.min.css" />
                     <link rel="stylesheet" href="/public/pages/components.min.css" />,
-                    <link rel="shortcut icon" href="/public/media/favicon.ico" />
-                    <script async defer src="https://buttons.github.io/buttons.js"></script>
+                    <link rel="shortcut icon" href="/public/media/favicon.ico" />,
                     {this.props.neck}
                 </head>
                 <body>
@@ -44,7 +43,7 @@ class DefaultLayout extends React.Component {
                     <div className="footer">
                         <div className="container">
                             <span className="copyright pull-right">
-                                <a className="github-button" href="https://github.com/johnstoecker/ironwagers/issues" data-icon="octicon-issue-opened" aria-label="Issue johnstoecker/ironwagers on GitHub">Help!</a>
+                                <a className="fa fa-twitter" href="https://twitter.com/ironwagers">Help!</a>
                             </span>
                             <ul className="links">
                                 <li><a href="/">Home</a></li>

@@ -29,15 +29,19 @@ const reducer = function (state = initialState, action) {
         // error: validation.error,
         // hasError: validation.hasError,
         console.log(action)
-        const stateUpdates = {
+        let stateUpdates = {
             hydrated: true,
             loading: false,
             showSaveSuccess: !action.err,
             hasError: action.err,
-            error: action.response,
-            tags: []
+            tags: [],
+            prediction: { text: ""},
+            text: "",
+            coins: 9999
         }
-
+        if (!Array.isArray(action.response)) {
+            stateUpdates.error = action.response
+        }
         return ObjectAssign({}, state, stateUpdates);
     }
 

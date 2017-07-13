@@ -66,7 +66,7 @@ internals.applyRoutes = function (server, next) {
                 query.author = EscapeRegExp(request.query.author);
             }
             const fields = request.query.fields;
-            const sort = request.query.sort || "-_commentsCount";
+            const sort = request.query.sort || "-commentsCount";
             const limit = 20;
             const page = 1;
 
@@ -143,6 +143,9 @@ internals.applyRoutes = function (server, next) {
                   comments: []
                 }
 
+                console.log("wager params")
+                console.log(params)
+
                 if(params.coins < 1) {
                     return reply(Boom.badRequest("Incorrect coins"))
                 }
@@ -184,7 +187,7 @@ internals.applyRoutes = function (server, next) {
                         const predictionCommentParams = {
                             user_id: request.auth.credentials.user._id.toString(),
                             author: request.auth.credentials.user.username.toString(),
-                            authorHouse: request.auth.credentials.user.house && request.auth.credentials.user.house.toString(),
+                            authorHouse: request.auth.credentials.user.house && request.auth.credentials.user.house.name.toString(),
                             coins: params.coins,
                             text : request.auth.credentials.user.username.toString() + " has wagered " + params.coins
                         }
