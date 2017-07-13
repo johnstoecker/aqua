@@ -322,7 +322,7 @@ class HomePage extends React.Component {
                         <button className="btn btn-primary" onClick={this.goToPredictions.bind(this)} type="submit">See All Wagers</button>
                         <div className="the-rookery">
                         <h2 className="page-header">Ravens from the Iron Bank</h2>
-                            <div className="raven">
+                            <div className="raven desktop-only">
                                 <img src="/public/media/raven-mail.png" />
                             </div>
                         {messages}
