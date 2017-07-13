@@ -30,6 +30,10 @@ class Leaderboard extends React.Component {
         this.setState(Store.getState());
     }
 
+    goToUserPredictions(username) {
+        window.location.href = "/account/predictions/user/"+ username
+    }
+
     showTab(tab) {
         this.setState({showTab: tab})
     }
@@ -40,7 +44,7 @@ class Leaderboard extends React.Component {
                 return (<div/>)
             } else {
             return (
-                <div className="prediction-container" key={user._id}>
+                <div href="#" onClick={this.goToUserPredictions.bind(this, user.username)} className="prediction-container hover-zoom" key={user._id}>
                     <div className= {"prediction-box " + (user.house && user.house.name || "").toLowerCase().replace(/\s/, "-")}>
                         <div className="prediction-box-footer">
                             <div className={"iron-coin " + (user.house && user.house.name || "").toLowerCase().replace(/\s/, "-")}/>

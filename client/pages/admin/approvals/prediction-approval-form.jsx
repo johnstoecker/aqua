@@ -60,6 +60,10 @@ class PredictionApprovalForm extends React.Component {
         Actions.updatePrediction({_id: this.props._id, status: 'lost'})
     }
 
+    awardThronesyPrediction() {
+        Actions.updatePrediction({_id: this.props._id, award: 'thronesy'})
+    }
+
     handleSubmit(event) {
 
         event.preventDefault();
@@ -88,6 +92,7 @@ class PredictionApprovalForm extends React.Component {
                     <div>{this.props.text}</div>
                     <Button type="submit" onClick={this.approvePrediction.bind(this)}>Approve</Button>
                     <Button type="submit" onClick={this.denyPrediction.bind(this)}>Deny</Button>
+                    <Button type="submit" onClick={this.awardThronesyPrediction.bind(this)}>Award Thronesy</Button>
                 </div>
             )
         } else if(this.props.status == 'standing') {

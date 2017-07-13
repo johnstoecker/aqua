@@ -30,11 +30,15 @@ class TopWagers extends React.Component {
         this.setState(Store.getState());
     }
 
+    goToPrediction(id) {
+        window.location.href = "/account/predictions/?id="+ id
+    }
+
     render() {
         console.log(this.state)
         const predictions = this.state.topPredictions.data.map((pred) => {
             return (
-                <div className="prediction-container" key={pred._id}>
+                <div href="#" onClick={this.goToPrediction.bind(this, pred._id)} className="prediction-container hover-zoom" key={pred._id}>
                     <div className= {"prediction-box " + (pred.authorHouse || "").toLowerCase().replace(/\s/, "-")}>
                         <div className="prediction-box-footer">
                             <div className={"iron-coin " + (pred.authorHouse || "").toLowerCase().replace(/\s/, "-")}/>

@@ -118,6 +118,15 @@ class PredictionsPage extends React.Component {
         console.log(this.state)
         let makePrediction
         const predictions = this.state.predictions.data.map((pred) => {
+            const awards = pred.awards && pred.awards.map((award) => {
+                if(award == "thronesy") {
+                    return (<div className="prediction-status-info prediction-award">🏆
+                        <div className="prediction-status-box">This prediction was determined to be extra thronesy. +20 coins!</div>
+                    </div>)
+                } else {
+                    return(<div/>)
+                }
+            })
             const comments = pred.comments.map((comment) => {
                 let commentDelete, commentCoins
                 if(comment.author == this.state.user.username && !comment.coins) {
@@ -164,6 +173,7 @@ class PredictionsPage extends React.Component {
                 <div className="prediction-container " key={pred._id}>
                     <div className= {"prediction-box " + (pred.authorHouse || "").toLowerCase().replace(/\s/, "-")}>
                         <div className={"prediction-box-details " + (pred.status == "rejected" && "prediction-box-details-rejected ") + (pred.status == "lost" && " prediction-box-details-false")}>
+                            {awards}
                             <div className="prediction">{pred.text}</div>
                             <div>
                                 <span className="author">Predicted by </span>

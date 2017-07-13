@@ -298,6 +298,7 @@ internals.applyRoutes = function (server, next) {
               status: 'pending',
               coins: parseInt(request.payload.coins),
               comments: [],
+              awards: [],
               commentsCount: 0
             }
 
