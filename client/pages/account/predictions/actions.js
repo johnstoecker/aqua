@@ -76,6 +76,26 @@ class Actions {
         )
     }
 
+    static addPredictionReaction(id, data) {
+        ApiActions.post(
+            '/api/predictions/'+id+'/addreaction',
+            data,
+            Store,
+            Constants.ADD_PREDICTION_REACTION,
+            Constants.ADD_PREDICTION_REACTION_RESPONSE
+        )
+    }
+
+    static removePredictionReaction(id, data) {
+        ApiActions.post(
+            '/api/predictions/'+id+'/removereaction',
+            data,
+            Store,
+            Constants.ADD_PREDICTION_REACTION,
+            Constants.ADD_PREDICTION_REACTION_RESPONSE
+        )
+    }
+
     static addComment(id, data) {
         ApiActions.post(
           '/api/predictions/' + id + '/comments',

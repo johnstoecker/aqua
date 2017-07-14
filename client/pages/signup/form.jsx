@@ -81,7 +81,7 @@ class Form extends React.Component {
                 <TextControl
                     ref={(c) => (this.input.username = c)}
                     name="username"
-                    label="Username"
+                    label="Username (GoT puns recommended, but not required)"
                     hasError={this.state.hasError.username}
                     help={this.state.help.username}
                     disabled={this.state.loading}

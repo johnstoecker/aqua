@@ -35,6 +35,10 @@ Gulp.task('less', () => {
         entries: './client/stylesheets/components.less',
         dest: './public/pages',
         outputName: 'components.min.css'
+    }, {
+        entries: './client/stylesheets/emoji-mart.css',
+        dest: './public/pages',
+        outputName: 'emoji-mart.min.css'
     }];
 
     return bundleConfigs.map((bundleConfig) => {

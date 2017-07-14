@@ -232,6 +232,55 @@ internals.applyRoutes = function (server, next) {
 
     server.route({
         method: 'POST',
+        path: '/predictions/{id}/removereaction',
+        config: {
+            auth: {
+                strategy: 'session',
+                scope: ['admin', 'account']
+            }
+        },
+        handler: function (request, reply) {
+
+            Prediction.removeReaction(request.params.id, request.auth.credentials.user._id.toString(), request.auth.credentials.user.username, request.payload.reaction, (err, prediction) => {
+                if (err) {
+                    return reply(err);
+                }
+
+                reply(prediction)
+            })
+        }
+    })
+
+    server.route({
+        method: 'POST',
+        path: '/predictions/{id}/addreaction',
+        config: {
+            auth: {
+                strategy: 'session',
+                scope: ['admin', 'account']
+            }
+        },
+        handler: function (request, reply) {
+
+            const params = {
+                user_id: request.auth.credentials.user._id.toString(),
+                author: request.auth.credentials.user.username.toString(),
+                //authorHouse: request.auth.credentials.user.house.toString(),
+                text : request.payload.text
+            }
+
+            Prediction.addReaction(request.params.id, request.auth.credentials.user._id.toString(), request.auth.credentials.user.username, request.payload, (err, prediction) => {
+                if (err) {
+                    return reply(err);
+                }
+
+                reply(prediction)
+            })
+        }
+    })
+
+    server.route({
+        method: 'POST',
         path: '/predictions/{id}/comments',
         config: {
             auth: {
@@ -303,6 +352,7 @@ internals.applyRoutes = function (server, next) {
               coins: parseInt(request.payload.coins),
               comments: [],
               awards: [],
+              time: new Date(),
               commentsCount: 0
             }
 

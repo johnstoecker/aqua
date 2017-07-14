@@ -6,6 +6,10 @@ const CommentForm = require('./comment-form.jsx');
 const Button = require('../../../components/form/button.jsx');
 const tagImageHash = require('../../../../data/tag_hash.json');
 const Houses = require('../../../../data/houses.json');
+// const Emojis = require('emoji-mart')
+import { Picker } from 'emoji-mart'
+// const ReactReactions = require('react-reactions');
+// import {SlackSelector} from 'react-reactions';
 
 
 class PredictionsPage extends React.Component {
@@ -98,6 +102,28 @@ class PredictionsPage extends React.Component {
         this.setState({showPredictionDoubleDown: prediction._id})
     }
 
+    toggleShowPredictionPicker(prediction, event) {
+        this.setState({showPredictionX: event.pageX, showPredictionY: event.pageY+5})
+        if(this.state.showPredictionPicker == prediction._id) {
+            this.setState({showPredictionPicker: false})
+        } else {
+            this.setState({showPredictionPicker: prediction._id})
+        }
+    }
+
+    addEmojiToPrediction(emoji, pred) {
+        Actions.addPredictionReaction(pred._id, emoji)
+    }
+
+    addPredictionReaction(emoji) {
+        console.log(emoji)
+        Actions.addPredictionReaction(this.state.showPredictionPicker, emoji)
+    }
+
+    removePredictionReaction(emoji) {
+        Actions.removePredictionReaction(this.state.showPredictionPicker, emoji)
+    }
+
     nextPage() {
         if(!this.props.location.search) {
             window.location.href = this.props.location.pathname + "?page=2"
@@ -169,6 +195,14 @@ class PredictionsPage extends React.Component {
                     </div>
                 )
             })) || []
+            const reactions = (pred.reactions && pred.reactions.length > 0 && pred.reactions.map((reaction) => {
+                console.log(reaction)
+                return (
+                    <div onClick={this.addEmojiToPrediction.bind(this, reaction, pred)} className="emoji-reaction" key={reaction.id}>{reaction.native}
+                        <div className="emoji-reaction-user-box">{reaction.usernames && reaction.usernames.join(", ")}</div>
+                    </div>
+                )
+            })) || []
             return (
                 <div className="prediction-container " key={pred._id}>
                     <div className= {"prediction-box " + (pred.authorHouse || "").toLowerCase().replace(/\s/, "-")}>
@@ -178,6 +212,10 @@ class PredictionsPage extends React.Component {
                             <div>
                                 <span className="author">Predicted by </span>
                                 <a href={"/account/predictions/user/" + pred.author}>{pred.author}</a>
+                            </div>
+                            <div className="reaction-box">
+                                {reactions}
+                                 <div onClick={this.toggleShowPredictionPicker.bind(this, pred)} className="emoji-reaction add-emoji">😀</div>
                             </div>
                         </div>
                         <div className="prediction-box-footer">
@@ -291,8 +329,14 @@ class PredictionsPage extends React.Component {
                 </div>
             )
         }
+        // <Picker set='emojione' onClick={this.addEmoji} title='Pick your emoji…' emoji='point_up' style={{ position: 'absolute', bottom: '20px', right: '20px' }} />
+
         return (
             <section className="container">
+                <div className={"emoji-picker-container "+(this.state.showPredictionPicker || " hidden")}>
+                    <Picker onClick={this.addPredictionReaction.bind(this)} style={{ position: 'absolute', top: this.state.showPredictionY, left: this.state.showPredictionX }}/>
+                </div>
+
                 <h1 className="page-header">
                     Game of Thrones Season 7
                 </h1>

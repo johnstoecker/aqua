@@ -11,8 +11,60 @@ const Async = require('async');
 //
 class Prediction extends MongoModels {
 
+    static addReaction(id, user_id, username, reaction, callback) {
+        this.findById(id, (err, pred) => {
+            reaction.usernames = [username]
+            if(pred.reactions) {
+                let index = -1;
+                for(let i=0; i<pred.reactions.length; i++) {
+                    if(pred.reactions[i]["id"] == reaction.id) {
+                        let userIndex = pred.reactions[i]["usernames"].indexOf(username)
+                        if(userIndex == -1) {
+                            pred.reactions[i]["usernames"].push(username)
+                        } else {
+                            // TODO: toggle username
+                        }
+                    }
+                }
+                if(index == -1) {
+                    pred.reactions.push(reaction)
+                }
+
+            } else {
+                pred.reactions = [reaction]
+            }
+
+            const updateParams = {
+                '$set': {
+                    "reactions": pred.reactions
+                },
+                '$inc': {
+                    "reactionsLength": 1
+                }
+            }
+            this.findOneAndUpdate({_id: Mongodb.ObjectId(id),  '$or': [{'reactionsLength': { '$lt': 20}}, {'reactionsLength': null}]}, updateParams, callback)
+
+        })
+    }
+
+    // static removeReaction(id, user_id, username, reaction, callback) {
+    //     const updateParams = {
+    //         '$pull': {
+    //             "reactions": {
+    //                 user_id: user_id,
+    //                 id: reaction.id
+    //             }
+    //         },
+    //         '$inc': {
+    //             "reactionsLength": -1
+    //         }
+    //     }
+    //     this.findByIdAndUpdate(id, updateParams, callback)
+    // }
+
     static addComment(id, params, callback) {
         params["_id"] = this.ObjectId();
+        params["time"] = new Date();
         const updateParams = { '$push':
             {
                 "comments": params

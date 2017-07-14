@@ -53,7 +53,7 @@ class PredictionForm extends React.Component {
         var text = event.target.value;
         this.setState({text: text});
 
-        var words = text.toLowerCase().split(" ");
+        var words = text.toLowerCase().split(/[\s,'\.]+/);
         var previousWord = null
         var newTags = []
         for (var i=0; i<words.length; i++) {
