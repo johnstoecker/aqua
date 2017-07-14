@@ -214,8 +214,6 @@ class PredictionsPage extends React.Component {
                                 <a href={"/account/predictions/user/" + pred.author}>{pred.author}</a>
                             </div>
                             <div className="reaction-box">
-                                {reactions}
-                                 <div onClick={this.toggleShowPredictionPicker.bind(this, pred)} className="emoji-reaction add-emoji">😀</div>
                             </div>
                         </div>
                         <div className="prediction-box-footer">
