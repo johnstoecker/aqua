@@ -5,8 +5,23 @@ const React = require('react');
 
 
 class HomePage extends React.Component {
-    render() {
+    constructor(props) {
 
+        super(props);
+
+        this.state = {
+            img: Math.round(Math.random()*4)
+        }
+    }
+
+
+    render() {
+        let src;
+        if (this.state.img == 0) {
+            src = "/public/media/iron_wagers_figurines.jpg"
+        } else {
+            src = "http://media-cache-ak0.pinimg.com/736x/1b/16/98/1b169875c1952cf4272eb245fee48add.jpg"
+        }
         const neck = <link rel='stylesheet' href="/public/pages/home.min.css" />;
 
         return (
@@ -18,7 +33,7 @@ class HomePage extends React.Component {
                 <div className="jumbotron">
                     <h2>THE IRON BANK WILL HAVE ITS DUE</h2>
                     <h2>
-                        <img className="max-hundred" src="http://media-cache-ak0.pinimg.com/736x/1b/16/98/1b169875c1952cf4272eb245fee48add.jpg" />
+                        <img className="max-hundred max-height-screen" src={src} />
                         <h2>
                             <a className="btn btn-primary btn-lg" href="/signup">
                                 Create an account

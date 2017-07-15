@@ -21,9 +21,9 @@ class SplashPage extends React.Component {
                                 </div>
                             </div>
                             <div className="media-body">
-                                <h4 className="media-heading">Erik Strom</h4>
+                                <h4 className="media-heading">My Brother</h4>
                                 <p>
-                                    I don't really watch Game of Thrones
+                                    Hey I'm getting 404's is the site down?
                                 </p>
                             </div>
                         </div>
