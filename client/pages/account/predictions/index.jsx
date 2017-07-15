@@ -32,16 +32,19 @@ class PredictionsPage extends React.Component {
         if (props.match.params.username) {
             Actions.getScopedUser(props.match.params.username)
             params.author = props.match.params.username
-        } else if (props.match.params.house) {
-            params.house = props.match.params.house
-        } else if (props.location.search && props.location.search.match("id")) {
-            params.id = props.location.search.substr(props.location.search.indexOf("id")+3)
-        }
+            Actions.getPredictionsForUser(params)
+        } else {
+            if (props.match.params.house) {
+                params.house = props.match.params.house
+            } else if (props.location.search && props.location.search.match("id")) {
+                params.id = props.location.search.substr(props.location.search.indexOf("id")+3)
+            }
 
-        if (props.location.search && props.location.search.match("page")) {
-            params.page = parseInt(props.location.search.substr(props.location.search.indexOf("page")+5))
+            if (props.location.search && props.location.search.match("page")) {
+                params.page = parseInt(props.location.search.substr(props.location.search.indexOf("page")+5))
+            }
+            Actions.getPredictions(params);
         }
-        Actions.getPredictions(params);
     }
 
     componentDidMount() {

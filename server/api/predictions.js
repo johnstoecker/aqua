@@ -59,6 +59,38 @@ internals.applyRoutes = function (server, next) {
 
     server.route({
         method: 'GET',
+        // LOL this API path smh
+        path: '/predictions/foruser',
+        handler: function (request, reply) {
+            const query = {};
+            const username = request.query.author;
+            Wager.find({author: username}, (err, results) => {
+                if (err) {
+                    return reply(err);
+                }
+                console.log(results)
+                let predictionIds = []
+                for(var i=0; i< results.length; i++) {
+                    console.log(results[i])
+                    predictionIds.push(Mongodb.ObjectId(results[i].predictionId))
+                }
+                const sort = request.query.sort || "-_id";
+                const page = request.query.page;
+                console.log("prediction ids:")
+                console.log(predictionIds)
+                Prediction.pagedFind({ "$or": [{ author: username}, {_id: { "$in": predictionIds}}]}, null, sort, null, page, (err, predictions) =>{
+                    if(err) {
+                        return reply(err);
+                    }
+                    reply(predictions);
+                })
+            })
+
+        }
+    })
+
+    server.route({
+        method: 'GET',
         path: '/predictions/top',
         handler: function (request, reply) {
             const query = {};

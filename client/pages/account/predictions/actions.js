@@ -15,6 +15,16 @@ class Actions {
         );
     }
 
+    static getPredictionsForUser(params) {
+        ApiActions.get(
+            '/api/predictions/foruser',
+            params,
+            Store,
+            Constants.GET_PREDICTIONS,
+            Constants.GET_PREDICTIONS_RESPONSE
+        )
+    }
+
     static showCreateNew() {
         Store.dispatch({
             type: Constants.SHOW_ADD_PREDICTION
