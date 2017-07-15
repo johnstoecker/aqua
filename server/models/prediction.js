@@ -279,7 +279,7 @@ class Prediction extends MongoModels {
                 },
                 $push: {
                     messages: {
-                        message: "Your wager " + pred.text +" has been deemed very thronesy! +20 coins banked",
+                        message: "Your Valyrian Steel wager " + pred.text +" has been deemed very thronesy! +20 coins banked",
                         dismissed: false,
                         seen: false,
                         type: "award",

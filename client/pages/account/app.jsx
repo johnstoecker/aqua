@@ -9,6 +9,7 @@ const Settings = require('./settings/index.jsx');
 const IntroPage = require('./intro/index.jsx');
 const CriteriaPage = require('./criteria/index.jsx');
 const JoinHousePage = require('./joinahouse/index.jsx');
+const HouseStatsPage = require('./houses/index.jsx');
 const CoinsAndWagersPage = require('./coinsandwagers/index.jsx')
 const ThroneTeam = require('./throne-team/index.jsx')
 const Predictions = require('./predictions/index.jsx')
@@ -32,6 +33,7 @@ const App = (
                 <Route path="/account/settings" component={Settings} />
                 <Route path="/account/throne-team" component={ThroneTeam} />
                 <Route path="/account/joinahouse" component={JoinHousePage} />
+                <Route path="/account/houses" component={HouseStatsPage} />
                 <Route path="/account/predictions/new" component={NewPrediction} />
                 <Route path="/account/predictions/user/:username" component={Predictions} />
                 <Route path="/account/predictions/house/:house" component={Predictions} />

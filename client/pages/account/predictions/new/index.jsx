@@ -54,7 +54,9 @@ class NewPredictionPage extends React.Component {
                         <li>Make a wager</li>
                         <li>The Iron Bank will approve your wagers before the episode</li>
                         <li>If the wager is too vague, the Iron Bank will reject your wager</li>
-                        <li>(You will just get those coins back)</li>
+                        <li>If the wager is an under on an existing wager, the Iron Bank will reject your wager</li>
+                        <li>If the wager is near certain, the Iron Bank will reject your wager</li>
+                        <li>(No worries --- You will just get those coins back)</li>
                         <li>Otherwise, wait and see if your wager comes true!</li>
                         <li>Biggest bank roll at the end wins</li>
                         <li>Biggest house bank roll at the end wins</li>

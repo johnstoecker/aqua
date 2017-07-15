@@ -12,6 +12,7 @@ const initialState = {
 const reducer = function (state = initialState, action) {
 
     if (action.type === Constants.GET_HOUSESTATS) {
+        console.log("got")
         return ObjectAssign({}, state, {
             hydrated: false,
             loading: true
@@ -19,6 +20,8 @@ const reducer = function (state = initialState, action) {
     }
 
     if (action.type === Constants.GET_HOUSESTATS_RESPONSE) {
+        console.log("response")
+        console.log(state)
         return ObjectAssign({}, state, {
             hydrated: true,
             loading: false,

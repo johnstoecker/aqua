@@ -147,7 +147,7 @@ class PredictionsPage extends React.Component {
             const awards = pred.awards && pred.awards.map((award) => {
                 if(award == "thronesy") {
                     return (<div className="prediction-status-info prediction-award">🏆
-                        <div className="prediction-status-box">This prediction was determined to be extra thronesy. +20 coins!</div>
+                        <div className="prediction-status-box">This Valyrian Steel wager was determined to be extra thronesy. +20 coins!</div>
                     </div>)
                 } else {
                     return(<div/>)
@@ -332,6 +332,7 @@ class PredictionsPage extends React.Component {
         return (
             <section className="container">
                 <div className={"emoji-picker-container "+(this.state.showPredictionPicker || " hidden")}>
+                    <div onClick={this.hidePredictionPicker} className="popup-close fa fa-close" style={{ position: 'absolute', top: this.state.showPredictionY, left: this.state.showPredictionX + 80 }}/>
                     <Picker onClick={this.addPredictionReaction.bind(this)} style={{ position: 'absolute', top: this.state.showPredictionY, left: this.state.showPredictionX }}/>
                 </div>
 

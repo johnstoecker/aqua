@@ -43,7 +43,7 @@ internals.applyRoutes = function (server, next) {
         },
         handler: function (request, reply) {
             var name = request.payload.name
-            if (["Greyjoy", "Lannister", "Martell", "Stark", "Targaryen", "White Walkers"].indexOf(name) == -1) {
+            if (["Greyjoy", "Lannister", "Stark", "Targaryen", "White Walkers"].indexOf(name) == -1) {
                 return reply(Boom.badRequest("Not a valid house name"));
             }
             const findParam = {
@@ -52,9 +52,14 @@ internals.applyRoutes = function (server, next) {
             var retVal = {
                 userCount: 0,
                 numPredictions: 0,
+                steelWagers: 0,
+                ironWagers: 0,
+                saltWagers: 0,
                 coins: 0,
                 availableCoins: 0,
                 lostCoins: 0,
+                plusCoins: 0,
+                minusCoins: 0,
                 name: name
             }
             User.find(findParam, (err, users) => {
@@ -72,6 +77,14 @@ internals.applyRoutes = function (server, next) {
                 Prediction.find(predFindParam, (err, predictions) => {
                     for (var pred in predictions) {
                         retVal.numPredictions += 1;
+                        if(pred.awards ==["thronesy"]) {
+                            retVal.steelWagers += 1;
+                        }
+                        if(pred.status=="won") {
+                            retVal.ironWagers += 1;
+                        } else if(pred.status=="rejected" || pred.status=="lost") {
+                            retVal.saltWagers += 1;
+                        }
                     }
                     const houseFindParam = {
                         name: name
