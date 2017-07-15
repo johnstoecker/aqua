@@ -57,6 +57,63 @@ class AboutPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="row">
+                    <div className="col-sm-6">
+                        <h1 className="page-header">Praise for Iron Wagers</h1>
+                        <div className="media">
+                            <div className="pull-left">
+                                <div className="media-object">
+                                    <i className="fa fa-comments fa-4x"></i>
+                                </div>
+                            </div>
+                            <div className="media-body">
+                                <h4 className="media-heading">My Brother</h4>
+                                <p>
+                                    Hey I'm getting 404's is the site down?
+                                </p>
+                            </div>
+                        </div>
+                        <div className="media text-right">
+                            <div className="pull-right">
+                                <div className="media-object">
+                                    <i className="fa fa-comments fa-4x"></i>
+                                </div>
+                            </div>
+                            <div className="media-body">
+                                <h4 className="media-heading">My Mom</h4>
+                                <p>
+                                    Oh that's nice that you're keeping busy
+                                </p>
+                            </div>
+                        </div>
+                        <div className="media">
+                            <div className="pull-left">
+                                <div className="media-object">
+                                    <i className="fa fa-comments fa-4x"></i>
+                                </div>
+                            </div>
+                            <div className="media-body">
+                                <h4 className="media-heading">My Supervisor</h4>
+                                <p>
+                                    It's....so great...that you are....learning from this project
+                                </p>
+                            </div>
+                        </div>
+                        <div className="media text-right">
+                            <div className="pull-right">
+                                <div className="media-object">
+                                    <i className="fa fa-comments fa-4x"></i>
+                                </div>
+                            </div>
+                            <div className="media-body">
+                                <h4 className="media-heading">My Colleague</h4>
+                                <p>
+                                    Hm, looks interesting, but I dont really watch Game of Thrones
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="row">
                     <div className="col-sm-6">
