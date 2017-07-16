@@ -13,6 +13,7 @@ internals.applyRoutes = function (server, next) {
 
     const User = server.plugins['hapi-mongo-models'].User;
     const Prediction = server.plugins['hapi-mongo-models'].Prediction;
+    const Wager = server.plugins['hapi-mongo-models'].Wager;
 
 
     server.route({
@@ -592,7 +593,7 @@ internals.applyRoutes = function (server, next) {
                     if(err) {
                         return reply(err);
                     }
-                    Prediction.updateMany({author: user["username"]}, predictionUpdate, (err, count) => {
+                    Wager.updateMany({author: user["username"]}, predictionUpdate, (err, count) => {
                         if (err) {
                             return reply(err);
                         }

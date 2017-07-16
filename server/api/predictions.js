@@ -8,7 +8,6 @@ const Mongodb = require('mongodb');
 
 const internals = {};
 
-
 internals.applyRoutes = function (server, next) {
 
     const Prediction = server.plugins['hapi-mongo-models'].Prediction;
@@ -293,15 +292,27 @@ internals.applyRoutes = function (server, next) {
             }
         },
         handler: function (request, reply) {
-
-            const params = {
-                user_id: request.auth.credentials.user._id.toString(),
-                author: request.auth.credentials.user.username.toString(),
-                //authorHouse: request.auth.credentials.user.house.toString(),
-                text : request.payload.text
-            }
-
             Prediction.addReaction(request.params.id, request.auth.credentials.user._id.toString(), request.auth.credentials.user.username, request.payload, (err, prediction) => {
+                if (err) {
+                    return reply(err);
+                }
+
+                reply(prediction)
+            })
+        }
+    })
+
+    server.route({
+        method: 'POST',
+        path: '/predictions/{id}/comments/{commentId}/addreaction',
+        config: {
+            auth: {
+                strategy: 'session',
+                scope: ['admin', 'account']
+            }
+        },
+        handler: function (request, reply) {
+            Prediction.addCommentReaction(request.params.id, request.params.commentId, request.auth.credentials.user._id.toString(), request.auth.credentials.user.username, request.payload, (err, prediction) => {
                 if (err) {
                     return reply(err);
                 }

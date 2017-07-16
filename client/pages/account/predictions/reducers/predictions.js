@@ -40,6 +40,10 @@ const reducer = function (state = initialState, action) {
             }
         }
 
+        if(index == -1) {
+            return state;
+        }
+
         return Object.assign({}, state, {
             hydrated: true,
             loading: false,
@@ -58,6 +62,9 @@ const reducer = function (state = initialState, action) {
                 index = i;
                 break;
             }
+        }
+        if(index == -1) {
+            return state;
         }
 
         return Object.assign({}, state,  {
@@ -79,6 +86,9 @@ const reducer = function (state = initialState, action) {
                 break;
             }
         }
+        if(index == -1) {
+            return state;
+        }
 
         return Object.assign({}, state,  {
             hydrated: true,
@@ -99,6 +109,10 @@ const reducer = function (state = initialState, action) {
                 index = i;
                 break;
             }
+        }
+
+        if(index == -1) {
+            return state;
         }
 
         return Object.assign({}, state,  {

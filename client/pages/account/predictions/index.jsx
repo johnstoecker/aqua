@@ -6,10 +6,8 @@ const CommentForm = require('./comment-form.jsx');
 const Button = require('../../../components/form/button.jsx');
 const tagImageHash = require('../../../../data/tag_hash.json');
 const Houses = require('../../../../data/houses.json');
-// const Emojis = require('emoji-mart')
 import { Picker } from 'emoji-mart'
-// const ReactReactions = require('react-reactions');
-// import {SlackSelector} from 'react-reactions';
+import { Emoji } from 'emoji-mart'
 
 
 class PredictionsPage extends React.Component {
@@ -108,19 +106,41 @@ class PredictionsPage extends React.Component {
     toggleShowPredictionPicker(prediction, event) {
         this.setState({showPredictionX: event.pageX, showPredictionY: event.pageY+5})
         if(this.state.showPredictionPicker == prediction._id) {
-            this.setState({showPredictionPicker: false})
+            this.setState({showPredictionPicker: false, showPredictionCommentPicker: false})
         } else {
-            this.setState({showPredictionPicker: prediction._id})
+            this.setState({showPredictionPicker: prediction._id, showPredictionCommentPicker: false})
         }
+    }
+
+    toggleShowPredictionCommentPicker(prediction, comment, event) {
+        this.setState({showPredictionX: event.pageX, showPredictionY: event.pageY+5})
+        if(this.state.showPredictionPicker == prediction._id) {
+            this.setState({showPredictionPicker: false, showPredictionCommentPicker: false})
+        } else {
+            this.setState({showPredictionPicker: prediction._id, showPredictionCommentPicker: comment._id})
+        }
+    }
+
+    hidePredictionPicker() {
+        this.setState({showPredictionPicker: false, showPredictionCommentPicker: false})
     }
 
     addEmojiToPrediction(emoji, pred) {
         Actions.addPredictionReaction(pred._id, emoji)
     }
 
+    addEmojiToComment(emoji, comment, pred) {
+        Actions.addPredictionCommentReaction(pred._id, comment._id, emoji)
+    }
+
     addPredictionReaction(emoji) {
         console.log(emoji)
-        Actions.addPredictionReaction(this.state.showPredictionPicker, emoji)
+        if(this.state.showPredictionCommentPicker) {
+            Actions.addPredictionCommentReaction(this.state.showPredictionPicker, this.state.showPredictionCommentPicker, emoji)
+        } else {
+            Actions.addPredictionReaction(this.state.showPredictionPicker, emoji)
+        }
+        this.setState({showPredictionPicker: false, showPredictionCommentPicker: false})
     }
 
     removePredictionReaction(emoji) {
@@ -147,6 +167,9 @@ class PredictionsPage extends React.Component {
         console.log(this.state)
         let makePrediction
         const predictions = this.state.predictions.data.map((pred) => {
+            if(!pred) {
+                return (<div/>)
+            }
             const awards = pred.awards && pred.awards.map((award) => {
                 if(award == "thronesy") {
                     return (<div className="prediction-status-info prediction-award">🏆
@@ -158,6 +181,15 @@ class PredictionsPage extends React.Component {
             })
             const comments = pred.comments.map((comment) => {
                 let commentDelete, commentCoins
+                const commentReactions = (comment.reactions && comment.reactions.length > 0 && comment.reactions.map((reaction) => {
+                    return (
+                        <div onClick={this.addEmojiToComment.bind(this, reaction, comment, pred)} className="emoji-reaction" key={reaction.id}>
+                            <Emoji emoji={reaction.id} size={14} set='emojione' />
+                            <div className={"emoji-reaction-count "+ (reaction.usernames || "hidden")}>{reaction.usernames && reaction.usernames.length}</div>
+                            <div className="emoji-reaction-user-box">{reaction.usernames && reaction.usernames.join(", ")}</div>
+                        </div>
+                    )
+                })) || []
                 if(comment.author == this.state.user.username && !comment.coins) {
                     commentDelete = (<a href="#" className="comment-box-delete fa fa-trash" onClick={this.deleteComment.bind(this, comment, pred)}/>)
                 }
@@ -173,6 +205,9 @@ class PredictionsPage extends React.Component {
                                 <span className="author">Wagered by </span>
                                 <a href={"/account/predictions/user/" + comment.author}>{comment.author}</a>
                             </div>
+                            <div className={"reaction-box " + (commentReactions.length>0 && "reaction-box-displayed")}>
+                                {commentReactions}
+                            </div>
                         </div>
                     );
                 }
@@ -182,6 +217,10 @@ class PredictionsPage extends React.Component {
                             <div className="comment-box" key={comment._id}>
                                 <div className="comment-box-header">Comment by {comment.author}{commentDelete}</div>
                                 <div>{comment.text}</div>
+                            </div>
+                            <div className={"reaction-box " + (commentReactions.length>0 && "reaction-box-displayed")}>
+                                {commentReactions}
+                                <div onClick={this.toggleShowPredictionCommentPicker.bind(this, pred, comment)} className="emoji-reaction add-emoji"><Emoji emoji="grinning" set="emojione" size={14} /></div>
                             </div>
                         </div>
                     );
@@ -199,9 +238,10 @@ class PredictionsPage extends React.Component {
                 )
             })) || []
             const reactions = (pred.reactions && pred.reactions.length > 0 && pred.reactions.map((reaction) => {
-                console.log(reaction)
                 return (
-                    <div onClick={this.addEmojiToPrediction.bind(this, reaction, pred)} className="emoji-reaction" key={reaction.id}>{reaction.native}
+                    <div onClick={this.addEmojiToPrediction.bind(this, reaction, pred)} className="emoji-reaction" key={reaction.id}>
+                        <Emoji emoji={reaction.id} size={14} set='emojione' />
+                        <div className={"emoji-reaction-count "+ (reaction.usernames || "hidden")}>{reaction.usernames && reaction.usernames.length}</div>
                         <div className="emoji-reaction-user-box">{reaction.usernames && reaction.usernames.join(", ")}</div>
                     </div>
                 )
@@ -217,6 +257,8 @@ class PredictionsPage extends React.Component {
                                 <a href={"/account/predictions/user/" + pred.author}>{pred.author}</a>
                             </div>
                             <div className="reaction-box">
+                                {reactions}
+                                <div onClick={this.toggleShowPredictionPicker.bind(this, pred)} className="emoji-reaction add-emoji"><Emoji emoji="grinning" set="emojione" size={14} /></div>
                             </div>
                         </div>
                         <div className="prediction-box-footer">
@@ -335,8 +377,8 @@ class PredictionsPage extends React.Component {
         return (
             <section className="container">
                 <div className={"emoji-picker-container "+(this.state.showPredictionPicker || " hidden")}>
-                    <div onClick={this.hidePredictionPicker} className="popup-close fa fa-close" style={{ position: 'absolute', top: this.state.showPredictionY, left: this.state.showPredictionX + 80 }}/>
-                    <Picker onClick={this.addPredictionReaction.bind(this)} style={{ position: 'absolute', top: this.state.showPredictionY, left: this.state.showPredictionX }}/>
+                    <div onClick={this.hidePredictionPicker.bind(this)} className="popup-close fa fa-close" style={{ position: 'absolute', top: this.state.showPredictionY, left: this.state.showPredictionX + 320 }}/>
+                    <Picker onClick={this.addPredictionReaction.bind(this)} set="emojione" style={{ position: 'absolute', top: this.state.showPredictionY, left: this.state.showPredictionX }}/>
                 </div>
 
                 <h1 className="page-header">

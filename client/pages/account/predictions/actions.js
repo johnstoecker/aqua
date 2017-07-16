@@ -96,6 +96,16 @@ class Actions {
         )
     }
 
+    static addPredictionCommentReaction(id, commentId, data) {
+        ApiActions.post(
+            '/api/predictions/'+id+'/comments/'+commentId+'/addreaction',
+            data,
+            Store,
+            Constants.ADD_PREDICTION_REACTION,
+            Constants.ADD_PREDICTION_REACTION_RESPONSE
+        )
+    }
+
     static removePredictionReaction(id, data) {
         ApiActions.post(
             '/api/predictions/'+id+'/removereaction',

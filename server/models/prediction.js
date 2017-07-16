@@ -12,21 +12,33 @@ const Async = require('async');
 class Prediction extends MongoModels {
 
     static addReaction(id, user_id, username, reaction, callback) {
-        this.findById(id, (err, pred) => {
+        console.log(id)
+        this.findById(Mongodb.ObjectId(id), (err, pred) => {
+            let toggleOff=false
+            if(err || !pred) {
+                return callback(err)
+            }
             reaction.usernames = [username]
             if(pred.reactions) {
-                let index = -1;
+                let found = false;
                 for(let i=0; i<pred.reactions.length; i++) {
                     if(pred.reactions[i]["id"] == reaction.id) {
+                        found = true;
                         let userIndex = pred.reactions[i]["usernames"].indexOf(username)
                         if(userIndex == -1) {
                             pred.reactions[i]["usernames"].push(username)
                         } else {
-                            // TODO: toggle username
+                            toggleOff=true
+                            if(pred.reactions[i]["usernames"].length == 1) {
+                                pred.reactions.splice(i,1)
+                            } else {
+                                pred.reactions[i]["usernames"].splice(userIndex,1)
+                            }
                         }
+                        break
                     }
                 }
-                if(index == -1) {
+                if(!found) {
                     pred.reactions.push(reaction)
                 }
 
@@ -34,18 +46,80 @@ class Prediction extends MongoModels {
                 pred.reactions = [reaction]
             }
 
+            if(!toggleOff && pred.reactions.length>=10) {
+                return callback(Boom.badRequest("too many reactions"))
+            }
+
             const updateParams = {
                 '$set': {
                     "reactions": pred.reactions
+                }
+            }
+            this.findOneAndUpdate({_id: Mongodb.ObjectId(id)}, updateParams, callback)
+
+        })
+    }
+
+    static addCommentReaction(id, commentId, user_id, username, reaction, callback) {
+        this.findById(Mongodb.ObjectId(id), (err, pred) => {
+            let toggleOff = false
+            if(err || !pred) {
+                return callback(err)
+            }
+            let comment;
+            for(let ind=0; ind< pred.comments.length;ind++) {
+                if(pred.comments[ind]._id == commentId) {
+                    comment = pred.comments[ind]
+                }
+            }
+            if(!comment) {
+                return callback(Boom.notFound())
+            }
+            reaction.usernames = [username]
+            if(comment.reactions) {
+                let found = false;
+                for(let i=0; i<comment.reactions.length; i++) {
+                    if(comment.reactions[i]["id"] == reaction.id) {
+                        found = true;
+                        let userIndex = comment.reactions[i]["usernames"].indexOf(username)
+                        if(userIndex == -1) {
+                            comment.reactions[i]["usernames"].push(username)
+                        } else {
+                            toggleOff=true
+                            if(comment.reactions[i]["usernames"].length == 1) {
+                                comment.reactions.splice(i,1)
+                            } else {
+                                comment.reactions[i]["usernames"].splice(userIndex,1)
+                            }
+                        }
+                        break
+                    }
+                }
+                if(!found) {
+                    comment.reactions.push(reaction)
+                }
+
+            } else {
+                comment.reactions = [reaction]
+            }
+
+            if(comment.reactions.length >= 10) {
+                return callback(Boom.badRequest("too many reactions"))
+            }
+
+            const updateParams = {
+                '$set': {
+                    "comments.$.reactions": comment.reactions
                 },
                 '$inc': {
                     "reactionsLength": 1
                 }
             }
-            this.findOneAndUpdate({_id: Mongodb.ObjectId(id),  '$or': [{'reactionsLength': { '$lt': 20}}, {'reactionsLength': null}]}, updateParams, callback)
+            this.findOneAndUpdate({_id: Mongodb.ObjectId(id), "comments": { $elemMatch: {_id: Mongodb.ObjectId(commentId)}}}, updateParams, callback)
 
         })
     }
+
 
     // static removeReaction(id, user_id, username, reaction, callback) {
     //     const updateParams = {
@@ -150,7 +224,6 @@ class Prediction extends MongoModels {
             }
             callback(pred);
         });
-        console.log('x')
     }
 
     // send message to user

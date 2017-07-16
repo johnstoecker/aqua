@@ -58,8 +58,6 @@ internals.applyRoutes = function (server, next) {
                 coins: 0,
                 availableCoins: 0,
                 lostCoins: 0,
-                plusCoins: 0,
-                minusCoins: 0,
                 name: name
             }
             User.find(findParam, (err, users) => {
@@ -91,6 +89,7 @@ internals.applyRoutes = function (server, next) {
                     }
                     House.findOne(houseFindParam, (err, house) => {
                         if (!house) {
+                            console.log("no house")
                             retVal.id = Mongodb.ObjectId();
                             House.insertOne(retVal, (err, house) => {
                                 if (err) {
@@ -99,7 +98,8 @@ internals.applyRoutes = function (server, next) {
                                 reply(house)
                             })
                         } else {
-                            House.findOneAndUpdate({_id: Mongodb.ObjectId(house._id)}, retVal, (err, house) => {
+                            console.log(retVal)
+                            House.findOneAndUpdate({_id: Mongodb.ObjectId(house._id)}, {$set: retVal}, (err, house) => {
                                 if (err) {
                                     reply(err)
                                 }
