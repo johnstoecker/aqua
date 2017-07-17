@@ -158,7 +158,7 @@ internals.applyRoutes = function (server, next) {
                 if (!pred) {
                     return reply(Boom.notFound())
                 }
-                if (pred.status != "pending" && pred.status != "standing") {
+                if (pred.status != "pending" && pred.status != "standing" && !pred.locked) {
                     return reply(Boom.badRequest("only bet on pending or standing predictions"))
                 }
                 console.log(request.params.id)
