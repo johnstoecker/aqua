@@ -40,7 +40,7 @@ class JoinHousePage extends React.Component {
                 <div className="col-sm-12 house-picker-container">
                     <div className="house-picker-wrapper greyjoy">
                         <div className="house-banner">
-                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[0].image} />
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[1].image} />
                             <div className="house-banner-name">House Greyjoy</div>
                         </div>
                         <div className="house-attribute-title">⚓ We Do Not Sow ⚓</div>
@@ -48,12 +48,12 @@ class JoinHousePage extends React.Component {
                         <div className="house-attribute-title">🐙 What is dead, could die 🐙</div>
                         <div className="house-attribute-detail">-2 For each week no Greyjoy is seen on a ship</div>
                         <div className="justify-button">
-                            <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[0])}>Join</button>
+                            <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[1])}>Join</button>
                         </div>
                     </div>
                     <div className="house-picker-wrapper lannister">
                         <div className="house-banner">
-                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[1].image} />
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[0].image} />
                             <div className="house-banner-name">House Lannister</div>
                         </div>
                         <div className="house-attribute-title">👑 Golden Crown 👑</div>
@@ -61,7 +61,7 @@ class JoinHousePage extends React.Component {
                         <div className="house-attribute-title">👫 Twincest 👫</div>
                         <div className="house-attribute-detail">-2 for each week Cersei and Jaime don't meet</div>
                         <div className="justify-button">
-                        <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[1])}>Join</button>
+                        <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[0])}>Join</button>
                         </div>
                     </div>
                     <div className="house-picker-wrapper white-walkers">
@@ -79,7 +79,7 @@ class JoinHousePage extends React.Component {
                     </div>
                     <div className="house-picker-wrapper stark">
                         <div className="house-banner">
-                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
                             <div className="house-banner-name">House Stark</div>
                         </div>
                         <div className="house-attribute-title">🗡 Needlework 🗡</div>
@@ -87,12 +87,12 @@ class JoinHousePage extends React.Component {
                         <div className="house-attribute-title">🍽 Power Hungry 🍽</div>
                         <div className="house-attribute-detail">-3 for each week Sansa talks to Littlefinger</div>
                         <div className="justify-button">
-                            <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[3])}>Join</button>
+                            <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[4])}>Join</button>
                         </div>
                     </div>
                     <div className="house-picker-wrapper targaryen">
                         <div className="house-banner">
-                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
+                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
                             <div className="house-banner-name">House Targaryen</div>
                         </div>
                         <div className="house-attribute-title">🐲 Wild Fire 🐲</div>
@@ -100,7 +100,7 @@ class JoinHousePage extends React.Component {
                         <div className="house-attribute-title">🍷 Drunken Hand 🍷</div>
                         <div className="house-attribute-detail">-1 for each wine cup Tyrion drinks</div>
                         <div className="justify-button">
-                        <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[4])}>Join</button>
+                        <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[3])}>Join</button>
                         </div>
                     </div>
                 </div>
