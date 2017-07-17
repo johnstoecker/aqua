@@ -65,7 +65,7 @@ class HouseStatsPage extends React.Component {
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
                                 <div className="house-attribute-stats">
-                                    <div className="house-attribute-stat">+{this.state.houseStats.data[0] && this.state.houseStats.data[0].plusCoins}/-{this.state.houseStats.data[1] && this.state.houseStats.data[1].minusCoins}</div>
+                                    <div className="house-attribute-stat">+{this.state.houseStats.data[0] && this.state.houseStats.data[0].plusCoins}/-{this.state.houseStats.data[0] && this.state.houseStats.data[0].minusCoins}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[0] && this.state.houseStats.data[0].userCount}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[0] && this.state.houseStats.data[0].coins}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[0] && this.state.houseStats.data[0].availableCoins}</div>
@@ -105,7 +105,7 @@ class HouseStatsPage extends React.Component {
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
                                 <div className="house-attribute-stats">
-                                    <div className="house-attribute-stat">+{this.state.houseStats.data[1] && this.state.houseStats.data[1].plusCoins}/-{this.state.houseStats.data[0] && this.state.houseStats.data[0].minusCoins}</div>
+                                    <div className="house-attribute-stat">+{this.state.houseStats.data[1] && this.state.houseStats.data[1].plusCoins}/-{this.state.houseStats.data[1] && this.state.houseStats.data[1]].minusCoins}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[1] && this.state.houseStats.data[1].userCount}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[1] && this.state.houseStats.data[1].coins}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[1] && this.state.houseStats.data[1].availableCoins}</div>
@@ -184,7 +184,7 @@ class HouseStatsPage extends React.Component {
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
                                 <div className="house-attribute-stats">
-                                    <div className="house-attribute-stat">+{this.state.houseStats.data[3] && this.state.houseStats.data[3].plusCoins}/-{this.state.houseStats.data[0] && this.state.houseStats.data[0].minusCoins}</div>
+                                    <div className="house-attribute-stat">+{this.state.houseStats.data[3] && this.state.houseStats.data[3].plusCoins}/-{this.state.houseStats.data[3] && this.state.houseStats.data[3].minusCoins}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[3] && this.state.houseStats.data[3].userCount}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[3] && this.state.houseStats.data[3].coins}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[3] && this.state.houseStats.data[3].availableCoins}</div>
@@ -224,7 +224,7 @@ class HouseStatsPage extends React.Component {
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
                                 <div className="house-attribute-stats">
-                                    <div className="house-attribute-stat">+{this.state.houseStats.data[4] && this.state.houseStats.data[4].plusCoins}/-{this.state.houseStats.data[3] && this.state.houseStats.data[3].minusCoins}</div>
+                                    <div className="house-attribute-stat">+{this.state.houseStats.data[4] && this.state.houseStats.data[4].plusCoins}/-{this.state.houseStats.data[4] && this.state.houseStats.data[4].minusCoins}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[4] && this.state.houseStats.data[4].userCount}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[4] && this.state.houseStats.data[4].coins}</div>
                                     <div className="house-attribute-stat">{this.state.houseStats.data[4] && this.state.houseStats.data[4].availableCoins}</div>
