@@ -217,7 +217,7 @@ class HouseStatsPage extends React.Component {
                             <div className="house-banner-name">House Stark</div>
                         </div>
                         <div className="house-attribute-title">🗡 Needlework 🗡</div>
-                        <div className="house-attribute-detail">+5 for each Arya kill</div>
+                        <div className="house-attribute-detail">+5 for each Arya kill, cooldown: 1 minute(from now on)</div>
                         <div className="house-attribute-title">🍽 Power Hungry 🍽</div>
                         <div className="house-attribute-detail">-3 for each week Sansa talks to Littlefinger</div>
                         <div className="house-attribute-stats-container">
