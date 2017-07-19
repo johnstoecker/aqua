@@ -101,6 +101,7 @@ class PredictionApprovalForm extends React.Component {
                     <div>{this.props.text}</div>
                     <Button type="submit" onClick={this.truePrediction.bind(this)}>True</Button>
                     <Button type="submit" onClick={this.falsePrediction.bind(this)}>False</Button>
+                    <Button type="submit" onClick={this.awardThronesyPrediction.bind(this)}>Award Thronesy</Button>
                 </div>
             )
         } else {
