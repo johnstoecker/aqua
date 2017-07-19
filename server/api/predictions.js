@@ -112,6 +112,28 @@ internals.applyRoutes = function (server, next) {
         }
     });
 
+    server.route({
+        method: 'GET',
+        path: '/predictions/thronesy',
+        handler: function (request, reply) {
+            if (request.query.author) {
+                query.author = EscapeRegExp(request.query.author);
+            }
+            const fields = request.query.fields;
+            // const sort = request.query.sort || "{commentsCount: -1}";
+            const limit = 20;
+            const page = 1;
+
+            Prediction.pagedFind({$or:[ {awards: ['thronesy']},{ status: "won"}]}, fields, "-_id", limit, page, (err, results) => {
+                // console.log(results)
+                if (err) {
+                    return reply(err);
+                }
+
+                reply(results);
+            });
+        }
+    });
 
     server.route({
         method: 'GET',

@@ -348,11 +348,11 @@ class Prediction extends MongoModels {
             }
             const userUpdate = {
                 $inc: {
-                    coins: 20
+                    coins: 25
                 },
                 $push: {
                     messages: {
-                        message: "Your Valyrian Steel wager " + pred.text +" has been deemed very thronesy! +20 coins banked",
+                        message: "Your Valyrian Steel wager " + pred.text +" has been deemed very thronesy! +25 coins banked",
                         dismissed: false,
                         seen: false,
                         type: "award",

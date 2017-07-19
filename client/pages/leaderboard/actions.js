@@ -38,6 +38,22 @@ class Actions {
         );
     }
 
+    static thronesyPredictions(data) {
+        ApiActions.get(
+            '/api/predictions/thronesy',
+            undefined,
+            Store,
+            Constants.THRONESY_PREDICTIONS,
+            Constants.THRONESY_PREDICTIONS_RESPONSE,
+            (err, response) => {
+
+                if (!err) {
+                    // window.location.href = '/account?onboard=true';
+                }
+            }
+        );
+    }
+
 };
 
 

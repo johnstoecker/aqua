@@ -3,6 +3,7 @@ const Actions = require('./actions');
 const React = require('react');
 const Store = require('./store');
 const TopWagers = require('./topwagers')
+const ThronesyWagers = require('./thronesywagers')
 
 
 class Leaderboard extends React.Component {
@@ -70,6 +71,7 @@ class Leaderboard extends React.Component {
                 <div className="margin-bottom-20px">
                 <a href="#" className={"tab-picker " + (this.state.showTab=="users" && "tab-picker-active")} onClick={this.showTab.bind(this, "users")}>Most Coins Won</a>
                 <a href="#" className={"tab-picker " + (this.state.showTab == "wagers" && "tab-picker-active")} onClick={this.showTab.bind(this, "wagers")}>Hottest Wagers</a>
+                <a href="#" className={"tab-picker " + (this.state.showTab == "thronesy" && "tab-picker-active")} onClick={this.showTab.bind(this, "thronesy")}>Thronesiest Wagers</a>
                 </div>
 
                 <div className="row">
@@ -78,6 +80,9 @@ class Leaderboard extends React.Component {
                     </div>
                     <div className={"col-sm-8 " + (this.state.showTab=="wagers" || "hidden")}>
                       <TopWagers/>
+                    </div>
+                    <div className={"col-sm-8 " + (this.state.showTab=="thronesy" || "hidden")}>
+                      <ThronesyWagers/>
                     </div>
                 </div>
             </section>

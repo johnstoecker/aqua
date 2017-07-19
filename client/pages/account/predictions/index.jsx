@@ -173,7 +173,7 @@ class PredictionsPage extends React.Component {
             const awards = pred.awards && pred.awards.map((award) => {
                 if(award == "thronesy") {
                     return (<div className="prediction-status-info prediction-award">🏆
-                        <div className="prediction-status-box">This Valyrian Steel wager was determined to be extra thronesy. +20 coins!</div>
+                        <div className="prediction-status-box">This Valyrian Steel wager was determined to be extra thronesy. +25 coins!</div>
                     </div>)
                 } else {
                     return(<div/>)
