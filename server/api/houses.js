@@ -73,9 +73,11 @@ internals.applyRoutes = function (server, next) {
                 }
 
                 Prediction.find(predFindParam, (err, predictions) => {
-                    for (var pred in predictions) {
+                    for (var i=0; i<predictions.length; i++) {
+                        var pred = predictions[i]
                         retVal.numPredictions += 1;
-                        if(pred.awards ==["thronesy"]) {
+                        if(pred.awards && pred.awards.length>0) {
+                            console.log("thronesy!!!!")
                             retVal.steelWagers += 1;
                         }
                         if(pred.status=="won") {

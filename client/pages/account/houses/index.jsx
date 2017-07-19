@@ -79,7 +79,7 @@ class HouseStatsPage extends React.Component {
                                     <div className="house-attribute-stat-label">coins banked</div>
                                     <div className="house-attribute-stat-label">available coins</div>
                                     <div className="prediction-status-info house-attribute-stat-label">Valyrian Steel Wagers
-                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 are coming soon!</div>
+                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 gain the predictor +25 coins</div>
                                     </div>
                                     <div className="prediction-status-info house-attribute-stat-label">Iron Wagers
                                         <div className="prediction-status-box">💰Iron Wagers💰 have come true</div>
@@ -119,7 +119,7 @@ class HouseStatsPage extends React.Component {
                                     <div className="house-attribute-stat-label">coins banked</div>
                                     <div className="house-attribute-stat-label">available coins</div>
                                     <div className="prediction-status-info house-attribute-stat-label">Valyrian Steel Wagers
-                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 are coming soon!</div>
+                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 gain the predictor +25 coins</div>
                                     </div>
                                     <div className="prediction-status-info house-attribute-stat-label">Iron Wagers
                                         <div className="prediction-status-box">💰Iron Wagers💰 have come true</div>
@@ -158,7 +158,7 @@ class HouseStatsPage extends React.Component {
                                     <div className="house-attribute-stat-label">coins banked</div>
                                     <div className="house-attribute-stat-label">available coins</div>
                                     <div className="prediction-status-info house-attribute-stat-label">Valyrian Steel Wagers
-                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 are coming soon!</div>
+                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 gain the predictor +25 coins</div>
                                     </div>
                                     <div className="prediction-status-info house-attribute-stat-label">Iron Wagers
                                         <div className="prediction-status-box">💰Iron Wagers💰 have come true</div>
@@ -198,7 +198,7 @@ class HouseStatsPage extends React.Component {
                                     <div className="house-attribute-stat-label">coins banked</div>
                                     <div className="house-attribute-stat-label">available coins</div>
                                     <div className="prediction-status-info house-attribute-stat-label">Valyrian Steel Wagers
-                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 are coming soon!</div>
+                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 gain the predictor +25 coins</div>
                                     </div>
                                     <div className="prediction-status-info house-attribute-stat-label">Iron Wagers
                                         <div className="prediction-status-box">💰Iron Wagers💰 have come true</div>
@@ -238,7 +238,7 @@ class HouseStatsPage extends React.Component {
                                     <div className="house-attribute-stat-label">coins banked</div>
                                     <div className="house-attribute-stat-label">available coins</div>
                                     <div className="prediction-status-info house-attribute-stat-label">Valyrian Steel Wagers
-                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 are coming soon!</div>
+                                        <div className="prediction-status-box">🏆Valyrian Steel Wagers🏆 gain the predictor +25 coins</div>
                                     </div>
                                     <div className="prediction-status-info house-attribute-stat-label">Iron Wagers
                                         <div className="prediction-status-box">💰Iron Wagers💰 have come true</div>
