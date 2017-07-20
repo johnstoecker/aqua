@@ -3,6 +3,7 @@ const React = require('react');
 const Store = require('./store');
 const Actions = require('./actions')
 const Button = require('../../../components/form/button.jsx');
+const Characters = require('../../../../data/characters.json')
 
 class CyclesPage extends React.Component {
     constructor(props) {
@@ -24,6 +25,10 @@ class CyclesPage extends React.Component {
         Actions.refreshHouse({name: "Stark"});
     }
 
+    updateCharacters() {
+        Actions.updateCharacters({characters: Characters})
+    }
+
     render() {
         console.log(this.state)
         return (
@@ -36,6 +41,10 @@ class CyclesPage extends React.Component {
                         <h3>Update houses every weds/sunday night</h3>
                         <Button inputClasses={{ 'btn-primary': true }} onClick={this.updateHouses.bind(this)}>
                               Update Houses
+                        </Button>
+                        <h3>Update characters when we add a new one</h3>
+                        <Button inputClasses={{ 'btn-primary': true }} onClick={this.updateCharacters.bind(this)}>
+                              Update Characters
                         </Button>
                     </div>
                 </div>

@@ -139,11 +139,36 @@
 
 .playingfor-container {
     @house-border-left();
-
 }
 
 .font-center {
     text-align: center;
+}
+
+.dies-next-container {
+    width: 200px;
+}
+
+.dies-next-image-container {
+    height: 70px;
+    width: 80px;
+    background-color: black;
+}
+
+.dies-next-user-character {
+    display: flex;
+    justify-content: flex-start;
+    align-items:center;
+    height:70px;
+}
+
+.dies-next-character-picker {
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.dies-next-image {
+    width:120px;
 }
 
 .prediction-container {
@@ -311,6 +336,16 @@
     position: relative;
 }
 
+.house-side-stat-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    border: 1px solid gray;
+    padding: 0px 0px 70px 0px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
 .house-banner {
     display: flex;
     align-items: center;
@@ -392,6 +427,18 @@
     height:30px;
     width: 30px;
     border-radius: 15px;
+    background-color: #ff9900;
+    background-image: url("/public/media/transparent-coin.png");
+    background-size: contain;
+    margin-right: 10px;
+    border: none !important;
+    flex: 0 0 auto;
+}
+
+.iron-coin-small {
+    height:16px;
+    width: 16px;
+    border-radius: 8px;
     background-color: #ff9900;
     background-image: url("/public/media/transparent-coin.png");
     background-size: contain;
@@ -757,6 +804,16 @@ margin-bottom: 10px;
     position: absolute;
     left:5px;
     bottom:20px;
+}
+
+.prediction-box-underneath {
+    display: none;
+    // display: flex;
+    justify-content: space-around;
+}
+
+.prediction-box-underneath-stat {
+    display: flex;
 }
 
 .max-hundred {

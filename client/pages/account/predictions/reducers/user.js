@@ -14,6 +14,7 @@ const initialState = {
     username: '',
     email: '',
     coins: '-',
+    characters: [],
     reservedCoins: '-'
 };
 const reducer = function (state = initialState, action) {
@@ -38,6 +39,7 @@ const reducer = function (state = initialState, action) {
             house: action.response.house,
             email: action.response.email,
             coins: action.response.coins,
+            characters: action.response.characters,
             availableCoins: action.response.availableCoins,
             reservedCoins: action.response.reservedCoins
         });

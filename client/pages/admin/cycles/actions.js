@@ -14,6 +14,16 @@ class Actions {
             Constants.UPDATE_HOUSESTATS_RESPONSE
         );
     }
+
+    static updateCharacters(data) {
+        ApiActions.post(
+            '/api/characters/refresh',
+            data,
+            Store,
+            Constants.UPDATE_HOUSESTATS,
+            Constants.UPDATE_HOUSESTATS_RESPONSE
+        );
+    }
 }
 
 module.exports = Actions;

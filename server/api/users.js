@@ -14,6 +14,7 @@ internals.applyRoutes = function (server, next) {
     const User = server.plugins['hapi-mongo-models'].User;
     const Prediction = server.plugins['hapi-mongo-models'].Prediction;
     const Wager = server.plugins['hapi-mongo-models'].Wager;
+    const Character = server.plugins['hapi-mongo-models'].Character;
 
 
     server.route({

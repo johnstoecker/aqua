@@ -322,7 +322,11 @@ class PredictionsPage extends React.Component {
         }
 
         let sideBarContext;
+        let diesNextForUser;
         if (this.props.match.params.username && this.state.scopedUser.hydrated && this.state.scopedUser.house) {
+            diesNextForUser = this.state.scopedUser.characters && this.state.scopedUser.characters.map((character)=>{
+                return (<div>{character.name}</div>)
+            })
             sideBarContext = (
                 <div className="house-bankroll-container">
                     <div className={"house-bankroll "+ this.state.scopedUser.house.name.toLowerCase().replace(/\s/, "-")}>
@@ -330,16 +334,25 @@ class PredictionsPage extends React.Component {
                         <div>House {this.state.scopedUser.house.name}</div>
                         <img className="house-picker-image" src={"/public/media/tag_images/House-"+this.state.scopedUser.house.name+"-Main-Shield.png"} />
                         <div>{this.state.scopedUser.coins} coins banked</div>
+                        <div className={(diesNextForUser && diesNextForUser.length>0) || " hidden"}> Dies next:
+                            {diesNextForUser}
+                        </div>
                     </div>
                 </div>
             )
         } else if(this.props.match.params.username && this.state.scopedUser.hydrated && !this.state.scopedUser.house) {
+            diesNextForUser = this.state.scopedUser.characters && this.state.scopedUser.characters.map((character)=>{
+                return (<div>{character.name}</div>)
+            })
             sideBarContext = (
                 <div className="house-bankroll-container">
                     <div className="house-bankroll">
                         <div>{this.props.match.params.username}</div>
                         <div>[No House]</div>
                         <div>{this.state.scopedUser.coins} coins banked</div>
+                        <div className={(diesNextForUser && diesNextForUser.length>0) || " hidden"}> Dies next:
+                            {diesNextForUser}
+                        </div>
                     </div>
                 </div>
             )

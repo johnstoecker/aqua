@@ -18,6 +18,7 @@ const initialState = {
     messages: [],
     availableCoins: '-',
     lostCoins: '-',
+    characters: [],
     // // TODO: loading image for house
     house: {
         name: '',
@@ -48,6 +49,7 @@ const reducer = function (state = initialState, action) {
             availableCoins: action.response.availableCoins,
             lostCoins: action.response.lostCoins,
             messages: action.response.messages,
+            characters: action.response.characters,
             house: action.response.house
         });
     }

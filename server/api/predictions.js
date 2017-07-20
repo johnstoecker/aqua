@@ -4,6 +4,7 @@ const Boom = require('boom');
 const EscapeRegExp = require('escape-string-regexp');
 const Joi = require('joi');
 const Mongodb = require('mongodb');
+const Async = require('async');
 
 
 const internals = {};
@@ -159,6 +160,58 @@ internals.applyRoutes = function (server, next) {
                 }
 
                 reply(predictions);
+            });
+        }
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/predictions/updateWagerCoins',
+        config: {
+            auth: {
+                strategy: 'session',
+                scope: ['admin']
+            }
+        },
+        handler: function (request, reply) {
+            // const id = request.auth.credentials.user._id.toString();
+            console.log(id);
+
+            Prediction.find({}, (err, predictions) => {
+
+                if (err) {
+                    return reply(err);
+                }
+
+                if (!predictions) {
+                    return reply(Boom.notFound());
+                }
+                const tasks = {}
+                for(let i=0; i< predictions.length; i++) {
+                    pred = predictions[i]
+                    let wagerCoins = 0;
+                    for(let ind=0; ind<pred.comments.length;ind++) {
+                        if(comment.coins) {
+                            wagerCoins+= comment.coins
+                        }
+                    }
+                    tasks[i] = function (done) {
+                        Prediction.findOneAndUpdate({_id: pred.id},{$set: {wagerCoins: wagerCoins}},(err, result) => {
+                            if(err){
+                                return reply(err)
+                            }
+                            return(result)
+                        })
+                    }
+                }
+                Async.auto(tasks, (err, results) => {
+                    if (err) {
+                        return callback(err);
+                    }
+                    callback(results);
+                });
+
+
             });
         }
     });

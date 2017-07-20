@@ -52,6 +52,10 @@ class HomePage extends React.Component {
         window.location.href = "/account/houses"
     }
 
+    goToDiesNext() {
+        window.location.href = "/account/diesnext"
+    }
+
     seeOldRavens() {
         this.setState({showAllMessages: true})
     }
@@ -149,111 +153,147 @@ class HomePage extends React.Component {
             )
         }
         let house
+        let diesNext
         if(!this.state.user.house) {
             house = (
-                <div className="col-sm-3 playingfor-container">
+                <div className="playingfor-container">
                     <h1 className="page-section-header">Join a House</h1>
                     <p>This gets you into the team game</p>
                 <button className="btn btn-primary" onClick={this.goToJoinHouse.bind(this)} type="submit">Select a House</button>
                 </div>
             )
-        } else if(this.state.user.house.name == "Greyjoy") {
-            house = (
-                <div className="col-sm-3 playingfor-container">
-                    <h1 className="page-section-header">Playing for:</h1>
+        } else {
+            // if they already have a house, allow them to play "dies next"
+            if(!this.state.user.characters || this.state.user.characters.length == 0) {
+                diesNext = (
+                    <div className="dies-next-container">
+                        <h1 className="page-section-header">Dies Next</h1>
+                        <p>Choose 3 characters who will die next</p>
+                    <button className="btn btn-primary" onClick={this.goToDiesNext.bind(this)} type="submit">Dies Next</button>
+                    </div>
+                )
+            } else {
+                const myChars = this.state.user.characters.map((character) => {
+                    const image = '/public/media/tag_images/'+character.image
+                    return (<div className="dies-next-user-character">
+                        <div className="dies-next-image-container">
+                            <div className="dies-next-image" style={{backgroundImage:`url(${image})`, width: "80px", height: "70px", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPositionY: "center", backgroundPositionX: "center"}}/>
+                        </div>
+                        <div className="dies-next-name">{character.name}</div>
+                    </div>)
+                })
 
-                    <div className="house-player-wrapper greyjoy">
-                        <div className="house-banner">
-                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[0].image} />
-                            <div className="house-banner-name">House Greyjoy</div>
-                        </div>
-                        <div className="house-attribute-title">⚓ We Do Not Sow ⚓</div>
-                        <div className="house-attribute-detail">+10 for each naval battle (2+ ships)</div>
-                        <div className="house-attribute-title">🐙 What is dead, could die 🐙</div>
-                        <div className="house-attribute-detail">-2 For each week no Greyjoy is seen on a ship</div>
-                        <div className="justify-button">
-                            <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
-                        </div>
-                    </div>
-                </div>)
-        } else if(this.state.user.house.name == "Lannister") {
-            house = (
-                <div className="col-sm-3 playingfor-container">
-                    <h1 className="page-section-header">Playing for:</h1>
 
-                    <div className="house-player-wrapper lannister">
-                        <div className="house-banner">
-                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[1].image} />
-                            <div className="house-banner-name">House Lannister</div>
-                        </div>
-                        <div className="house-attribute-title">👑 Golden Crown 👑</div>
-                        <div className="house-attribute-detail">+6 for each week Cersei is Queen</div>
-                        <div className="house-attribute-title">👫 Twincest 👫</div>
-                        <div className="house-attribute-detail">-2 for each week Cersei and Jaime don't meet</div>
-                        <div className="justify-button">
-                            <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
+                diesNext = (
+                    <div className="playingfor-container dies-next-container">
+                        <h1 className="page-section-header">Dies Next</h1>
+                        <div className={"house-side-stat-wrapper " + (this.state.user.house && this.state.user.house.name || "").toLowerCase().replace(/\s/, "-")}>
+                            {myChars}
+                            <div className="justify-button">
+                                <button className="thronesy-white-button house-join-button" onClick={this.goToDiesNext.bind(this)}>Dies Next</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )
-        } else if(this.state.user.house.name == "White Walkers") {
-            house = (
-                <div className="col-sm-3 playingfor-container">
-                    <h1 className="page-section-header">Playing for:</h1>
-                    <div className="house-player-wrapper white-walkers">
-                        <div className="house-banner">
-                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[2].image} />
-                            <div className="house-banner-name">White Walkers</div>
-                        </div>
-                        <div className="house-attribute-title">❄ Ice Nine ❄</div>
-                        <div className="house-attribute-detail">+9 for each week the Night King is South of the Wall</div>
-                        <div className="house-attribute-title">🔵 Seeing Blue 🔵</div>
-                        <div className="house-attribute-detail">-2 for each walker burnt to death, cooldown: 3 minutes</div>
-                        <div className="justify-button">
-                            <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
-                        </div>
+                )
+            }
+            if(this.state.user.house.name == "Greyjoy") {
+                house = (
+                    <div className="playingfor-container">
+                        <h1 className="page-section-header">Playing for:</h1>
 
-                    </div>
-                </div>
-            )
-        } else if(this.state.user.house.name == "Stark") {
-            house = (
-                <div className="col-sm-3 playingfor-container">
-                    <h1 className="page-section-header">Playing for:</h1>
-                    <div className="house-player-wrapper stark">
-                        <div className="house-banner">
-                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
-                            <div className="house-banner-name">House Stark</div>
+                        <div className="house-player-wrapper greyjoy">
+                            <div className="house-banner">
+                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[0].image} />
+                                <div className="house-banner-name">House Greyjoy</div>
+                            </div>
+                            <div className="house-attribute-title">⚓ We Do Not Sow ⚓</div>
+                            <div className="house-attribute-detail">+10 for each naval battle (2+ ships)</div>
+                            <div className="house-attribute-title">🐙 What is dead, could die 🐙</div>
+                            <div className="house-attribute-detail">-2 For each week no Greyjoy is seen on a ship</div>
+                            <div className="justify-button">
+                                <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
+                            </div>
                         </div>
-                        <div className="house-attribute-title">🗡 Needlework 🗡</div>
-                        <div className="house-attribute-detail">+5 for each Arya kill, cooldown: 1 minute(from now on)</div>
-                        <div className="house-attribute-title">🍽 Power Hungry 🍽</div>
-                        <div className="house-attribute-detail">-3 for each week Sansa talks to Littlefinger</div>
-                        <div className="justify-button">
-                            <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
-                        </div>
-                    </div>
-                </div>
-            )
-        } else if(this.state.user.house.name == "Targaryen") {
-            house = (
-                <div className="col-sm-3 playingfor-container">
-                    <h1 className="page-section-header">Playing for:</h1>
-                    <div className="house-player-wrapper targaryen">
-                        <div className="house-banner">
-                            <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
-                            <div className="house-banner-name">House Targaryen</div>
-                        </div>
-                        <div className="house-attribute-title">🐲 Wild Fire 🐲</div>
-                        <div className="house-attribute-detail">+5 for each dragon flame, cooldown: 1 minute</div>
-                        <div className="house-attribute-title">🍷 Drunken Hand 🍷</div>
-                        <div className="house-attribute-detail">-1 for each wine cup Tyrion drinks</div>
-                        <div className="justify-button">
-                            <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
+                    </div>)
+            } else if(this.state.user.house.name == "Lannister") {
+                house = (
+                    <div className="playingfor-container">
+                        <h1 className="page-section-header">Playing for:</h1>
+
+                        <div className="house-player-wrapper lannister">
+                            <div className="house-banner">
+                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[1].image} />
+                                <div className="house-banner-name">House Lannister</div>
+                            </div>
+                            <div className="house-attribute-title">👑 Golden Crown 👑</div>
+                            <div className="house-attribute-detail">+6 for each week Cersei is Queen</div>
+                            <div className="house-attribute-title">👫 Twincest 👫</div>
+                            <div className="house-attribute-detail">-2 for each week Cersei and Jaime don't meet</div>
+                            <div className="justify-button">
+                                <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )
+                )
+            } else if(this.state.user.house.name == "White Walkers") {
+                house = (
+                    <div className="playingfor-container">
+                        <h1 className="page-section-header">Playing for:</h1>
+                        <div className="house-player-wrapper white-walkers">
+                            <div className="house-banner">
+                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[2].image} />
+                                <div className="house-banner-name">White Walkers</div>
+                            </div>
+                            <div className="house-attribute-title">❄ Ice Nine ❄</div>
+                            <div className="house-attribute-detail">+9 for each week the Night King is South of the Wall</div>
+                            <div className="house-attribute-title">🔵 Seeing Blue 🔵</div>
+                            <div className="house-attribute-detail">-2 for each walker burnt to death, cooldown: 3 minutes</div>
+                            <div className="justify-button">
+                                <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
+                            </div>
+
+                        </div>
+                    </div>
+                )
+            } else if(this.state.user.house.name == "Stark") {
+                house = (
+                    <div className="playingfor-container">
+                        <h1 className="page-section-header">Playing for:</h1>
+                        <div className="house-player-wrapper stark">
+                            <div className="house-banner">
+                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
+                                <div className="house-banner-name">House Stark</div>
+                            </div>
+                            <div className="house-attribute-title">🗡 Needlework 🗡</div>
+                            <div className="house-attribute-detail">+5 for each Arya kill, cooldown: 1 minute(from now on)</div>
+                            <div className="house-attribute-title">🍽 Power Hungry 🍽</div>
+                            <div className="house-attribute-detail">-3 for each week Sansa talks to Littlefinger</div>
+                            <div className="justify-button">
+                                <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            } else if(this.state.user.house.name == "Targaryen") {
+                house = (
+                    <div className="playingfor-container">
+                        <h1 className="page-section-header">Playing for:</h1>
+                        <div className="house-player-wrapper targaryen">
+                            <div className="house-banner">
+                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
+                                <div className="house-banner-name">House Targaryen</div>
+                            </div>
+                            <div className="house-attribute-title">🐲 Wild Fire 🐲</div>
+                            <div className="house-attribute-detail">+5 for each dragon flame, cooldown: 1 minute</div>
+                            <div className="house-attribute-title">🍷 Drunken Hand 🍷</div>
+                            <div className="house-attribute-detail">-1 for each wine cup Tyrion drinks</div>
+                            <div className="justify-button">
+                                <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
         }
         let messages;
         var allMessages = this.state.user.messages || []
@@ -348,7 +388,10 @@ class HomePage extends React.Component {
                     </div>
                     </div>
                     <div className="col-sm-1"></div>
-                    {house}
+                    <div className="col-sm-3">
+                        {house}
+                        {diesNext}
+                    </div>
                 </div>
 
 

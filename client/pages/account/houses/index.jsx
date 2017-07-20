@@ -16,7 +16,6 @@ class HouseStatsPage extends React.Component {
     }
 
     onStoreChange() {
-        console.log("store change")
         this.setState(Store.getState());
     }
 

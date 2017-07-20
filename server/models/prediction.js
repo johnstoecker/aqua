@@ -139,12 +139,14 @@ class Prediction extends MongoModels {
     static addComment(id, params, callback) {
         params["_id"] = this.ObjectId();
         params["time"] = new Date();
-        const updateParams = { '$push':
+
+        let updateParams = { '$push':
             {
                 "comments": params
             },
             $inc: {
-                "commentsCount": 1
+                "commentsCount": 1,
+                "wagerCoins": params.coins || 0
             }
         };
         this.findByIdAndUpdate(id, updateParams, (err, pred) => {
@@ -405,7 +407,6 @@ class Prediction extends MongoModels {
                 if (wagers.length < 1) {
                     return callback(Boom.badRequest("Wagers aren't linked correctly"))
                 }
-
 
                 const tasks = {}
                 // GROSS, that scope

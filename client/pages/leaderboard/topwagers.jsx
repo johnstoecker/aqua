@@ -53,6 +53,21 @@ class TopWagers extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <div className="prediction-box-underneath">
+                        <div className="prediction-box-underneath-stat">
+                            <div className="iron-coin iron-coin-small targaryen"/>
+                            <div className="wager-points">
+                                <div className="fa fa-plus"/>
+                                <div>{pred.wagerCoins}</div>
+                                <div>coins</div>
+                            </div>
+                        </div>
+                        <div className="prediction-box-underneath-stat">
+                            <div className="fa fa-twitter"/>
+                            <div>{pred.commentsCount}</div>
+                            <div>ravens</div>
+                        </div>
+                    </div>
                 </div>
             );
         });
