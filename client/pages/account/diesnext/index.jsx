@@ -37,10 +37,13 @@ class DiesNextPage extends React.Component {
     }
 
     addCharacter(character) {
-        if(this.state.myChars.length >= 3 || this.state.myChars.find((char, i) => char.name == character.name)) {
+        if(!this.state.myChars) {
+            this.setState({myChars: [character]})
+        } else if(this.state.myChars.length >= 3 || this.state.myChars.find((char, i) => char.name == character.name)) {
             return
+        } else {
+            this.setState({myChars: this.state.myChars.concat(character)})
         }
-        this.setState({myChars: this.state.myChars.concat(character)})
     }
 
     removeCharacter(character) {
