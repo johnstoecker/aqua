@@ -203,7 +203,7 @@ class Prediction extends MongoModels {
 
     // send message to user
     // decrement availableCoins, increase reservedCoins
-    static updateStandingPredictionUser(userId, pred, wager, callback) {
+    static updateStandingPredictionUser(author, pred, wager, callback) {
         const userUpdate = {
             $push: {
                 messages: {
@@ -216,7 +216,7 @@ class Prediction extends MongoModels {
             }
         }
         const userFindParam = {
-            _id: Mongodb.ObjectId(userId)
+            username: author
         }
 
         // WTF
@@ -230,7 +230,7 @@ class Prediction extends MongoModels {
 
     // send message to user
     // increment availableCoins
-    static updateRejectedPredictionUser(userId, pred, wager, callback) {
+    static updateRejectedPredictionUser(author, pred, wager, callback) {
         const userUpdate = {
             $inc: {
                 availableCoins: wager.coins,
@@ -248,7 +248,7 @@ class Prediction extends MongoModels {
             }
         }
         const userFindParam = {
-            _id: Mongodb.ObjectId(userId)
+            username: author
         }
         MongoModels.db.collection('users').findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
             if (err) {
@@ -262,7 +262,7 @@ class Prediction extends MongoModels {
     // decrement availableCoins, decrese reserved
     // TODO:
     // do this for all wagers on this pred!
-    static updateTruePredictionUser(userId, pred, wager, callback) {
+    static updateTruePredictionUser(author, pred, wager, callback) {
         const userUpdate = {
             $inc: {
                 coins: wager.coins,
@@ -279,7 +279,7 @@ class Prediction extends MongoModels {
             }
         }
         const userFindParam = {
-            _id: Mongodb.ObjectId(userId)
+            username: author
         }
         MongoModels.db.collection('users').findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
             if (err) {
@@ -292,7 +292,7 @@ class Prediction extends MongoModels {
 
     // send message to user
     // decrement reservedCoins
-    static updateFalsePredictionUser(userId, pred, wager, callback) {
+    static updateFalsePredictionUser(author, pred, wager, callback) {
 
         const userUpdate = {
             $inc: {
@@ -310,7 +310,7 @@ class Prediction extends MongoModels {
             }
         }
         const userFindParam = {
-            _id: Mongodb.ObjectId(userId)
+            username: author
         }
         MongoModels.db.collection('users').findOneAndUpdate(userFindParam, userUpdate, (err, user) => {
             if (err) {
@@ -323,13 +323,13 @@ class Prediction extends MongoModels {
 
     static doTheNeedful(request, wager, pred, callback) {
         if (request.payload.status =='rejected') {
-            this.updateRejectedPredictionUser(wager.userId, pred, wager, callback)
+            this.updateRejectedPredictionUser(wager.author, pred, wager, callback)
         } else if (request.payload.status == 'standing') {
-            this.updateStandingPredictionUser(wager.userId, pred, wager, callback)
+            this.updateStandingPredictionUser(wager.author, pred, wager, callback)
         } else if (request.payload.status == 'won') {
-            this.updateTruePredictionUser(wager.userId, pred, wager, callback)
+            this.updateTruePredictionUser(wager.author, pred, wager, callback)
         } else if (request.payload.status == 'lost') {
-            this.updateFalsePredictionUser(wager.userId, pred, wager, callback)
+            this.updateFalsePredictionUser(wager.author, pred, wager, callback)
         }
     }
 
@@ -417,6 +417,7 @@ class Prediction extends MongoModels {
                     tasks[x] = function (done) {
                         that.doTheNeedful(request, wager, pred, callback);
                     };
+                    x+=1;
                 });
                 Async.auto(tasks, (err, results) => {
                     if (err) {
@@ -424,26 +425,6 @@ class Prediction extends MongoModels {
                     }
                     callback(results);
                 });
-                // Object.keys(this.groups).forEach((group) => {
-                //
-                //     tasks[group] = function (done) {
-                //
-                //         AdminGroup.findById(group, done);
-                //     };
-                // });
-                //
-                // Async.auto(tasks, (err, results) => {
-                //
-                //     if (err) {
-                //         return callback(err);
-                //     }
-                //
-                //     this._groups = results;
-                //
-                //     callback(null, this._groups);
-                // });
-
-
             })
 
 

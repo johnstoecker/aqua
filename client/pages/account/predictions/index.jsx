@@ -283,9 +283,13 @@ class PredictionsPage extends React.Component {
                         <div className="comment-form-box">
                             <CommentForm onCommentSubmit={this.handleCommentSubmit} parentId={pred._id} {...this.state.details}/>
                         </div>
-                        <div className={"double-down-box " + ((pred.status=="pending" || pred.status=="standing") && !pred.locked && "double-down-box-visible")} onClick={this.showDoubleDown.bind(this, pred)}>
+                        <div className={"double-down-box-clickable double-down-box " + ((pred.status=="pending" || pred.status=="standing") && !pred.locked && "double-down-box-visible")} onClick={this.showDoubleDown.bind(this, pred)}>
                             <div className="fa fa-plus"></div>
                             <div className="double-down-text">wager</div>
+                        </div>
+                        <div className={"double-down-box " + ((pred.status == "won" || pred.status == "lost" || pred.status == "rejected" || pred.locked) && "double-down-box-visible")}>
+                            <div className="fa fa-lock"></div>
+                            <div className="double-down-text">locked</div>
                         </div>
                         <div className={"double-down-popup " + (this.state.showPredictionDoubleDown == pred._id && " double-down-popup-visible")}>
                             <div className="popup-close fa fa-close" onClick={this.hideDoubleDown}></div>

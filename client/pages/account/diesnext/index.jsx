@@ -3,6 +3,7 @@ const React = require('react');
 const Store = require('./store');
 const Actions = require('./actions')
 const Characters = require('../../../../data/characters.json');
+import { Emoji } from 'emoji-mart'
 
 // const PropTypes = require('prop-types');
 
@@ -37,6 +38,9 @@ class DiesNextPage extends React.Component {
     }
 
     addCharacter(character) {
+        if(character.isDead) {
+            return
+        }
         if(!this.state.myChars) {
             this.setState({myChars: [character]})
         } else if(this.state.myChars.length >= 3 || this.state.myChars.find((char, i) => char.name == character.name)) {
@@ -70,8 +74,11 @@ class DiesNextPage extends React.Component {
         })
         const allChars = this.state.allChars && this.state.allChars.map((character) => {
             const image = '/public/media/tag_images/'+character.image
-            return (<div className="dies-next-user-character dies-next-character-picker hover-zoom" onClick={this.addCharacter.bind(this, character)}>
+            return (<div className={"dies-next-user-character dies-next-character-picker-spacing "+ (!character.isDead && "dies-next-character-picker hover-zoom")} onClick={this.addCharacter.bind(this, character)}>
                 <div className="dies-next-image-container">
+                    <div className={"dies-next-dead " + (character.isDead || "hidden")}>
+                        <Emoji emoji="skull_and_crossbones" size={60} set='emojione' />
+                    </div>
                     <div className="dies-next-image" style={{backgroundImage:`url(${image})`, width: "80px", height: "70px", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPositionY: "center", backgroundPositionX: "center"}}/>
                 </div>
                 <div className="dies-next-name">{character.name}</div>
