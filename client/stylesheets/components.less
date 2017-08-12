@@ -211,6 +211,10 @@
     );
 }
 
+.prediction-box-details-won {
+    border: 5px solid #ffffe5;
+}
+
 .prediction {
     max-width:70%;
     font-size:18px;
@@ -819,13 +823,21 @@ margin-bottom: 10px;
 }
 
 .prediction-box-underneath {
-    display: none;
-    // display: flex;
-    justify-content: space-around;
+    display: flex;
+    // justify-content: space-around;
+    background-color: #bcbcbc;
+    width: 120px;
+    padding-left: 15px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .prediction-box-underneath-stat {
     display: flex;
+    align-items: center;
+    div {
+        margin-right: 3px;
+    }
 }
 
 .max-hundred {
@@ -943,8 +955,13 @@ margin-bottom: 10px;
         align-self: flex-end;
     }
 
-    .prediction-box-details:hover .add-emoji {
-        display: none;
+    .prediction-box-details {
+        flex-direction: column;
+        align-items: left;
+    }
+
+    .prediction {
+        max-width: 100%;
     }
 }
 
