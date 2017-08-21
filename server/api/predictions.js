@@ -43,7 +43,7 @@ internals.applyRoutes = function (server, next) {
             }
             const fields = request.query.fields;
             const sort = request.query.sort || "-_id";
-            const limit = request.query.limit || 50;
+            const limit = (request.query.limit && parseInt(request.query.limit)) || 50;
             const page = request.query.page;
             console.log(query)
             Prediction.pagedFind(query, fields, sort, limit, page, (err, results) => {
