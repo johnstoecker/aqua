@@ -17,7 +17,7 @@ class Actions {
 
     static getStandingPredictions() {
         ApiActions.get(
-            '/api/predictions?status=standing',
+            '/api/predictions?status=standing&limit=100',
             undefined,
             Store,
             Constants.GET_STANDING_PREDICTIONS,
