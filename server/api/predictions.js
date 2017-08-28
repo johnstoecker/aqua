@@ -449,82 +449,82 @@ internals.applyRoutes = function (server, next) {
         }
     })
 
-    server.route({
-        method: 'POST',
-        path: '/predictions/my',
-        config: {
-            auth: {
-                strategy: 'session',
-                scope: ['admin', 'account']
-            },
-        },
-        handler: function (request, reply) {
-            const params = {
-              user_id : request.auth.credentials.user._id.toString(),
-              author: request.auth.credentials.user.username.toString(),
-              authorHouse: (request.auth.credentials.user.house && request.auth.credentials.user.house.name) || "unaffiliated",
-              text : request.payload.text,
-              tags : request.payload.tags,
-              season: 6,
-              status: 'pending',
-              coins: parseInt(request.payload.coins),
-              comments: [],
-              awards: [],
-              time: new Date(),
-              commentsCount: 0
-            }
-
-            if(params.coins < 1) {
-                return reply(Boom.badRequest("Incorrect coins"))
-            }
-            const userUpdate = {
-                $inc: {
-                    availableCoins: -params.coins,
-                    reservedCoins: params.coins
-                }
-            }
-            const findParam = {
-                _id: Mongodb.ObjectId(params.user_id),
-                availableCoins: { $gt: params.coins-1 }
-            }
-            console.log(findParam)
-            User.findOneAndUpdate(findParam, userUpdate, (err, user) => {
-
-                if (err) {
-                    return reply(err);
-                }
-
-                if (!user) {
-                    return reply(Boom.badRequest("Not enough coins"))
-                }
-
-                Prediction.insertOne(params, (err, prediction) => {
-
-                    if (err) {
-                        return reply(err);
-                    }
-                    console.log(params)
-                    console.log(params._id)
-
-                    const wagerParams = {
-                        userId: params.user_id,
-                        authorHouse: request.auth.credentials.user.house && request.auth.credentials.user.house.name,
-                        author: request.auth.credentials.user.username,
-                        coins: params.coins,
-                        predictionId: params._id,
-                        status: 'pending'
-                    }
-                    Wager.insertOne(wagerParams, (err, docs) => {
-                        if (err) {
-                            return reply(err);
-                        }
-
-                        reply(prediction)
-                    })
-                });
-            })
-        }
-    });
+    // server.route({
+    //     method: 'POST',
+    //     path: '/predictions/my',
+    //     config: {
+    //         auth: {
+    //             strategy: 'session',
+    //             scope: ['admin', 'account']
+    //         },
+    //     },
+    //     handler: function (request, reply) {
+    //         const params = {
+    //           user_id : request.auth.credentials.user._id.toString(),
+    //           author: request.auth.credentials.user.username.toString(),
+    //           authorHouse: (request.auth.credentials.user.house && request.auth.credentials.user.house.name) || "unaffiliated",
+    //           text : request.payload.text,
+    //           tags : request.payload.tags,
+    //           season: 6,
+    //           status: 'pending',
+    //           coins: parseInt(request.payload.coins),
+    //           comments: [],
+    //           awards: [],
+    //           time: new Date(),
+    //           commentsCount: 0
+    //         }
+    //
+    //         if(params.coins < 1) {
+    //             return reply(Boom.badRequest("Incorrect coins"))
+    //         }
+    //         const userUpdate = {
+    //             $inc: {
+    //                 availableCoins: -params.coins,
+    //                 reservedCoins: params.coins
+    //             }
+    //         }
+    //         const findParam = {
+    //             _id: Mongodb.ObjectId(params.user_id),
+    //             availableCoins: { $gt: params.coins-1 }
+    //         }
+    //         console.log(findParam)
+    //         User.findOneAndUpdate(findParam, userUpdate, (err, user) => {
+    //
+    //             if (err) {
+    //                 return reply(err);
+    //             }
+    //
+    //             if (!user) {
+    //                 return reply(Boom.badRequest("Not enough coins"))
+    //             }
+    //
+    //             Prediction.insertOne(params, (err, prediction) => {
+    //
+    //                 if (err) {
+    //                     return reply(err);
+    //                 }
+    //                 console.log(params)
+    //                 console.log(params._id)
+    //
+    //                 const wagerParams = {
+    //                     userId: params.user_id,
+    //                     authorHouse: request.auth.credentials.user.house && request.auth.credentials.user.house.name,
+    //                     author: request.auth.credentials.user.username,
+    //                     coins: params.coins,
+    //                     predictionId: params._id,
+    //                     status: 'pending'
+    //                 }
+    //                 Wager.insertOne(wagerParams, (err, docs) => {
+    //                     if (err) {
+    //                         return reply(err);
+    //                     }
+    //
+    //                     reply(prediction)
+    //                 })
+    //             });
+    //         })
+    //     }
+    // });
 
     next();
 };
