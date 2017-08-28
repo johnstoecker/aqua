@@ -25,7 +25,7 @@ internals.applyRoutes = function (server, next) {
             const query = {};
             const fields = "coins username house";
             const sort = "-coins";
-            const limit = 20;
+            const limit = 40;
             const page = 1;
 
             User.pagedFind(query, fields, sort, limit, page, (err, results) => {

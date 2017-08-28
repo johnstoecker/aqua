@@ -76,6 +76,138 @@ class Leaderboard extends React.Component {
 
                 <div className="row">
                     <div className={"col-sm-8 " + (this.state.showTab=="users" || "hidden")}>
+                        <div className="iron-wagers-throne-container">
+                            <img className="iron-wagers-throne" src="/public/media/iron_throne_text.png"/>
+                            <div className="font-center">Iron Heist Will Have His Due</div>
+                        </div>
+
+
+                        <div className="prediction-container" key="winner1">
+                            <div className= "prediction-box stark">
+                                <div className="prediction-box-footer">
+                                    🏆
+                                    <div className="iron-coin stark"></div>
+                                    <div className="wager-points">
+                                        <div>295</div>
+                                        <div>coins</div>
+                                    </div>
+                                    <div>iron_heist</div>
+                                    <div className="leaderboard-swing-right">
+                                        <span>Stark</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="prediction-container" key="winner2">
+                            <div className= "prediction-box targaryen">
+                                <div className="prediction-box-footer">
+                                    🏅
+                                    <div className="iron-coin targaryen"></div>
+                                    <div className="wager-points">
+                                        <div>175</div>
+                                        <div>coins</div>
+                                    </div>
+                                    <div>iainharlow</div>
+                                    <div className="leaderboard-swing-right">
+                                        <span>Targaryen</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="prediction-container" key="winner3">
+                            <div className= "prediction-box lannister">
+                                <div className="prediction-box-footer">
+                                    🏅
+                                    <div className="iron-coin lannister"></div>
+                                    <div className="wager-points">
+                                        <div>128</div>
+                                        <div>coins</div>
+                                    </div>
+                                    <div>lordcommandertarly</div>
+                                    <div className="leaderboard-swing-right">
+                                        <span>Lannister</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        Top Houses by average winnings:
+                        <div className="prediction-container" key="house1">
+                            <div className= "prediction-box stark">
+                                <div className="prediction-box-footer">
+                                    🏆
+                                    <div className="iron-coin stark"></div>
+                                    <div className="wager-points">
+                                        <div>100</div>
+                                        <div>coins</div>
+                                    </div>
+                                    <div>House Stark</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="prediction-container" key="house2">
+                            <div className= "prediction-box targaryen">
+                                <div className="prediction-box-footer">
+                                    🏅
+                                    <div className="iron-coin targaryen"></div>
+                                    <div className="wager-points">
+                                        <div>79</div>
+                                        <div>coins</div>
+                                    </div>
+                                    <div>House Targaryen</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="prediction-container" key="house3">
+                            <div className= "prediction-box lannister">
+                                <div className="prediction-box-footer">
+                                    🏅
+                                    <div className="iron-coin lannister"></div>
+                                    <div className="wager-points">
+                                        <div>78</div>
+                                        <div>coins</div>
+                                    </div>
+                                    <div>House Lannister</div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        Best username:
+                        <div className="prediction-container" key="bestusername">
+                            <div className= "prediction-box lannister">
+                                <div className="prediction-box-footer">
+                                    👌
+                                    <div className="iron-coin lannister"></div>
+                                    <div className="wager-points">
+                                        <div>72</div>
+                                        <div>coins</div>
+                                    </div>
+                                    <div>roosewitherspoon</div>
+                                    <div className="leaderboard-swing-right">
+                                        <span>Lannister</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        Best prediction:
+                        <div className="prediction-container" key="bestprediction">
+                            <div className= "prediction-box greyjoy">
+                                <div className="prediction-box-footer">
+                                    🐶
+                                    <div className="iron-coin greyjoy"></div>
+                                    <div className="wager-points">
+                                        <div>10</div>
+                                        <div>coins</div>
+                                    </div>
+                                    <div>Sandor Clegane is the Prince that was Promised</div>
+                                    <div className="leaderboard-swing-right">
+                                        <span>thronestradamus</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
                       {users}
                     </div>
                     <div className={"col-sm-8 " + (this.state.showTab=="wagers" || "hidden")}>

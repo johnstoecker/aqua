@@ -174,6 +174,18 @@ class Prediction extends MongoModels {
                     }
                 }
             }
+            // "dothrak_n_roll","roosewitherspoon","jonmyfatherisntwhoithoughtitwassnow","iainharlow","lordcommandertarly"
+            // thefunyunknight,presidentlittlefinger,iainharlow,snackskelly
+            // db.users.updateMany({"house.name": "Lannister"}, { $push: { messages: { message: "As the only faction without dragons, things are not looking up, cousin. However, we may still regain our honor by winning CLEGANEBOWL. +4 coins banked for House Lannister", dismissed: false, seen: false, type: "true", _id: ObjectId()}}})
+            // db.users.updateMany({"house.name": "Targaryen"}, { $push: { messages: { message: "We lost a dragon, but we gained a couple of unkillable humans. An OK week for House Targaryen, +9 coins", dismissed: false, seen: false, type: "true", _id: ObjectId()}}})
+            // db.users.updateMany({"house.name": "Greyjoy"}, { $push: { messages: { message: "Let us hope Euron is spending his off-screen time finding a water dragon. -2 coins for House Greyjoy", dismissed: false, seen: false, type: "false", _id: ObjectId()}}})
+            // db.users.updateMany({"house.name": "White Walkers"}, { $push: { messages: { message: "They burn us and they stab us, but we won't be stopped. We are heading South, because we have tickets to CleganeBowl. -8 coins for the White Walkers", dismissed: false, seen: false, type: "false", _id: ObjectId()}}})
+
+            // db.users.updateMany({}, { $push: { messages: { message: "Another Thronesy Sunday! Cersei Queens behind the scenes (+4 Lannisters), Euron is probably back at Pyke replanting trees (-2 Greyjoys), many Wights burn (-8 White Walkers), and Khaleesi is a sexy Auntie (+9 Targaryens). A girl must chill (-3 Starks). True predictions: Benjen sacrificed himself, Jorah reunited (for a moment) with Longclaw, and of course freaking ice dragons. You have 40 more coins to triple down on CleganeBowl.", dismissed: false, seen: false, type: "housejoin", _id: ObjectId()}}})
+            // db.users.updateMany({}, { $push: { messages: { message: "Also, a few dies next updates: Benjen, Thoros, and Viserion. If you have a dead person in your team, click to remove and add a new, not dead person.", dismissed: false, seen: false, type: "housejoin", _id: ObjectId()}}})
+
+            // db.users.updateMany({"house.name": "Stark"}, { $push: { messages: { message: "We are pretty sure that was Littlefinger, and Arya didn't kill him and take his face. If not, the Iron Bank will retroactively award points. Still, a girl must chill. -3 coins for House Stark", dismissed: false, seen: false, type: "false", _id: ObjectId()}}})
+            // db.users.findOneAndUpdate({"username": "gerosan"}, { $push: { messages: { message: "The Iron Bank has reviewed your petition, and decided your prediction 'After what the Hound seeing in the fire, the Brotherhood change course and head north.' has indeed come true. +5 coins banked", dismissed: false, seen: false, type: "true", _id: ObjectId()}}})
 
             const userFindParam = {
                 _id: Mongodb.ObjectId(pred.user_id)
