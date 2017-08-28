@@ -933,11 +933,23 @@ margin-bottom: 10px;
     display: block;
 }
 
-
+.raven {
+    display: none;
+    position: absolute;
+    top:250px;
+    right: 70px;
+    -webkit-animation-name: raven; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: raven;
+    animation-duration: 3s;
+}
 
 @media screen and (min-width: 768px) {
     .mobile-only {
         display: none;
+    }
+    .raven {
+        display: initial;
     }
 }
 
@@ -963,17 +975,6 @@ margin-bottom: 10px;
     .prediction {
         max-width: 100%;
     }
-}
-
-.raven {
-    display: none;
-    position: absolute;
-    top:250px;
-    right: 70px;
-    -webkit-animation-name: raven; /* Safari 4.0 - 8.0 */
-    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
-    animation-name: raven;
-    animation-duration: 3s;
 }
 
 .raven img {
