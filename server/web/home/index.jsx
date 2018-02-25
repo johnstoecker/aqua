@@ -10,7 +10,7 @@ class HomePage extends React.Component {
         super(props);
 
         this.state = {
-            img: Math.round(Math.random()*4)
+            img: Math.round(Math.random()*2)
         }
     }
 
@@ -24,6 +24,18 @@ class HomePage extends React.Component {
         }
         const neck = <link rel='stylesheet' href="/public/pages/home.min.css" />;
 
+          // re-add this below image on new season
+          // <h2>
+          //     <a className="btn btn-primary btn-lg" href="/signup">
+          //         Create an account
+          //     </a>
+          //     &nbsp;&nbsp;
+          //     <a className="btn btn-primary btn-success btn-lg" href="/login">
+          //         Sign In
+          //     </a>
+          // </h2>
+
+
         return (
             <Layout
                 title="Iron Wagers"
@@ -34,16 +46,8 @@ class HomePage extends React.Component {
                     <h2>THE IRON BANK WILL HAVE ITS DUE</h2>
                     <h2>
                         <img className="max-hundred max-height-screen" src={src} />
-                        <h2>
-                            <a className="btn btn-primary btn-lg" href="/signup">
-                                Create an account
-                            </a>
-                            &nbsp;&nbsp;
-                            <a className="btn btn-primary btn-success btn-lg" href="/login">
-                                Sign In
-                            </a>
-                        </h2>
                     </h2>
+                    Iron Wagers will continue next year in season 8. In the meantime, check out last year's <a href="/leaderboard">leaderboard</a>
                 </div>
                 <div className="row">
                     <div className="col-sm-6">

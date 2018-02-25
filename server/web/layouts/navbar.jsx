@@ -18,6 +18,12 @@ class Navbar extends React.Component {
 
     render() {
 
+      // re-add nav signup next year
+      // <li className={this.tabClass('signup')}>
+      //     <a href="/signup">Sign up</a>
+      // </li>
+
+
         return (
             <div className="navbar navbar-default navbar-fixed-top">
                 <div className="container">
@@ -40,9 +46,6 @@ class Navbar extends React.Component {
                             </li>
                             <li className={this.tabClass('leaderboard')}>
                                 <a href="/leaderboard">Leaderboard</a>
-                            </li>
-                            <li className={this.tabClass('signup')}>
-                                <a href="/signup">Sign up</a>
                             </li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">

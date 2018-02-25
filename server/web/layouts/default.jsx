@@ -29,8 +29,8 @@ class DefaultLayout extends React.Component {
                     <meta property="og:url" content="https://ironwagers.com"/>
                     <link rel="stylesheet" href="/public/core.min.css" />
                     <link rel="stylesheet" href="/public/layouts/default.min.css" />
-                    <link rel="stylesheet" href="/public/pages/components.min.css" />,
-                    <link rel="shortcut icon" href="/public/media/favicon.ico" />,
+                    <link rel="stylesheet" href="/public/pages/components.min.css" />
+                    <link rel="shortcut icon" href="/public/media/favicon.ico" />
                     {this.props.neck}
                 </head>
                 <body>
