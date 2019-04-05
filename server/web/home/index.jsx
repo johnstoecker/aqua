@@ -24,16 +24,6 @@ class HomePage extends React.Component {
         }
         const neck = <link rel='stylesheet' href="/public/pages/home.min.css" />;
 
-          // re-add this below image on new season
-          // <h2>
-          //     <a className="btn btn-primary btn-lg" href="/signup">
-          //         Create an account
-          //     </a>
-          //     &nbsp;&nbsp;
-          //     <a className="btn btn-primary btn-success btn-lg" href="/login">
-          //         Sign In
-          //     </a>
-          // </h2>
 
 
         return (
@@ -47,7 +37,15 @@ class HomePage extends React.Component {
                     <h2>
                         <img className="max-hundred max-height-screen" src={src} />
                     </h2>
-                    Iron Wagers will continue next year in season 8. In the meantime, check out last year's <a href="/leaderboard">leaderboard</a>
+                    <h2>
+                        <a className="btn btn-primary btn-lg" href="/signup">
+                            Create an account
+                        </a>
+                        &nbsp;&nbsp;
+                        <a className="btn btn-primary btn-success btn-lg" href="/login">
+                            Sign In
+                        </a>
+                    </h2>
                 </div>
                 <div className="row">
                     <div className="col-sm-6">
@@ -69,7 +67,7 @@ class HomePage extends React.Component {
                                     Wagerers of salt, wagerers of iron
                                 </p>
                                 <a href="/leaderboard" className="btn btn-default btn-block">
-                                    Leaderboard
+                                    Last Year's Leaderboard
                                 </a>
                             </div>
                         </div>

@@ -109,16 +109,13 @@ class Form extends React.Component {
                 </ControlGroup>
             </fieldset>;
         }
-        //
-        // <form onSubmit={this.handleSubmit.bind(this)}>
-        //     {alert}
-        //     {formElements}
-        // </form>
-
         return (
             <section>
                 <h1 className="page-header">Sign up</h1>
-                (Sign-ups closed until closer to season 8)
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                    {alert}
+                    {formElements}
+                </form>
             </section>
         );
     }
