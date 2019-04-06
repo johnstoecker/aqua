@@ -26,27 +26,28 @@ internals.applyRoutes = function (server, next) {
                     password: Joi.string().required()
                 }
             },
-            pre: [{
-                assign: 'abuseDetected',
-                method: function (request, reply) {
-
-                    const ip = request.info.remoteAddress;
-                    const username = request.payload.username;
-
-                    AuthAttempt.abuseDetected(ip, username, (err, detected) => {
-
-                        if (err) {
-                            return reply(err);
-                        }
-
-                        if (detected) {
-                            return reply(Boom.badRequest('Maximum number of auth attempts reached. Please try again later.'));
-                        }
-
-                        reply();
-                    });
-                }
-            }, {
+            pre: [
+              {
+            //     assign: 'abuseDetected',
+            //     method: function (request, reply) {
+            //
+            //         const ip = request.info.remoteAddress;
+            //         const username = request.payload.username;
+            //
+            //         AuthAttempt.abuseDetected(ip, username, (err, detected) => {
+            //
+            //             if (err) {
+            //                 return reply(err);
+            //             }
+            //
+            //             if (detected) {
+            //                 return reply(Boom.badRequest('Maximum number of auth attempts reached. Please try again later.'));
+            //             }
+            //
+            //             reply();
+            //         });
+            //     }
+            // }, {
                 assign: 'user',
                 method: function (request, reply) {
 
