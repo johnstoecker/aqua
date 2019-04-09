@@ -174,7 +174,7 @@ class Prediction extends MongoModels {
                     }
                 }
             }
-db.users.updateMany({"characters.name": "Petyr Baelish (Littlefinger)"}, {$inc: {coins: 20}})
+// db.users.updateMany({"characters.name": "Petyr Baelish (Littlefinger)"}, {$inc: {coins: 20}})
 
 // db.users.updateMany({"characters.name": "Petyr Baelish (Littlefinger)"},{ $push: { messages: { message: "Littlefinger has schemed his last scheme. +20 coins for dies next", dismissed: false, seen: false, type: "true", _id: ObjectId()}}})
 // db.users.updateMany({"characters.name": "Tormund Giantsbane"},{ $push: { messages: { message: "I'm gonna assume that Tormund did not survive the ice breath and Wall Shattering down. +20 coins for dies next", dismissed: false, seen: false, type: "true", _id: ObjectId()}}})
