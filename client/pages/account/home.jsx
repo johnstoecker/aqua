@@ -203,13 +203,13 @@ class HomePage extends React.Component {
 
                         <div className="house-player-wrapper greyjoy">
                             <div className="house-banner">
-                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[0].image} />
+                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[1].image} />
                                 <div className="house-banner-name">House Greyjoy</div>
                             </div>
-                            <div className="house-attribute-title">⚓ We Do Not Sow ⚓</div>
-                            <div className="house-attribute-detail">+10 for each naval battle (2+ ships)</div>
-                            <div className="house-attribute-title">🐙 What is dead, could die 🐙</div>
-                            <div className="house-attribute-detail">-2 For each week no Greyjoy is seen on a ship</div>
+                            <div className="house-attribute-title">🐙 Sea Legs 🐙</div>
+                            <div className="house-attribute-detail">+5 for each land battle fought by Euron, +10 for any attack by sea</div>
+                            <div className="house-attribute-title">🎣 The Salty Queen 🎣</div>
+                            <div className="house-attribute-detail">-2 For each episode Yara remains a prisoner</div>
                             <div className="justify-button">
                                 <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
                             </div>
@@ -222,13 +222,13 @@ class HomePage extends React.Component {
 
                         <div className="house-player-wrapper lannister">
                             <div className="house-banner">
-                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[1].image} />
+                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[0].image} />
                                 <div className="house-banner-name">House Lannister</div>
                             </div>
-                            <div className="house-attribute-title">👑 Golden Crown 👑</div>
-                            <div className="house-attribute-detail">+6 for each week Cersei is Queen</div>
-                            <div className="house-attribute-title">👫 Twincest 👫</div>
-                            <div className="house-attribute-detail">-2 for each week Cersei and Jaime don't meet</div>
+                            <div className="house-attribute-title">🌞 Endless Summer 🌞</div>
+                            <div className="house-attribute-detail">+6 for each week the walkers stay out of Kings Landing</div>
+                            <div className="house-attribute-title">🍷 Drowned Sorrows 🍷</div>
+                            <div className="house-attribute-detail">-2 for each week Cersei drinks wine alone</div>
                             <div className="justify-button">
                                 <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
                             </div>
@@ -244,9 +244,9 @@ class HomePage extends React.Component {
                                 <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[2].image} />
                                 <div className="house-banner-name">White Walkers</div>
                             </div>
-                            <div className="house-attribute-title">❄ Ice Nine ❄</div>
-                            <div className="house-attribute-detail">+9 for each week the Night King is South of the Wall</div>
-                            <div className="house-attribute-title">🔵 Seeing Blue 🔵</div>
+                            <div className="house-attribute-title">❄ Icy Tingle ❄</div>
+                            <div className="house-attribute-detail">+8 for every named character turned into a wight</div>
+                            <div className="house-attribute-title">🔥 Winter BBQ 🔥</div>
                             <div className="house-attribute-detail">-2 for each walker burnt to death, cooldown: 3 minutes</div>
                             <div className="justify-button">
                                 <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
@@ -261,13 +261,13 @@ class HomePage extends React.Component {
                         <h1 className="page-section-header">Playing for:</h1>
                         <div className="house-player-wrapper stark">
                             <div className="house-banner">
-                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
+                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
                                 <div className="house-banner-name">House Stark</div>
                             </div>
-                            <div className="house-attribute-title">🗡 Needlework 🗡</div>
-                            <div className="house-attribute-detail">+5 for each Arya kill, cooldown: 1 minute(from now on)</div>
-                            <div className="house-attribute-title">🍽 Power Hungry 🍽</div>
-                            <div className="house-attribute-detail">-3 for each week Sansa talks to Littlefinger</div>
+                            <div className="house-attribute-title">🎭 Face/Off 🎭</div>
+                            <div className="house-attribute-detail">+10 for every new face Arya wears</div>
+                            <div className="house-attribute-title">👑 Bran=Night King? 👑</div>
+                            <div className="house-attribute-detail">- 2 for every time Bran wargs cooldown: 1 minute</div>
                             <div className="justify-button">
                                 <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
                             </div>
@@ -280,13 +280,13 @@ class HomePage extends React.Component {
                         <h1 className="page-section-header">Playing for:</h1>
                         <div className="house-player-wrapper targaryen">
                             <div className="house-banner">
-                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
+                                <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
                                 <div className="house-banner-name">House Targaryen</div>
                             </div>
                             <div className="house-attribute-title">🐲 Wild Fire 🐲</div>
-                            <div className="house-attribute-detail">+5 for each dragon flame, cooldown: 1 minute</div>
-                            <div className="house-attribute-title">🍷 Drunken Hand 🍷</div>
-                            <div className="house-attribute-detail">-1 for each wine cup Tyrion drinks</div>
+                            <div className="house-attribute-detail">+5 for each dragonfire flame, cooldown: 1 minute</div>
+                            <div className="house-attribute-title">🍗 Knock Kneed 🍗</div>
+                            <div className="house-attribute-detail">-2 for each noble person that refuses to bend the knee to Dany (not during active battle), cooldown: 2 minutes</div>
                             <div className="justify-button">
                                 <button className="thronesy-white-button house-join-button" onClick={this.goToHouses.bind(this)}>Stats</button>
                             </div>
