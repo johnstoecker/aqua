@@ -45,7 +45,7 @@ class JoinHousePage extends React.Component {
                             <div className="house-banner-name">House Greyjoy</div>
                         </div>
                         <div className="house-attribute-title">🐙 Sea Legs 🐙</div>
-                        <div className="house-attribute-detail">+5 for each land battle fought by Euron, +10 for any attack by sea</div>
+                        <div className="house-attribute-detail">+5 for each land battle fought by Euron, +10 for any sea battle</div>
                         <div className="house-attribute-title">🎣 The Salty Queen 🎣</div>
                         <div className="house-attribute-detail">-2 For each episode Yara remains a prisoner</div>
                         <div className="justify-button">
@@ -83,9 +83,9 @@ class JoinHousePage extends React.Component {
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
                             <div className="house-banner-name">House Stark</div>
                         </div>
-                        <div className="house-attribute-title">🗡 Needlework 🗡</div>
-                        <div className="house-attribute-detail">+1 for every White Walker Army Arya Kill, + 7 if it’s someone (living or non-living) on the list</div>
-                        <div className="house-attribute-title">🥶 Bran=Night King? 🥶</div>
+                        <div className="house-attribute-title">🎭 Face/Off 🎭</div>
+                        <div className="house-attribute-detail">+10 for every new face Arya wears</div>
+                        <div className="house-attribute-title">👑 Bran=Night King? 👑</div>
                         <div className="house-attribute-detail">- 2 for every time Bran wargs cooldown: 1 minute</div>
                         <div className="justify-button">
                             <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[4])}>Join</button>
@@ -97,9 +97,9 @@ class JoinHousePage extends React.Component {
                             <div className="house-banner-name">House Targaryen</div>
                         </div>
                         <div className="house-attribute-title">🐲 Wild Fire 🐲</div>
-                        <div className="house-attribute-detail">+5 for each dragon flame, cooldown: 1 minute</div>
+                        <div className="house-attribute-detail">+5 for each dragonfire flame, cooldown: 1 minute</div>
                         <div className="house-attribute-title">🍗 Knock Kneed 🍗</div>
-                        <div className="house-attribute-detail">-2 for each person that refuses to bend the knee to Dany</div>
+                        <div className="house-attribute-detail">-2 for each noble person that refuses to bend the knee to Dany (not during active battle), cooldown: 2 minutes</div>
                         <div className="justify-button">
                         <button className="thronesy-white-button house-join-button" onClick={this.joinHouse.bind(this, Houses[3])}>Join</button>
                         </div>
