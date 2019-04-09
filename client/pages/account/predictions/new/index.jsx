@@ -41,7 +41,7 @@ class NewPredictionPage extends React.Component {
                 <div className="row">
                     <div className="col-sm-6">
                         <p className="extra-margin">
-                            <span>Will Arya and Sansa reunite?  Will Bran fight the Night King as a warg?  What depravity will George R.R. Martin show us this season? If you have a hunch, write down each prediction for season 7 and wager points on how sure you are.  If others agree, they might just wager some of their coins too.  If not, they may troll you in the comments section.  The night is dark and full of terrors. Learn more about wagers here-</span>
+                            <span>Will Arya and Sansa reunite?  Will Bran fight the Night King as a warg?  What depravity will George R.R. Martin show us this season? If you have a hunch, write down each prediction for season 8 and wager points on how sure you are.  If others agree, they might just wager some of their coins too.  If not, they may troll you in the comments section.  The night is dark and full of terrors. Learn more about wagers here-</span>
                             <a href="/account/criteria" className="fa fa-external-link"/>
                         </p>
                         <PredictionForm {...this.state.prediction} />

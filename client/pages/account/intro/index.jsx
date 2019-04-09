@@ -52,7 +52,7 @@ class IntroPage extends React.Component {
                                 <div className={"item " + (this.state.currentPage == 0 && "active") || ""}>
                                     <div className="onboarding-inner">
                                         <h3 className="onboarding-header">HOW TO PLAY</h3>
-                                        <h3 className="onboarding-step">1. Enter your predictions for Season 7</h3>
+                                        <h3 className="onboarding-step">1. Enter your predictions for Season 8</h3>
                                         <p>
                                             Think Tyrion will die this season? Think Sansa is pregnant? Write those as predictions.
                                         </p>

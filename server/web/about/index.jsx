@@ -37,7 +37,7 @@ class AboutPage extends React.Component {
                             <div className="media-body">
                                 <h4 className="media-heading">Kit Richert</h4>
                                 <p>
-                                    Excited about season 7.
+                                    Excited about season 8.
                                     Can't wait to create more GOT-themed Christmas Carols.
                                 </p>
                             </div>

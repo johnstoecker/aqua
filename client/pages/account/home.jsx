@@ -377,7 +377,7 @@ class HomePage extends React.Component {
                         {accountDetails}
                         <br/>
                         <p className="font-bold font-size-18">{this.state.user.availableCoins} coins are available to wager</p>
-                        <p className="margin-bottom-20px">Wager on your own Season 7 predictions, or bet on someone else's</p>
+                        <p className="margin-bottom-20px">Wager on your own Season 8 predictions, or bet on someone else's</p>
                         <button className="btn btn-primary" onClick={this.goToPredictions.bind(this)} type="submit">See All Wagers</button>
                         <div className="the-rookery">
                         <h2 className="page-header">Ravens from the Iron Bank</h2>
