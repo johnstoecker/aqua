@@ -66,7 +66,7 @@ class Leaderboard extends React.Component {
         return (
             <section className="container">
                 <h1 className="page-header">
-                    Wagers of Salt, Wagers of Iron
+                    Season 7: Wagers of Salt, Wagers of Iron
                 </h1>
                 <div className="margin-bottom-20px">
                 <a href="#" className={"tab-picker " + (this.state.showTab=="users" && "tab-picker-active")} onClick={this.showTab.bind(this, "users")}>Most Coins Won</a>
