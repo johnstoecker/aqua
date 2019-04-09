@@ -50,9 +50,9 @@ class Intro extends React.Component {
                             <div className={"item " + (this.state.currentPage == 0 && "active") || ""}>
                                 <div className="onboarding-inner">
                                     <h3 className="onboarding-header">HOW TO PLAY</h3>
-                                    <h3 className="onboarding-step">1. Enter your predictions for Season 7</h3>
+                                    <h3 className="onboarding-step">1. Enter your predictions for Season 8</h3>
                                     <p>
-                                        Think Tyrion will die this season? Think Sansa is pregnant? Write those as predictions.
+                                        Think Bran is the Night King? Think Tormund and Brienne will finally get together? Write those as predictions.
                                     </p>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@ class Intro extends React.Component {
                                     <h3 className="onboarding-header">HOW TO PLAY</h3>
                                     <h3 className="onboarding-step">3. Watch Game of Thrones!</h3>
                                     <p>
-                                        The admin approves or rejects all wagers, based on predefined <a href="/account/criteria">criteria</a>. If your predictions are right, the coins you wagered will be deposited into your Iron Bank Account. The player with the biggest bank at the end of the season wins! Players in the winning house also win!
+                                        The admin approves or rejects all wagers, based on predefined <a href="/account/criteria">criteria</a>. If your predictions are right, the coins you wagered will be deposited into your Iron Bank Account. The player with the biggest bank at the end of the season wins! Players in the winning house also win the team game!
                                     </p>
                                 </div>
 
