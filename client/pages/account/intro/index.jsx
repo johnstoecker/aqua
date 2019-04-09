@@ -28,7 +28,7 @@ class IntroPage extends React.Component {
     }
 
     startGame() {
-        window.location.href = "/account"
+        window.location.href = "/account/joinahouse"
     }
 
     render() {
