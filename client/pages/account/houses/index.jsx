@@ -97,7 +97,7 @@ class HouseStatsPage extends React.Component {
                             <div className="house-banner-name">House Greyjoy</div>
                         </div>
                         <div className="house-attribute-title">🐙 Sea Legs 🐙</div>
-                        <div className="house-attribute-detail">+5 for each land battle fought by Euron, +10 for any sea battle</div>
+                        <div className="house-attribute-detail">+5 for each land battle fought by Euron, +10 for any attack by sea</div>
                         <div className="house-attribute-title">🎣 The Salty Queen 🎣</div>
                         <div className="house-attribute-detail">-2 For each episode Yara remains a prisoner</div>
                         <div className="house-attribute-stats-container">
