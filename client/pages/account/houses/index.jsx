@@ -178,7 +178,7 @@ class HouseStatsPage extends React.Component {
                         <div className="house-attribute-title">🐲 Wild Fire 🐲</div>
                         <div className="house-attribute-detail">+5 for each dragonfire flame, cooldown: 1 minute</div>
                         <div className="house-attribute-title">🍗 Knock Kneed 🍗</div>
-                        <div className="house-attribute-detail">-2 for each noble person that refuses to bend the knee to Dany (not during active battle), cooldown: 2 minutes</div>
+                        <div className="house-attribute-detail">-2 for each noble who refuses to bend the knee, cooldown: 2 minutes</div>
                         <div className="house-attribute-stats-container">
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
