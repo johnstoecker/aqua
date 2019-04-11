@@ -56,10 +56,12 @@ class HouseStatsPage extends React.Component {
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[0].image} />
                             <div className="house-banner-name">House Lannister</div>
                         </div>
-                        <div className="house-attribute-title">🌞 Endless Summer 🌞</div>
-                        <div className="house-attribute-detail">+6 for each week the walkers stay out of Kings Landing</div>
-                        <div className="house-attribute-title">🍷 Drowned Sorrows 🍷</div>
-                        <div className="house-attribute-detail">-2 for each week Cersei drinks wine alone</div>
+                        <div className="house-attribute-bonuses">
+                          <div className="house-attribute-title">🌞 Endless Summer 🌞</div>
+                          <div className="house-attribute-detail">+6 for each week the walkers stay out of Kings Landing</div>
+                          <div className="house-attribute-title">🍷 Drowned Sorrows 🍷</div>
+                          <div className="house-attribute-detail">-2 for each week Cersei drinks wine alone</div>
+                        </div>
                         <div className="house-attribute-stats-container">
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
@@ -89,6 +91,10 @@ class HouseStatsPage extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="userlist">
+                          <div className="house-attribute-title-center-underline">Members</div>
+                          {this.state.houseStats.data[0] && this.state.houseStats.data[0].users.join(", ")}
+                        </div>
                     </div>
 
                     <div className="house-picker-wrapper house-stats-wrapper greyjoy">
@@ -96,10 +102,12 @@ class HouseStatsPage extends React.Component {
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[1].image} />
                             <div className="house-banner-name">House Greyjoy</div>
                         </div>
-                        <div className="house-attribute-title">🐙 Sea Legs 🐙</div>
-                        <div className="house-attribute-detail">+5 for each land battle fought by Euron, +10 for any attack by sea</div>
-                        <div className="house-attribute-title">🎣 The Salty Queen 🎣</div>
-                        <div className="house-attribute-detail">-2 For each episode Yara remains a prisoner</div>
+                        <div className="house-attribute-bonuses">
+                          <div className="house-attribute-title">🐙 Sea Legs 🐙</div>
+                          <div className="house-attribute-detail">+5 for each land battle fought by Euron, +10 for any attack by sea</div>
+                          <div className="house-attribute-title">🎣 The Salty Queen 🎣</div>
+                          <div className="house-attribute-detail">-2 For each episode Yara remains a prisoner</div>
+                        </div>
                         <div className="house-attribute-stats-container">
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
@@ -129,16 +137,22 @@ class HouseStatsPage extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="userlist">
+                          <div className="house-attribute-title-center-underline">Members</div>
+                          {this.state.houseStats.data[1] && this.state.houseStats.data[1].users.join(", ")}
+                        </div>
                     </div>
                     <div className="house-picker-wrapper house-stats-wrapper white-walkers">
                         <div className="house-banner">
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[2].image} />
                             <div className="house-banner-name">White Walkers</div>
                         </div>
-                        <div className="house-attribute-title">❄ Icy Tingle ❄</div>
-                        <div className="house-attribute-detail">+8 for every named character turned into a wight</div>
-                        <div className="house-attribute-title">🔥 Winter BBQ 🔥</div>
-                        <div className="house-attribute-detail">-2 for each walker burnt to death, cooldown: 3 minutes</div>
+                        <div className="house-attribute-bonuses">
+                          <div className="house-attribute-title">❄ Icy Tingle ❄</div>
+                          <div className="house-attribute-detail">+8 for every named character turned into a wight</div>
+                          <div className="house-attribute-title">🔥 Winter BBQ 🔥</div>
+                          <div className="house-attribute-detail">-2 for each walker burnt to death, cooldown: 3 minutes</div>
+                        </div>
                         <div className="house-attribute-stats-container">
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
@@ -168,6 +182,10 @@ class HouseStatsPage extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="userlist">
+                          <div className="house-attribute-title-center-underline">Members</div>
+                          {this.state.houseStats.data[2] && this.state.houseStats.data[2].users.join(", ")}
+                        </div>
                     </div>
 
                     <div className="house-picker-wrapper house-stats-wrapper targaryen">
@@ -175,10 +193,12 @@ class HouseStatsPage extends React.Component {
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[3].image} />
                             <div className="house-banner-name">House Targaryen</div>
                         </div>
-                        <div className="house-attribute-title">🐲 Wild Fire 🐲</div>
-                        <div className="house-attribute-detail">+5 for each dragonfire flame, cooldown: 1 minute</div>
-                        <div className="house-attribute-title">🍗 Knock Kneed 🍗</div>
-                        <div className="house-attribute-detail">-2 for each noble who refuses to bend the knee, cooldown: 2 minutes</div>
+                        <div className="house-attribute-bonuses">
+                          <div className="house-attribute-title">🐲 Wild Fire 🐲</div>
+                          <div className="house-attribute-detail">+5 for each dragonfire flame, cooldown: 1 minute</div>
+                          <div className="house-attribute-title">🍗 Knock Kneed 🍗</div>
+                          <div className="house-attribute-detail">-2 for each noble who refuses to bend the knee, cooldown: 2 minutes</div>
+                        </div>
                         <div className="house-attribute-stats-container">
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
@@ -208,6 +228,10 @@ class HouseStatsPage extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="userlist">
+                          <div className="house-attribute-title-center-underline">Members</div>
+                          {this.state.houseStats.data[3] && this.state.houseStats.data[3].users.join(", ")}
+                        </div>
                     </div>
 
                     <div className="house-picker-wrapper house-stats-wrapper stark">
@@ -215,10 +239,12 @@ class HouseStatsPage extends React.Component {
                             <img className="house-picker-image" src={"/public/media/tag_images/"+Houses[4].image} />
                             <div className="house-banner-name">House Stark</div>
                         </div>
-                        <div className="house-attribute-title">🎭 Face/Off 🎭</div>
-                        <div className="house-attribute-detail">+10 for every new face Arya wears</div>
-                        <div className="house-attribute-title">👑 Bran=Night King? 👑</div>
-                        <div className="house-attribute-detail">- 2 for every time Bran wargs cooldown: 1 minute</div>
+                        <div className="house-attribute-bonuses">
+                          <div className="house-attribute-title">🎭 Face/Off 🎭</div>
+                          <div className="house-attribute-detail">+10 for every new face Arya wears</div>
+                          <div className="house-attribute-title">👑 Bran=Night King? 👑</div>
+                          <div className="house-attribute-detail">- 2 for every time Bran wargs cooldown: 1 minute</div>
+                        </div>
                         <div className="house-attribute-stats-container">
                             <div className="house-attribute-title-center-underline">Stats</div>
                             <div className="house-attribute-stats-box">
@@ -247,6 +273,10 @@ class HouseStatsPage extends React.Component {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="userlist">
+                          <div className="house-attribute-title-center-underline">Members</div>
+                          {this.state.houseStats.data[4] && this.state.houseStats.data[4].users.join(", ")}
                         </div>
                     </div>
                 </div>

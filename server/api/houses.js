@@ -58,12 +58,14 @@ internals.applyRoutes = function (server, next) {
                 coins: 0,
                 availableCoins: 0,
                 lostCoins: 0,
+                users: [],
                 name: name
             }
             User.find(findParam, (err, users) => {
                 users.forEach(function (user) {
                     retVal.userCount += 1;
                     retVal.coins += user.coins || 0;
+                    retVal.users.push(user.username);
                     retVal.availableCoins += user.availableCoins || 0;
                     retVal.lostCoins += user.lostCoins || 0;
                 });
