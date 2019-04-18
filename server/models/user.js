@@ -5,7 +5,7 @@ const Async = require('async');
 const Bcrypt = require('bcrypt');
 const Joi = require('joi');
 const MongoModels = require('mongo-models');
-const STARTING_COINS = 100;
+const STARTING_COINS = 140;
 const House = require('./house')
 
 class User extends MongoModels {
