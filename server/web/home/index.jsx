@@ -16,12 +16,7 @@ class HomePage extends React.Component {
 
 
     render() {
-        let src;
-        if (this.state.img == 0) {
-            src = "/public/media/iron_wagers_figurines.jpg"
-        } else {
-            src = "http://media-cache-ak0.pinimg.com/736x/1b/16/98/1b169875c1952cf4272eb245fee48add.jpg"
-        }
+        let src = "/public/media/iron_baby.jpg"
         const neck = <link rel='stylesheet' href="/public/pages/home.min.css" />;
 
 
@@ -33,7 +28,7 @@ class HomePage extends React.Component {
                 activeTab="home">
 
                 <div className="jumbotron">
-                    <h2>THE IRON BANK WILL HAVE ITS DUE</h2>
+                    <h2>THE IRON BABY WILL HAVE HIS DUE</h2>
                     <h2>
                         <img className="max-hundred max-height-screen" src={src} />
                     </h2>
